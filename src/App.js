@@ -1,12 +1,12 @@
 import './App.css';
-import HomePage from './Components/HomePage';
+import MainPage from './Components/MainPage';
 import NosotrosPage from './Components/NosotrosPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage/>
+    element: <MainPage/>
   },
   {
     path:'/nosotros',

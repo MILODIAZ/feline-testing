@@ -1,9 +1,9 @@
 import React from 'react';
 import NavBar from './NavBar';
 import CategoriesNav from './CategoriesNav';
-import PageMain from './PageMain';
+import HomeMain from './HomeMain';
 
-class HomePage extends React.Component{
+class MainPage extends React.Component{
   constructor(props){
     super(props);
     this.state = {  }
@@ -11,12 +11,12 @@ class HomePage extends React.Component{
   
   render() {      
     return (
-      <div >          
+      <div >        
         <NavBar />
-        <CategoriesNav />
+        <CategoriesNav />             
         <main>
           <div>          
-            <PageMain />
+            <HomeMain />
           </div>
         </main>    
       </div>
@@ -24,4 +24,4 @@ class HomePage extends React.Component{
   }
 }
   
-export default HomePage;
+export default MainPage;
