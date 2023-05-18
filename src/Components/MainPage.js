@@ -1,27 +1,23 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import NavBar from './NavBar';
 import CategoriesNav from './CategoriesNav';
 import HomeMain from './HomeMain';
 
-class MainPage extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {  }
-  }   
-  
-  render() {      
-    return (
-      <div >        
-        <NavBar />
-        <CategoriesNav />             
-        <main>
-          <div>          
-            <HomeMain />
+function MainPage(props) {
+  return (
+    <div>
+      <NavBar />
+      <CategoriesNav />
+      <main>
+        <div>
+          <div>
+            <Outlet />
           </div>
-        </main>    
-      </div>
-    );  
-  }
+        </div>
+      </main>
+    </div>
+  );
 }
-  
+
 export default MainPage;

@@ -1,27 +1,34 @@
 import './App.css';
 import MainPage from './Components/MainPage';
-import NosotrosPage from './Components/NosotrosPage';
+import HomeMain from './Components/HomeMain';
+import NosotrosMain from './Components/NosotrosMain';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainPage/>
-  },
-  {
-    path:'/nosotros',
-    element: <NosotrosPage/>
-  },
+    element: <MainPage/>,
+    children: [
+      {
+        path: '/',
+        element: <HomeMain />
+      },
+      {
+        path: '/Nosotros',
+        element: <NosotrosMain />
+      }
+    ]
+  },  
   {
     path:'/admin',
-    element: <h1>admin</h1>
+    element: <h1>ADMIN</h1>
   }
 ]);
 
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </div>
   );
 }

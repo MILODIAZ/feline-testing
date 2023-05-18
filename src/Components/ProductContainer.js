@@ -19,7 +19,7 @@ function ProductContainer (props) {
 
         <div className='flex justify-end'>
           <button onClick={hideProductContainer}>
-            <FaTimes className='text-[3rem] hover:fill-white transition-all'/>
+            <FaTimes className='text-[1.5rem] hover:fill-white transition-all'/>
           </button>
         </div>
         
@@ -27,7 +27,7 @@ function ProductContainer (props) {
 
           <div className='sm:w-11/12'>
             <p className='text-[11px]'>{props.code}</p>
-            <img className='border-4 border-[#56efd3] rounded-lg' alt='product-image' src={require('../productsImages/P001.jpg')}/>
+            <img className='border-4 border-[#56efd3] rounded-lg' alt='product-image' src={require(`../productsImages/${props.code}.jpg`)}/>
           </div>
 
           <div className='text-center mt-3 sm:my-auto w-5/6 mx-auto sm:px-2'>

@@ -29,11 +29,14 @@ function NavBar () {
             <button className='p-5 lg:hidden' onClick={showNavbar}>
               <FaTimes className='text-[3rem] hover:fill-white transition-all'/>
             </button>
-            <ul className='lg:flex lg:flex-row lg:justify-end lg:text-center '>
+            <ul className='lg:flex lg:flex-row lg:justify-end lg:text-center'>
               <li><Link to={'/'} className={navClassNames}>INICIO</Link></li>
-              <li><Link to={'/nosotros'} className={navClassNames}>NOSOTROS</Link></li>
+              <li><Link to={'/Nosotros'} className={navClassNames}>NOSOTROS</Link></li>
               <li><a target="_blank" rel="noopener noreferrer" href='https://www.instagram.com/tienda_feline/' className={navClassNames}>INSTAGRAM</a></li>
             </ul>
+            <div className='lg:hidden h-screen flex flex-col justify-center'>
+              <img className='' alt='feline-logo-nav' src={require('../images/feline-logo-pink.jpg')} />
+            </div>
           </nav>             
           
           <button ref={openNavButtonRef} className='w-1/3 lg:hidden' onClick={showNavbar}>
