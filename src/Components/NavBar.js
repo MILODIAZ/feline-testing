@@ -20,9 +20,9 @@ function NavBar () {
 
           <h1 className='text-[1.5rem] lg:text-[2rem] text-center w-2/3 my-auto'>Tienda Feline</h1>   
 
-          <a href='/' className='inline-block min-w-[80px] py-2 w-1/6 max-w-[100px]'>
+          <Link to={'/'} className='inline-block min-w-[80px] py-2 w-1/6 max-w-[100px]'>
               <img src={require('../images/feline-logo-2.jpg')} alt='feline-logo'/>
-          </a>
+          </Link>
 
           <nav ref={navRef} className='z-1 bg-[#ffb2e0] lg:bg-transparent translate-x-full lg:translate-x-0 fixed lg:relative top-0 right-0
           transition-transform lg:transition-none h-screen lg:h-fit lg:my-auto w-2/6'>

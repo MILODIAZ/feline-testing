@@ -118,9 +118,9 @@ SELECT * FROM categoria
 SELECT * FROM producto
 WHERE favorito=true
 
-SELECT producto.id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-INNER JOIN corresponde ON producto.id_producto = corresponde.id_producto
-WHERE corresponde.nombre_categoria = 'Camisetas'
+SELECT producto.codigo, nombre_proveedor, nombre, descripción, precio FROM producto
+INNER JOIN corresponde ON producto.codigo = corresponde.codigo_producto
+WHERE corresponde.nombre_categoria = 'Ropa'
 
 SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
 

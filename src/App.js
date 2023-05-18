@@ -1,6 +1,7 @@
 import './App.css';
 import MainPage from './Components/MainPage';
 import HomeMain from './Components/HomeMain';
+import CategorieMain from './Components/CategorieMain';
 import NosotrosMain from './Components/NosotrosMain';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomeMain />
+      },
+      {
+        path: '/:categorieID',
+        element: <CategorieMain />
       },
       {
         path: '/Nosotros',

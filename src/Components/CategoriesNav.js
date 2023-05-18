@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function CategoriesNav() {
   
@@ -10,12 +11,12 @@ function CategoriesNav() {
   const nextCategories = () => {
     const slideCount = sliderRef.current.childElementCount;
     const slideWidth = sliderRef.current.offsetWidth;         
-    if(counter+1 == Math.ceil(slideCount/3)){
+    if(counter+1 === Math.ceil(slideCount/3)){
       setCounter(0);      
       sliderDiv.current.style.left = '0px';            
     } else{
       setCounter(counter+1);      
-      sliderDiv.current.style.left = `-${(counter+1) * slideWidth}px`;             
+      sliderDiv.current.style.left = `-${(counter+1) * slideWidth}px`;           
     }    
   }
 
@@ -61,7 +62,7 @@ function CategoriesNav() {
             <ul ref={sliderRef} className='-z-1 text-[0.95rem] grid grid-cols-4 gap-y-3 lg:flex lg:flex-row lg:text-[1.5rem] lg:justify-start lg:text-center'>
               {categories.map(categorie => (
                 <li key={categorie[0]} className='mx-auto'>
-                  <button className='text-black hover:text-white uppercase transition-all'>{categorie[0]}</button>
+                  <a href={`/${categorie[0]}`} className='text-black hover:text-white uppercase transition-all'>{categorie[0]}</a>
                 </li>
               ))}
             </ul>
