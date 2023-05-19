@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 
 function CategoriesNav() {
   
