@@ -3,7 +3,7 @@
     $host = "localhost";
     $dbname = "INGESOTESTING";
     $username = "postgres";
-    $password = "reddead";
+    $password = "reddead";    
 
     try{
         $conn = new PDO ("pgsql:host = $host; dbname=$dbname", $username, $password);
@@ -13,4 +13,5 @@
     catch(PDOException $exp){
      /*echo ("No se pudo conectar a la base de datos, $exp");*/
     }
+    
 ?>

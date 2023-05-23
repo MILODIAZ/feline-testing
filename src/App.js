@@ -25,8 +25,9 @@ const router = createBrowserRouter([
     ]
   },  
   {
-    path:'/admin',
-    element: <h1>ADMIN</h1>
+    path:'/login',
+    element: <h2>administracion</h2>,
+    isPrivate: true    
   }
 ]);
 
