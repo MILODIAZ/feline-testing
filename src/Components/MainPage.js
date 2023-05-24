@@ -1,8 +1,7 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import NavBar from './NavBar';
 import CategoriesNav from './CategoriesNav';
-import HomeMain from './HomeMain';
 
 function MainPage(props) {
   return (
@@ -16,6 +15,9 @@ function MainPage(props) {
           </div>
         </div>
       </main>
+      <footer>
+        <Link to={'/login'}>Acceso</Link>
+      </footer>
     </div>
   );
 }

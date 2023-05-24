@@ -16,9 +16,9 @@ function NavBar () {
 
   return(
     <div>
-        <header className='xl:px-10 bg-[#56efd3] grid grid-cols-3 justify-items-center'>
+        <header className='xl:px-30 2xl:px-32 bg-[#56efd3] grid grid-cols-3 justify-items-center'>
 
-          <h1 className='text-[1.5rem] lg:text-[2rem] text-center w-2/3 my-auto'>Tienda Feline</h1>   
+          <h1 className='text-[1.5rem] lg:text-[2rem] text-center w-2/3 my-auto font-bold whitespace-nowrap'>F E L I N E</h1>   
 
           <Link to={'/'} className='inline-block min-w-[80px] py-2 w-1/6 max-w-[100px]'>
               <img src={require('../images/feline-logo-2.jpg')} alt='feline-logo'/>
