@@ -27,8 +27,8 @@ function Login(){
   }
 
   return (
-    <div className='flex flex-col justify-content-center h-screen'>
-      <div className='admin bg-[#eeeeee] flex flex-col align-center'>
+    <div className='bg-[#eeeeee] flex flex-col justify-content-center h-screen'>
+      <div className='admin  flex flex-col align-center'>
         <div>
           <Link to={'/'} className='text-sm underline'>Página principal</Link>
         </div>

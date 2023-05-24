@@ -6,6 +6,9 @@ import NosotrosMain from './Components/NosotrosMain';
 import Login from './Components/Login';
 import PrivateRoute from './Components/PrivateRoute';
 import Private from './Components/Private';
+import Inventario from './PrivateComponents/Inventario';
+import Productos from './PrivateComponents/Productos';
+import Producción from './PrivateComponents/Producción';
 import Logout from './Components/Logout';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AuthContextProvider from './Contexts/AuthContext';
@@ -39,9 +42,22 @@ const router = createBrowserRouter([
     element: <PrivateRoute />,
     children: [
       {
-        index: true,
-        path:'/private',
-        element:<Private />
+        path:'',
+        element:<Private />,
+        children: [
+          {
+            path:'',
+            element:<Inventario />
+          },
+          {
+            path:'/private/productos',
+            element:<Productos />
+          },
+          {
+            path:'/private/produccion',
+            element:<Producción />
+          }
+        ]
       },
       {
         path:'/private/logout',

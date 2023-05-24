@@ -1,4 +1,4 @@
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../Contexts/AuthContext';
 
 function Private(){
@@ -10,8 +10,8 @@ function Private(){
   }
 
   return (
-    <div className='flex flex-col justify-content-center h-screen'> 
-      <div className='bg-[#eeeeee] flex flex-row justify-between'>
+    <div className='bg-[#eeeeee] flex flex-col justify-content-center h-screen'> 
+      <div className='flex flex-row justify-between'>
 
         <div>
           <h2>Bienvenid@ {userName}</h2>
@@ -19,8 +19,18 @@ function Private(){
 
         <div>
           <Link to={'/private/logout'} className='text-sm underline'>Cerrar Sesión</Link>
-        </div>
+        </div>        
 
+      </div>
+
+      <div>
+        <Link to={'/private'} className='text-sm underline'>Inventario</Link>
+        <Link to={'/private/productos'} className='text-sm underline'>Productos</Link>
+        <Link to={'/private/produccion'} className='text-sm underline'>Producción</Link>
+      </div>
+
+      <div>
+        <Outlet />
       </div>
     </div>   
   );
