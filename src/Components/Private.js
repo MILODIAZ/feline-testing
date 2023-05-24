@@ -10,9 +10,18 @@ function Private(){
   }
 
   return (
-    <div>
-      <h2>Welcome {userName}</h2>
-      <Link to={'/private/logout'}>Cerrar Sesión</Link>
+    <div className='flex flex-col justify-content-center h-screen'> 
+      <div className='bg-[#eeeeee] flex flex-row justify-between'>
+
+        <div>
+          <h2>Bienvenid@ {userName}</h2>
+        </div>
+
+        <div>
+          <Link to={'/private/logout'} className='text-sm underline'>Cerrar Sesión</Link>
+        </div>
+
+      </div>
     </div>   
   );
 }
