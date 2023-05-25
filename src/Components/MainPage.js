@@ -16,7 +16,7 @@ function MainPage(props) {
         </div>
       </main>
       <footer>
-        <Link to={'/login'}>Login</Link>
+        <Link to={'/login'}>Joshir</Link>
       </footer>
     </div>
   );
