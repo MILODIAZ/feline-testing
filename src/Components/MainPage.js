@@ -24,5 +24,4 @@ function MainPage(props) {
     </div>
   );
 }
-
 export default MainPage;
