@@ -13,30 +13,33 @@ function ProductContainer (props) {
   }
 
   return (
-    <div id='product-container' onClick={hideProductContainer} ref={productContainerRef} className='z-[99] fixed inset-0 flex justify-center items-center invisible opacity-0 transition-all'>
+    <div id='product-container' onClick={hideProductContainer} ref={productContainerRef} className='z-[99] drop-shadow-2xl fixed inset-0 flex justify-center items-center invisible opacity-0 transition-all'>
 
-      <div className="bg-[#ffb2e0] w-5/6 md:w-4/6 lg:w-7/12 xl:w-5/12 p-3 border-8 border-[#ff7795] rounded-lg">
-
-        <div className='flex justify-end'>
-          <button onClick={hideProductContainer}>
-            <FaTimes className='text-[1.5rem] hover:fill-white transition-all'/>
-          </button>
-        </div>
-        
         <div className='flex flex-col sm:flex-row p-2'>
-
-          <div className='sm:w-11/12'>
-            <p className='text-[11px]'>{props.code}</p>
-            <img className='border-4 border-[#56efd3] rounded-lg' alt='product-image' src={require(`../productsImages/${props.code}.jpg`)}/>
+                   
+        {/* NUEVA CARD */}
+        <div class="max-w-md  bg-white border border-gray-200 rounded-lg shadow dark:bg-pink-300 dark:border-gray-700">
+          <img className='rounded-t-lg' src={require(`../productsImages/${props.code}.jpg`)}/>
+          <div className='p-5'>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
+              {props.name}
+            </h5>
+            <p
+              class="mb-3 font-normal text-gray-700 bold dark:text-gray-700">
+              {props.description} 
+            </p>
+            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
+              Precio: {props.price}
+            </h5>
+            <p
+              class="mb-3 font-normal text-gray-700 dark:text-gray-700">
+              Stock: {props.stock} 
+            </p>
+            <p
+              class="mb-3 font-normal text-gray-700 dark:text-gray-900">
+              Codigo del producto: {props.code} 
+            </p>
           </div>
-
-          <div className='text-center mt-3 sm:my-auto w-5/6 mx-auto sm:px-2'>
-            <p className='text-2xl'>{props.name}</p>            
-            <p className='text-3xl'>${props.price}</p>
-            <p className='text-[11px]'>Disponible: {props.stock} un.</p>
-            <p className='text-white'>{props.description}</p>
-          </div> 
-
         </div>
 
       </div>

@@ -1,10 +1,9 @@
 function HomeSlider () {
   return(
     <div className='flex justify-center'>
-      <div className=' rounded-b-2xl border-8 border-[#ff7795]'>
-        <img alt='slider-sample' src={require('../images/slider-example.jpg')} />
-      </div>
-      
+      <div className='overflow-hidden border-4 border-[#ff7795] rounded-xl'>
+        <img alt='slider-sample  w-full' src={require('../images/slider-example.jpg')} />
+      </div>      
     </div>
   );
 }
