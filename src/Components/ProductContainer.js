@@ -18,7 +18,7 @@ function ProductContainer (props) {
         <div className='flex flex-col sm:flex-row p-2'>
                    
         {/* NUEVA CARD */}
-        <div class="max-w-md  bg-white border border-gray-200 rounded-lg shadow dark:bg-pink-300 dark:border-gray-700">
+        <div class="max-w-md  bg-white border border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">
           <img className='rounded-t-lg' src={require(`../productsImages/${props.code}.jpg`)}/>
           <div className='p-5'>
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
