@@ -16,7 +16,7 @@ function MainPage(props) {
         </div>
       </main>
       <footer>
-        <Link to={'/login'}>Acceso</Link>
+        <Link to={'/login'}>Login</Link>
       </footer>
     </div>
   );
