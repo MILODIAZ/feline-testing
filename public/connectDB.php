@@ -3,7 +3,7 @@
 $host = "localhost";
 $dbname = "INGESOTESTING";
 $username = "postgres";
-$password = "reddead";
+$password = "hola";
 
 try {
     $conn = new PDO("pgsql:host = $host; dbname=$dbname", $username, $password);
