@@ -51,7 +51,7 @@
 
             include ("connectDB.php");
 
-            $sql="SELECT producto.codigo, nombre_proveedor, nombre, descripción, precio FROM producto
+            $sql="SELECT producto.codigo, nombre_proveedor, nombre, descripción, precio, stock_actual FROM producto
             INNER JOIN corresponde ON producto.codigo = corresponde.codigo_producto
             WHERE corresponde.nombre_categoria = :categoria";
             $sentencia=$conn->prepare($sql);
