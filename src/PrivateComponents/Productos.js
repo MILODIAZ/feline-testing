@@ -1,7 +1,7 @@
 function Productos(){
     return(
-        <div>
-            <h3>Productos</h3>
+        <div className="text-5xl">
+            <h5>Productos</h5>
         </div>
     );
 }
