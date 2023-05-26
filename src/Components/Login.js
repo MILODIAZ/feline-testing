@@ -1,4 +1,4 @@
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuthContext } from '../Contexts/AuthContext';
 import { useState } from 'react';
 import NavBar from './NavBar';

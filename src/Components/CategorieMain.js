@@ -11,7 +11,7 @@ function CategorieMain () {
 
   useEffect(() => {
     loadData();
-  }, []);
+  });
 
   const loadData = () => {
     fetch(`http://localhost/feline-testing/public/main.php?query=3&categoria=${params.categorieID}`)
