@@ -11,7 +11,7 @@ function CategorieMain () {
 
   useEffect(() => {
     loadData();
-  });
+  },[]);
 
   const loadData = () => {
     fetch(`http://localhost/feline-testing/public/main.php?query=3&categoria=${params.categorieID}`)
@@ -30,7 +30,6 @@ function CategorieMain () {
   const [productDescription, setProductDescription] = useState('');
 
   const showProductContainer = (prodCod, prodName, prodPrice, prodStock, prodDescription) => {
-
     const productContainer = document.querySelector('#product-container');
 
     productContainer.classList.remove('invisible');
@@ -50,7 +49,6 @@ function CategorieMain () {
     return <div>Cargando...</div>;
   } else {
     return (
-    
       <div>
 
         <div className="flex justify-center">
