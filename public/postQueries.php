@@ -42,4 +42,28 @@ header("Access-Control-Allow-Origin: *");
 
  }
 
+ if ($query == 2) {
+  $usuario = $_POST['rut'];
+  $newPass = $_POST['newPass'];
+
+  include("connectDB.php");
+
+  $sql = "UPDATE usuario
+          SET contraseña = :newPass
+          WHERE rut = :rut";
+
+  $sentencia = $conn->prepare($sql);
+  $sentencia->bindValue(':rut', $usuario);
+  $sentencia->bindValue(':newPass', $newPass);
+  $sentencia->execute();
+
+  $rowCount = $sentencia->rowCount(); // Obtener el número de filas afectadas por la consulta
+
+  include("disconnectDB.php");
+
+  $response = ($rowCount > 0) ? true : false; // Verificar si se actualizó al menos una fila
+
+  echo json_encode($response);
+}
+
 ?>
