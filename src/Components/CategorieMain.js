@@ -9,6 +9,8 @@ function CategorieMain () {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [categorieProducts, setCategorieProducts] = useState([]);
 
+  const params = useParams();
+
   useEffect(() => {
     loadData();
   },[]);
@@ -43,26 +45,33 @@ function CategorieMain () {
 
   }
 
-  const params = useParams();  
 
   if (!dataLoaded) {
     return <div>Cargando...</div>;
   } else {
     return (
       <div>
-
-        <div className="flex justify-center">
-          <h2 className="text-[2.5rem] text-white mt-8 px-2 bg-[#ff7795] align-middle rounded-2xl">{params.categorieID}</h2>
-        </div>        
+        {categorieProducts.length > 0  
+        ? (
+          <div>        
+            <div className="flex justify-center">
+              <h2 className="text-[2.5rem] text-white mt-8 px-2 bg-[#ff7795] align-middle rounded-2xl">{params.categorieID}</h2>
+            </div>        
   
-        <ProductContainer code={productCode} name={productName} price={productPrice} stock={productStock} description={productDescription} />
+            <ProductContainer code={productCode} name={productName} price={productPrice} stock={productStock} description={productDescription} />
   
-        <div className="xl:px-60 pt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-8">
-          {categorieProducts.map(categorieProducts => (
-            <ProductCard key={categorieProducts[0]} name={categorieProducts[2]} price={categorieProducts[4]} img={categorieProducts[0]} handleClick={showProductContainer} stock={categorieProducts[5]} description={categorieProducts[3]}/>
-          ))}
-        </div>
-      </div>
+            <div className="xl:px-60 pt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-8">
+              {categorieProducts.map(categorieProducts => (
+                <ProductCard key={categorieProducts[0]} name={categorieProducts[2]} price={categorieProducts[4]} img={categorieProducts[0]} handleClick={showProductContainer} stock={categorieProducts[5]} description={categorieProducts[3]}/>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="  flex justify-center  mt-8 mx-auto  ">
+            <h5 className="w-1/3  text-[2.5rem] align-middle  text-white mt-8 px-2 bg-[#ff7795] text-center rounded-2xl">La categoria no existe</h5>
+          </div>
+        )}
+      </div> 
     );
   }
   
