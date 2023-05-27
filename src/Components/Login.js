@@ -64,21 +64,21 @@ function Login() {
         {/* <!-- min-h-screen --> */}
         <NavBar />
         
-      <div className="overflow-hidden h-3/4 py-6 flex flex-col justify-center sm:py-24">
-        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+      <div className="overflow-hidden h-3/4 flex flex-col justify-center sm:py-24">
+        <div className="relative  sm:py-3 sm:max-w-xl sm:mx-auto">
           {/* Background gradiente */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-teal-400 to-pink-300 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+            className="absolute invisible sm:visible inset-0 bg-gradient-to-r from-teal-400 to-pink-300 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
           </div>
           {/* Cointainer */}
-          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+          <div className="relative pt-[150px] px-4 h-[100vh] sm:h-auto py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
             
             <div className="max-w-md mx-auto">
               <div className='text-center'>
-                <h1 className="text-2xl font-semibold ">Administración</h1>
+                <h4 className="text-[2.5rem] sm:text-2xl font-semibold ">Administración</h4>
               </div>
               <div className='text-center'>
-                <h1 className="text-2xl font-semibold">Iniciar sesión </h1>
+                <h1 className="text-[2rem] sm:text-2xl font-semibold">Iniciar sesión </h1>
               </div>
 
               <div className='mx-auto pt-2'>
@@ -99,19 +99,18 @@ function Login() {
                   </div>
                   <div className="relative mt-8">
                     {/* Password */}
-                    {/*  id='magicWord' type='password' value={magicWord} onChange={handlePasswordChange} */}
                     <input id='magicWord' type='password' value={magicWord} onChange={handlePasswordChange}
                       className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
                     <label htmlFor="magicWord" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Contraseña</label>
                   </div>
                   <div className="relative">
-                    <button className="bg-teal-400 hover:bg-pink-100 transition-all text-[#000] rounded-sm mt-4 px-4 py-1">Ingresar</button>
+                    <button className="bg-teal-400 hover:bg-pink-100 transition-all text-[#000] rounded-[5px] mt-4 text-[1.5rem] sm:text-[1.2rem] px-[50px] py-[20px] sm:px-[15px] sm:py-[8px]">Ingresar</button>
                   </div>
                   
                   </form>
 
                   <div>
-                    <Link to={'/login/changePass'} className='text-[1rem] hover:text-[#f4a8d3]'>Cambiar contraseña</Link>
+                    <Link to={'/login/changePass'} className='text-[1.5rem] sm:text-[1rem] hover:text-[#f4a8d3]'>Cambiar contraseña</Link>
                   </div>
                   
                 </div>
