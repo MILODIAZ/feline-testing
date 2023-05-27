@@ -37,13 +37,13 @@ function Private(){
 
         <div className='flex flex-col'>
           <Link to={'/private/logout'} className='pr-3 underline text-[1.5rem] text-end'>Cerrar Sesión</Link>
-          {(userName==='Usuario1' && userRut==='12345678-9')?
+          {(userName==='Mirle Jaque' && userRut==='15912517-3')?
             <button onClick={showUserAdminContainer} className='pr-3 underline text-[1.5rem] text-end'>Administrar Usuarios</button>
             : null}
           
         </div>
 
-        {(userName==='Usuario1' && userRut==='12345678-9')?
+        {(userName==='Mirle Jaque' && userRut==='15912517-3')?
           <AdministracionUsuarios />
           : null}            
 

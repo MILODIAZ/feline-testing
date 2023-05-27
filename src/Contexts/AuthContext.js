@@ -23,7 +23,7 @@ function AuthContextProvider({children}){
       body: `query=1&usuario=${userRut}&pass=${password}`
     })
       .then(response => response.json())
-      .then(data => {        
+      .then(data => {                        
 
         if(data[0][0]===true){
           window.localStorage.setItem(MY_AUTH_APP, true);

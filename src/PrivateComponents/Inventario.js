@@ -51,7 +51,7 @@ function Inventario() {
                 </select>
             </div>
             {/* Lista de productos */}
-            <div className="bg-white p-8 rounded-md w-[100%]">
+            <div className="p-8 rounded-md w-[100%]">
                 <div class=" flex items-center  justify-between pb-6">
                     <div>
                         <div class="-mx-4 w-[100%]  px-4 sm:px-8 py-4  overflow-x-auto">
@@ -59,7 +59,7 @@ function Inventario() {
                                 <table className='min-w-full leading-normal'>
                                     <tr>
                                         {products.map(product => (
-                                            <div className="items-center border-solid border-2 border-gray-400 w-[100%] inline-flex mt-2 xs:mt-0">
+                                            <div className="bg-white items-center border-solid border-2 border-gray-400 w-[100%] inline-flex mt-2 xs:mt-0">
                                                 {/* Codigo */}
                                                 <td className='px-5 py-5 border border-gray-900 bg-white text-sm'>
                                                     <p className='text-gray-900 whitespace-no-wrap'>
@@ -70,7 +70,7 @@ function Inventario() {
                                                 <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                                                     <div className='flex items-center'>
                                                         <div className='flex-shrink-0'>
-                                                            <img className='h-[150px] w-[150px]' src={require(`../productsImages/${product[0]}.jpg`)} />
+                                                            <img alt='product' className='h-[150px] w-[150px]' src={require(`../productsImages/${product[0]}.jpg`)} />
                                                         </div>
                                                         <div className='ml-3'>
                                                             <h2 className='text-gray-900 whitespace-no-wrap'>{product[2]}</h2>

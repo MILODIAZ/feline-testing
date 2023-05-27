@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useAuthContext } from "../Contexts/AuthContext";
-
 function NoProducts() {
 
     return (

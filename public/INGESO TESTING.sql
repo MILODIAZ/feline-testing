@@ -64,9 +64,10 @@ VALUES ('Accesorios'), ('Ropa'), ('Peluches'), ('Papelería'), ('Vasos'), ('Joye
 
 INSERT INTO usuario (rut, nombre, contraseña)
 VALUES 
-   ('12345678-9', 'Usuario1', 'contraseña1'),
-   ('98765432-1', 'Usuario2', 'contraseña2'),
-   ('56789012-3', 'Usuario3', 'contraseña3');
+	('15912517-3', 'Mirle Jaque', 'feline0'),
+   ('18924575-0', 'Emilio Díaz', 'feline1'),
+   ('20538523-1', 'Ignacio Herrera', 'feline2'),
+   ('20468276-3', 'Juan Nilo', 'feline3');
 
 INSERT INTO producto (codigo, nombre_proveedor, nombre, descripción, precio, stock_actual, stock_recomendado, stock_bajo, favorito)
 VALUES

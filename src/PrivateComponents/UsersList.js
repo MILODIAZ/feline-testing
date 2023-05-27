@@ -94,7 +94,7 @@ function UsersList () {
 
       {dataLoaded ? (
         users.map(user => (
-          (user[1]!='Usuario1' && user[0]!='12345678-9')?
+          (user[1]!=='Mirle Jaque' && user[0]!=='15912517-3')?
             <div key={user[0]} className='flex flex-row justify-between'>
             <p>{user[0]}</p>
             <p className='pl-8 text-left'>{user[1]}</p>
