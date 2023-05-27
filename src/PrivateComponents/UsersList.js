@@ -66,7 +66,8 @@ function UsersList () {
 
   function handleSubmit(event) {
     event.preventDefault();
-    fetch("http://localhost/feline-testing/public/postQueries.php", {
+    if(validarRut(userRut)){
+      fetch("http://localhost/feline-testing/public/postQueries.php", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -87,7 +88,47 @@ function UsersList () {
 
       })
       .catch(error => console.log(error));
+    } else {
+      alert("RUT inválido");
+    }
+    
   }
+
+  const validarRut = (rut) => {
+    // Eliminar puntos y guiones del RUT
+    rut = rut.replace(/\./g, '');
+    if (!rut.includes('-')) {
+      rut = rut.slice(0, -1) + '-' + rut.slice(-1);
+    }       
+  
+    // Verificar que el RUT tenga el formato correcto
+    const rutRegex = /^0*(\d{1,3}(\.?\d{3})*)\-?([\dkK])$/;
+    if (!rutRegex.test(rut)) {
+      return false;
+    }
+  
+    // Separar el dígito verificador del cuerpo del RUT
+    const [cuerpo, digitoVerificador] = rut.split('-');
+    console.log(digitoVerificador);
+  
+    // Verificar que el dígito verificador exista
+    if (!digitoVerificador) {
+      return false;
+    }
+  
+    // Calcular el dígito verificador esperado
+    let suma = 0;
+    let factor = 2;
+    for (let i = cuerpo.length - 1; i >= 0; i--) {
+      suma += factor * parseInt(cuerpo.charAt(i), 10);
+      factor = factor >= 7 ? 2 : factor + 1;
+    }
+    const digitoEsperado = 11 - (suma % 11);
+    const digitoCalculado = digitoEsperado === 11 ? '0' : digitoEsperado === 10 ? 'K' : digitoEsperado.toString();
+  
+    // Comparar el dígito verificador ingresado con el calculado
+    return digitoVerificador.toUpperCase() === digitoCalculado;
+  };
 
   return(
     <div className='flex flex-col'>

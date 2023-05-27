@@ -22,9 +22,9 @@ function Login() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();    
-    login(userRut, magicWord);
-  }
+    event.preventDefault();              
+    login(userRut, magicWord);       
+  }  
 
   return (
     <div>
