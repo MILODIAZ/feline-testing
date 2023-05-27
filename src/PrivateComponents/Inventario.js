@@ -10,7 +10,7 @@ function Inventario() {
     }, []);
 
     const dataProduct = () => {
-        fetch("http://localhost/feline-testing/public/main.php?query=2")
+        fetch("http://localhost/feline-testing/public/main.php?query=4")
             .then(response => response.json())
             .then(data => {
                 setDataProductLoaded(true);
@@ -59,7 +59,20 @@ function Inventario() {
                                 <table className='min-w-full leading-normal'>
                                     <tr>
                                         {products.map(product => (
-                                            <div key={product[0]} className="bg-white items-center border-solid border-2 border-gray-400 w-[100%] inline-flex mt-2 xs:mt-0">
+                                            <div key={product[0]} className={`items-center border-solid border-2 border-gray-400 w-[100%] inline-flex mt-2 xs:mt-0
+                                            
+                                            ${(() => {
+                                                switch (true) {
+                                                  case product[5]>product[6]:
+                                                    return 'bg-[#00ff00]';
+                                                  case product[5]<product[7]:
+                                                    return 'bg-[#dd7e6b]';                                                 
+                                                  default:
+                                                    return 'bg-[#fff2cc]';
+                                                }
+                                              })()}
+                                            
+                                            `}>
                                                 {/* Codigo */}
                                                 <td className='px-5 py-5 border border-gray-900 bg-white text-sm'>
                                                     <p className='text-gray-900 whitespace-no-wrap'>
@@ -67,7 +80,7 @@ function Inventario() {
                                                     </p>
                                                 </td>
                                                 {/* Nombre e imagen */}
-                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                <td className='px-5 py-5 border-gray-200 text-sm'>
                                                     <div className='flex items-center'>
                                                         <div className='flex-shrink-0'>
                                                             <img alt='product' className='h-[150px] w-[150px]' src={require(`../productsImages/${product[0]}.jpg`)} />
@@ -79,7 +92,7 @@ function Inventario() {
                                                 </td>
 
                                                 {/* Stock */}
-                                                <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+                                                <td className='px-5 py-5 border-gray-200 text-sm'>
                                                     <p className='text-gray-900 whitespace-no-wrap'>
                                                         Stock: {product[5]}
                                                     </p>
