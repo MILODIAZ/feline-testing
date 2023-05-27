@@ -66,4 +66,67 @@ header("Access-Control-Allow-Origin: *");
   echo json_encode($response);
 }
 
+if ($query == 3){
+  
+  include ("connectDB.php"); 
+
+  $sql="SELECT rut, nombre
+  FROM usuario";
+  $sentencia=$conn->prepare($sql);
+  $sentencia->execute();
+  $resultado=$sentencia->fetchAll(); 
+
+  include("disconnectDB.php");
+
+  header("Content-Type: application/json");
+  echo json_encode($resultado);
+
+}
+
+if ($query == 4){
+
+  $usuario = $_POST['user'];
+
+  include ("connectDB.php"); 
+
+  $sql="DELETE FROM usuario
+  WHERE rut = :usuario";
+  $sentencia=$conn->prepare($sql);
+  $sentencia->bindParam(':usuario', $usuario);
+  $sentencia->execute();
+
+  $rowCount = $sentencia->rowCount(); // Obtener el número de filas afectadas por la consulta
+
+  include("disconnectDB.php");
+
+  $response = ($rowCount > 0) ? true : false; // Verificar si se actualizó al menos una fila
+
+  echo json_encode($response);
+
+}
+
+if ($query == 5){
+
+  $userRut = $_POST['userRut'];
+  $userName = $_POST['userName'];
+
+  include ("connectDB.php"); 
+
+  $sql="INSERT INTO usuario (rut, nombre, contraseña)
+  VALUES (:userRut, :userName, :userRut)";
+  $sentencia=$conn->prepare($sql);
+  $sentencia->bindParam(':userRut', $userRut);
+  $sentencia->bindParam(':userName', $userName); 
+  $sentencia->execute();
+
+  $rowCount = $sentencia->rowCount(); // Obtener el número de filas afectadas por la consulta
+
+  include("disconnectDB.php");
+
+  $response = ($rowCount > 0) ? true : false; // Verificar si se actualizó al menos una fila
+
+  echo json_encode($response);
+
+}
+
 ?>

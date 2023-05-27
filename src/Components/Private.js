@@ -1,11 +1,12 @@
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../Contexts/AuthContext';
+import AdministracionUsuarios from '../PrivateComponents/AdministracionUsuarios';
 
 const linksStyles='text-[1rem] w-2/6 py-2 text-center border-black border-e border-y-[1px]';
 
 function Private(){
 
-  const { userName, isAuthenticated } = useAuthContext();
+  const { userName, userRut, isAuthenticated } = useAuthContext();
 
   if (!isAuthenticated) {
     return <Navigate to={'/login'} />;
@@ -19,6 +20,13 @@ function Private(){
     event.target.classList.add('adminMainSelectedTab');
   }
 
+  const showUserAdminContainer = () => {
+    const userAdminContainer = document.querySelector('#usersAdminContainer');
+
+    userAdminContainer.classList.remove('invisible');
+    userAdminContainer.classList.remove('opacity-0'); 
+  }
+
   return (
     <div className='bg-white flex flex-col justify-content-center h-screen'> 
       <div className='flex flex-row justify-between mb-16'>
@@ -27,9 +35,17 @@ function Private(){
           <h2>Bienvenid@ {userName}</h2>
         </div>
 
-        <div>
-          <Link to={'/private/logout'} className='pr-3 underline text-[1.5rem]'>Cerrar Sesión</Link>
-        </div>        
+        <div className='flex flex-col'>
+          <Link to={'/private/logout'} className='pr-3 underline text-[1.5rem] text-end'>Cerrar Sesión</Link>
+          {(userName==='Usuario1' && userRut==='12345678-9')?
+            <button onClick={showUserAdminContainer} className='pr-3 underline text-[1.5rem] text-end'>Administrar Usuarios</button>
+            : null}
+          
+        </div>
+
+        {(userName==='Usuario1' && userRut==='12345678-9')?
+          <AdministracionUsuarios />
+          : null}            
 
       </div>
 
