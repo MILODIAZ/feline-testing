@@ -24,8 +24,8 @@ function NavBar () {
               <img src={require('../images/feline-logo-2.jpg')} alt='feline-logo'/>
           </Link>
 
-          <nav ref={navRef} className='z-1 bg-[#ffb2e0] lg:bg-transparent translate-x-full lg:translate-x-0 fixed lg:relative top-0 right-0
-          transition-transform lg:transition-none h-screen lg:h-fit lg:my-auto w-2/6'>
+          <nav ref={navRef} className='z-1 bg-[#ffb2e0] lg:mr-[-120px] xl:mr-0 lg:bg-transparent translate-x-full lg:translate-x-0 fixed lg:relative top-0 right-0
+          transition-transform lg:transition-none h-screen lg:h-fit lg:my-auto w-6/12 sm:w-4/12 md:w-3/12'>
             <button className='p-5 lg:hidden' onClick={showNavbar}>
               <FaTimes className='text-[3rem] hover:fill-white transition-all'/>
             </button>
