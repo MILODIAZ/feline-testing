@@ -63,7 +63,7 @@ function Inventario() {
                                             
                                             ${(() => {
                                                 switch (true) {
-                                                  case product[5]>product[6]:
+                                                  case product[5]>=product[6]:
                                                     return 'bg-[#00ff00]';
                                                   case product[5]<product[7]:
                                                     return 'bg-[#dd7e6b]';                                                 

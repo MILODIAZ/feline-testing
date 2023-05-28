@@ -9,30 +9,153 @@ function Productos(){
   const [formData, setFormData] = useState({
     codigo: '',
     nombre: '',
-    proveedor: '',
+    proveedor: 'SIN PROVEEDOR',
     categorias: [],
-    precio: '',
-    stock: '',
-    stockRecomendado: '',
-    stockMinimo: '',
+    precio: 0,
+    stock: 0,
+    stockRecomendado: 0,
+    stockMinimo: 0,
     descripcion: '',
     imagen: null
   });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+  const resetFormData = () => {
+    setFormData({
+      codigo: '',
+      nombre: '',
+      proveedor: 'SIN PROVEEDOR',
+      categorias: [],
+      precio: '',
+      stock: '',
+      stockRecomendado: '',
+      stockMinimo: '',
+      descripcion: '',
+      imagen: null      
+    });    
   };
 
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+
+  const handleCodeChange = (event) => {
+    const updatedFormData = {...formData, codigo: event.target.value.toUpperCase()};
+    setFormData(updatedFormData);    
+  };
+  const handleNameChange = (event) => {
+    const updatedFormData = {...formData, nombre: event.target.value};
+    setFormData(updatedFormData);
+  };
+  const handlePriceChange = (event) => {
+    if(event.target.value >= 0){
+      const updatedFormData = {...formData, precio: event.target.value};
+      setFormData(updatedFormData);
+    }    
+  };
+  const handleStockChange = (event) => {
+    if(event.target.value >= 0){
+      const updatedFormData = {...formData, stock: event.target.value};
+      setFormData(updatedFormData);
+    } 
+  };
+  const handleRecommendedStockChange = (event) => {
+    if(event.target.value >= 0){
+      const updatedFormData = {...formData, stockRecomendado: event.target.value};
+      setFormData(updatedFormData);
+    } 
+  };
+  const handleMinimunStockChange = (event) => {
+    if(event.target.value >= 0){
+      const updatedFormData = {...formData, stockMinimo: event.target.value};
+      setFormData(updatedFormData);
+    } 
+  };
+  const handleDescriptionChange = (event) => {
+    const updatedFormData = {...formData, descripcion: event.target.value};
+    setFormData(updatedFormData);
+  };
+  const handleChangeCategories = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedCategories([...selectedCategories, value]);
+    } else {
+      setSelectedCategories(selectedCategories.filter((category) => category !== value));
+    }
+  };
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setFormData({ ...formData, imagen: file });
   };
+  const handleProviderChange = (event) => {
+    const selectedProvider = event.target.value;
+    const updatedFormData = { ...formData, proveedor:selectedProvider };
+    setFormData(updatedFormData);
+  }
+
+  const DatosObligatorios = () => {
+    if(formData.codigo==='' ||
+      formData.nombre==='' ||
+      formData.precio===0 ||
+      formData.stock===0  ||
+      formData.stockRecomendado===0 ||
+      formData.stockMinimo===0 ||
+      formData.descripcion==='' ||
+      document.getElementById('imagen').files.length===0
+    ){
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí puedes acceder a los valores de formData y realizar las acciones necesarias, como enviarlos a través de una solicitud HTTP.
-    console.log(formData);
+    if(DatosObligatorios()){
+      const updatedFormData = {
+        ...formData,
+        categorias: selectedCategories
+      };
+    
+      const formDataToSend = new FormData();
+      formDataToSend.append('query', '6');
+      Object.keys(updatedFormData).forEach((key) => {
+        if (key === 'categorias') {
+          if (selectedCategories.length > 0) {
+            updatedFormData[key].forEach((categoria) => {
+              formDataToSend.append('categorias[]', categoria);
+            });
+          } else {
+            formDataToSend.append('categorias[]', '');
+          }
+        } else if (key === 'imagen') {
+          const imageInput = document.getElementById('imagen');
+          if (imageInput.files.length > 0) {
+            formDataToSend.append('imagen', imageInput.files[0]);
+          } else {
+            formDataToSend.append('imagen', '');
+          }
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
+      });    
+    
+      fetch("http://localhost/feline-testing/public/postQueries.php", {
+        method: 'POST',
+        headers: {},
+        body: formDataToSend
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          resetFormData();
+          alert("Producto agregado con éxito");
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Error al agregar producto");       
+        });
+    } else {
+      alert("Complete los campos requeridos");
+    }
+    
   };
 
   useEffect(() => {
@@ -72,32 +195,56 @@ function Productos(){
         </div>
       </div>
 
-      <div className='flex flex-row p-24'>
-        <div className='w-6/12'>
-            <div className='rounded-2xl border-2 border-[#56efd3] bg-[#56efd3] min-w-[250px] w-5/12 mx-auto transition-all hover:border-[#ff7795] hover:bg-[#ff7795] hover:p-[1px] hover:-translate-y-2'>
-              <div className='h-full flex flex-col justify-between'>
-                <img className='rounded-2xl pb-2' alt='product' src={require(`../productsImages/P001.jpg`)}/>
-                <p className='font-bold mx-auto p-1'>Aros de gato</p>
-                <p className='mx-auto text-[1.25rem] pb-1'>$3990</p>
-              </div>          
-            </div>
+      <div className='flex flex-row px-80 py-5 justify-around'>
+        
+        <div className="max-w-sm border border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">          
+         
+          <img
+            alt='Imagen del producto'
+            className='rounded-t-lg'
+            src={formData.imagen ? URL.createObjectURL(formData.imagen) : require(`../images/feline-logo.png`)}
+          />
+          
+          <div className='p-5'>
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
+              {formData.nombre}
+            </h5>
+            <p
+              className="mb-3 font-normal text-gray-700 bold dark:text-gray-700">
+              {formData.descripcion} 
+            </p>
+            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
+              Precio: ${formData.precio}
+            </h5>
+            <p
+              className="mb-3 font-normal text-gray-700 dark:text-gray-700">
+              Stock: {formData.stock}
+            </p>
+            <p
+              className="mb-3 font-normal text-gray-700 dark:text-gray-900">
+              Codigo del producto: {formData.codigo}
+            </p>
           </div>
-        <div>
-          <form onSubmit={handleSubmit}>
+        </div>
 
+        <div className='pt-2'>
+          <form onSubmit={handleSubmit}>
+            <div className='pb-2'>
+              <span className='text-xs'>(*) Campos requeridos</span>
+            </div>            
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='codigo' className='pr-6'>CÓDIGO</label>
-              <input type='text' id='codigo' name='codigo' onChange={handleInputChange} />
+              <label htmlFor='codigo' className='pr-6'>CÓDIGO *</label>
+              <input autoComplete='off' type='text' id='codigo' name='codigo' value={formData.codigo} onChange={handleCodeChange} />
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='nombre' className='pr-6'>NOMBRE</label>
-              <input type='text' id='nombre' name='nombre' onChange={handleInputChange} />
+              <label htmlFor='nombre' className='pr-6'>NOMBRE *</label>
+              <input autoComplete='off' type='text' id='nombre' name='nombre' value={formData.nombre} onChange={handleNameChange} />
             </div>
 
             <div className='flex flex-row justify-between pb-2'>              
               <label htmlFor='proveedor' className='pr-6'>PROVEEDOR</label>
-              <select id='proveedor' name='proveedor'>
+              <select id='proveedor' name='proveedor' onChange={handleProviderChange} value={formData.proveedor}>
                 <option id='SIN PROVEEDOR' value={'SIN PROVEEDOR'}>SIN PROVEEDOR</option>
                 {providers.map(provider => (
                   <option key={provider[0]} id={provider[0]} value={provider[0]}>{provider[0]}</option>
@@ -112,7 +259,14 @@ function Productos(){
               <div className='grid grid-cols-3 gap-4'>
                 {categories.map(categorie => (
                   <div key={categorie[0]}>
-                    <input type='checkbox' id={categorie[0]} value={categorie[0]} name='categorias' />
+                    <input
+                     type='checkbox'
+                     id={categorie[0]}
+                     value={categorie[0]}
+                     name='categorias'
+                     checked={selectedCategories.includes(categorie[0])}
+                     onChange={handleChangeCategories}
+                    />
                     <label htmlFor={categorie[0]}>{categorie[0]}</label>
                   </div>                
                 ))}
@@ -120,40 +274,40 @@ function Productos(){
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='precio' className='pr-6'>PRECIO</label>
+              <label htmlFor='precio' className='pr-6'>PRECIO *</label>
               <div className='flex'>
                 <p className='pr-2'>$</p>
-                <input type='text' id='precio' name='precio' onChange={handleInputChange} />
+                <input autoComplete='off' type='number' placeholder='0' id='precio' name='precio' value={formData.precio} onChange={handlePriceChange} />
               </div>              
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='stock' className='pr-6'>STOCK</label>
-              <input type='text' id='stock' name='stock' onChange={handleInputChange} />
+              <label htmlFor='stock' className='pr-6'>STOCK *</label>
+              <input autoComplete='off' type='number' placeholder='0' id='stock' name='stock' value={formData.stock} onChange={handleStockChange} />
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='stockRecomendado' className='pr-6'>STOCK RECOMENDADO</label>
-              <input type='text' id='stockRecomendado' name='stockRecomendado' onChange={handleInputChange} />
+              <label htmlFor='stockRecomendado' className='pr-6'>STOCK RECOMENDADO *</label>
+              <input autoComplete='off' type='number' placeholder='0' name='stockRecomendado' value={formData.stockRecomendado} onChange={handleRecommendedStockChange} />
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='stockMinimo' className='pr-6'>STOCK MÍNIMO</label>
-              <input type='text' id='stockMinimo' name='stockMinimo' onChange={handleInputChange} />
+              <label htmlFor='stockMinimo' className='pr-6'>STOCK MÍNIMO *</label>
+              <input autoComplete='off' type='number' placeholder='0' name='stockMinimo' value={formData.stockMinimo} onChange={handleMinimunStockChange} />
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='descripción' className='pr-6'>DESCRIPCIÓN</label>
-              <input type='text' id='descripción' name='descripción' onChange={handleInputChange} />
+              <label htmlFor='descripción' className='pr-6'>DESCRIPCIÓN *</label>
+              <input autoComplete='off' type='text' id='descripción' name='descripción' value={formData.descripcion} onChange={handleDescriptionChange} />
             </div>
 
             <div className="flex flex-row justify-between pb-2">
-              <label htmlFor='imagen' className="pr-6">IMAGEN</label>
+              <label htmlFor='imagen' className="pr-6">IMAGEN*</label>
               <input type="file" id='imagen' name='imagen' onChange={handleFileChange} />
             </div>
 
-            <div className='mt-8'>
-              <button>+Agregar Producto</button>
+            <div className='mt-8 flex justify-center'>
+              <button className='bg-[#93c47d] p-3 rounded-lg border-[1px] border-black'>AGREGAR</button>
             </div>
 
           </form>

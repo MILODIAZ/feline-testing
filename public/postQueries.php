@@ -191,4 +191,79 @@ if ($query == 5){
 
 }
 
+if ($query == 6){
+  $codigo = $_POST['codigo'];
+  $nombre = $_POST['nombre'];
+  $proveedor = $_POST['proveedor'];
+  if($proveedor=='SIN PROVEEDOR'){
+    $proveedor=null;
+  }
+  $categorias = $_POST['categorias'];
+  $precio = $_POST['precio'];
+  $stock = $_POST['stock'];
+  $stockRecomendado = $_POST['stockRecomendado'];
+  $stockMinimo = $_POST['stockMinimo'];
+  $descripcion = $_POST['descripcion'];
+  if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+    // El campo 'imagen' se ha enviado y no hay errores
+    $imagen = $_FILES['imagen'];
+    // Resto de tu lógica para procesar la imagen
+  } else {
+    // El campo 'imagen' no se ha enviado o hay algún error
+    $imagen = null;
+  }  
+
+  include ("connectDB.php"); 
+
+  $sql="INSERT INTO producto (codigo, nombre_proveedor, nombre, descripción, precio, stock_actual, stock_recomendado, stock_bajo, favorito)
+  VALUES (:codigo, :nombre_proveedor, :nombre, :descripcion, :precio, :stock_actual, :stock_recomendado, :stock_bajo, false)";
+
+  $sentencia=$conn->prepare($sql);
+  $sentencia->bindParam(':codigo', $codigo);
+  $sentencia->bindParam(':nombre_proveedor', $proveedor);
+  $sentencia->bindParam(':nombre', $nombre);
+  $sentencia->bindParam(':descripcion', $descripcion);
+  $sentencia->bindParam(':precio', $precio);
+  $sentencia->bindParam(':stock_actual', $stock);
+  $sentencia->bindParam(':stock_recomendado', $stockRecomendado);
+  $sentencia->bindParam(':stock_bajo', $stockMinimo);
+  $sentencia->execute(); 
+
+  if($categorias!=[""]){
+
+    foreach($categorias as $categoria) {
+      $sql = "INSERT INTO corresponde (codigo_producto, nombre_categoria)
+      VALUES (:codigo_producto, :nombre_categoria)";
+  
+      $sentencia=$conn->prepare($sql);
+      $sentencia->bindParam(':codigo_producto', $codigo);
+      $sentencia->bindParam(':nombre_categoria', $categoria);
+  
+      $sentencia->execute();
+    }
+
+  }
+
+  
+
+  $rowCount = $sentencia->rowCount();
+
+  include("disconnectDB.php");
+
+  $response = ($rowCount > 0) ? true : false;
+  
+  if($response==true && !is_null($imagen)){    
+
+    // Generar el nuevo nombre del archivo usando el código
+    $nuevoNombreArchivo = $codigo . '.jpg';
+
+    $targetDirectory = '../src/productsImages/';
+    $targetFile = $targetDirectory . basename($nuevoNombreArchivo);
+    move_uploaded_file($imagen['tmp_name'], $targetFile);
+  }
+
+  echo json_encode($response);
+  
+}
+
 ?>
