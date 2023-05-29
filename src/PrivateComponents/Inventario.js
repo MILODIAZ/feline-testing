@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ScrollToTopButton from '../Components/ScrollToTopButton';
 
 function Inventario() {
 
@@ -52,6 +53,7 @@ function Inventario() {
             </div>
             {/* Lista de productos */}
             <div className="lg:p-8 rounded-md w-[100%]">
+                <ScrollToTopButton/>
                 <div className=" flex items-center  justify-between pb-6">
                     <div>
                         <div className="lg:-mx-4 w-[100%]  px-4 sm:px-8  overflow-x-auto">
