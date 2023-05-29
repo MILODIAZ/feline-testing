@@ -60,33 +60,34 @@ INSERT INTO proveedor (nombre)
 VALUES ('Proveedor A'), ('Proveedor B'), ('Proveedor C'), ('Proveedor D'), ('Proveedor E');
 
 INSERT INTO categoria (nombre)
-VALUES ('Electrónica'), ('Ropa'), ('Alimentación'), ('Hogar'), ('Deportes'), ('Joyería'), ('Juguetes'), ('Libros');
+VALUES ('Accesorios'), ('Ropa'), ('Peluches'), ('Papelería'), ('Vasos'), ('Joyería'), ('Regalos'), ('Libros');
 
 INSERT INTO usuario (rut, nombre, contraseña)
 VALUES 
-   ('12345678-9', 'Usuario1', 'contraseña1'),
-   ('98765432-1', 'Usuario2', 'contraseña2'),
-   ('56789012-3', 'Usuario3', 'contraseña3');
+	('15912517-3', 'Mirle Jaque', 'feline0'),
+   ('18924575-0', 'Emilio Díaz', 'feline1'),
+   ('20538523-1', 'Ignacio Herrera', 'feline2'),
+   ('20468276-3', 'Juan Nilo', 'feline3');
 
 INSERT INTO producto (codigo, nombre_proveedor, nombre, descripción, precio, stock_actual, stock_recomendado, stock_bajo, favorito)
 VALUES
-   ('P001', 'Proveedor A', 'Producto 1', 'Descripción del producto 1', 10, 50, 100, 20, true),
-   ('P002', 'Proveedor B', 'Producto 2', 'Descripción del producto 2', 15, 30, 80, 10, false),
-   ('P003', 'Proveedor C', 'Producto 3', 'Descripción del producto 3', 20, 100, 200, 50, true),
-   ('P004', 'Proveedor A', 'Producto 4', 'Descripción del producto 4', 25, 20, 50, 5, true),
-   ('P005', 'Proveedor B', 'Producto 5', 'Descripción del producto 5', 30, 80, 150, 30, false),
-   ('P006', 'Proveedor C', 'Producto 6', 'Descripción del producto 6', 35, 60, 120, 15, false),
-   ('P007', 'Proveedor A', 'Producto 7', 'Descripción del producto 7', 40, 10, 30, 3, true),
-   ('P008', 'Proveedor B', 'Producto 8', 'Descripción del producto 8', 45, 40, 100, 20, false),
-   ('P009', 'Proveedor C', 'Producto 9', 'Descripción del producto 9', 50, 70, 180, 40, true),
-   ('P010', 'Proveedor A', 'Producto 10', 'Descripción del producto 10', 55, 90, 200, 60, true),
-   ('P011', 'Proveedor B', 'Producto 11', 'Descripción del producto 11', 60, 30, 80, 10, false),
-   ('P012', 'Proveedor C', 'Producto 12', 'Descripción del producto 12', 65, 50, 120, 15, false),
-   ('P013', 'Proveedor A', 'Producto 13', 'Descripción del producto 13', 70, 10, 30, 3, true),
-   ('P014', 'Proveedor B', 'Producto 14', 'Descripción del producto 14', 75, 60, 150, 30, false),
+   ('P001', 'Proveedor A', 'Aros de Gato de Plata', 'Descripción del producto 1, aros de gato muy bonitos que brillan y todo eso.', 2990, 50, 100, 20, true),
+   ('P002', 'Proveedor B', 'Pijama de Gato Invierno', 'Descripción del producto 2, disponibles en S M L XL de algodon.', 11990, 30, 80, 10, false),
+   ('P003', 'Proveedor C', 'Pulsera Metálica de Gato', 'Descripción del producto 3, te dice la hora, se conecta por bluetooth, es bkn.', 7990, 100, 200, 50, true),
+   ('P004', 'Proveedor A', 'Peluche de Gatito', 'Descripción del producto 4, ideal para los niños.', 14990, 20, 50, 5, true),
+   ('P005', 'Proveedor B', 'Azucarero de Gato', 'Descripción del producto 5, de loza', 6990, 80, 150, 30, false),
+   ('P006', 'Proveedor C', 'Vaso para niño, Gatito', 'Descripción del producto 6, 300 ml, para microondas.', 6000, 60, 120, 15, false),
+   ('P007', 'Proveedor A', 'Camisa de Gato Gordo', 'Descripción del producto 7, unisex S M L XL.', 12990, 10, 30, 3, true),
+   ('P008', 'Proveedor B', 'Taza de perrito', 'Descripción del producto 8, de loza.', 7990, 40, 100, 20, false),
+   ('P009', 'Proveedor C', 'Lentes Estilo Felino', 'Descripción del producto 9, de fantasía, sin aumento.', 8990, 70, 180, 40, true),
+   ('P010', 'Proveedor A', 'Lapicera Patitas de Gato', 'Descripción del producto 10, disponible en blanco, rosado, negro y amarillo.', 1990, 90, 200, 60, true),
+   ('P011', 'Proveedor B', 'Luna, Sailor Moon 🌙', 'Descripción del producto 11. Algodón, Tamaño: 30 CM.', 15990, 30, 80, 10, false),
+   ('P012', 'Proveedor C', 'Camisa Niño de Perrito', 'Descripción del producto 12', 8990, 50, 120, 15, false),
+   ('P013', 'Proveedor A', 'Agenda Gato Gordo', 'Descripción del producto 13, 400 páginas, anillado.', 10990, 10, 30, 3, true),
+   ('P014', 'Proveedor B', 'Peluche Perrito', 'Descripción del producto 14', 14990, 60, 150, 30, false),
    ('P015', 'Proveedor C', 'Producto 15', 'Descripción del producto 15', 80, 40, 100, 20, false),
-   ('P016', 'Proveedor A', 'Producto 16', 'Descripción del producto 16', 85, 80, 180, 40, true),
-   ('P017', 'Proveedor B', 'Producto 17', 'Descripción del producto 17', 90, 70, 200, 60, true),
+   ('P016', 'Proveedor A', 'Mate de gatito 😺', 'Descripción del producto 16, 500 ml, metálico.', 14990, 80, 180, 40, true),
+   ('P017', 'Proveedor B', 'Aros de Gatito', 'Descripción del producto 17, acero inoxidable.', 3990, 70, 200, 60, true),
    ('P018', 'Proveedor C', 'Producto 18', 'Descripción del producto 18', 95, 30, 80, 10, false),
    ('P019', 'Proveedor A', 'Producto 19', 'Descripción del producto 19', 100, 50, 120, 15, false),
    ('P020', NULL, 'Producto 20', 'Descripción del producto 20', 80, 100, 50, 30, false),
@@ -94,24 +95,24 @@ VALUES
    
 INSERT INTO corresponde (codigo_producto, nombre_categoria)
 VALUES
-   ('P001', 'Electrónica'),
+   ('P001', 'Joyería'),
    ('P002', 'Ropa'),
-   ('P002', 'Deportes'),
-   ('P003', 'Alimentación'),
-   ('P003', 'Hogar'),
-   ('P004', 'Ropa'),
-   ('P005', 'Electrónica'),
-   ('P005', 'Deportes'),
-   ('P006', 'Hogar'),
-   ('P007', 'Alimentación'),
-   ('P008', 'Electrónica'),
-   ('P009', 'Deportes'),
-   ('P010', 'Hogar'),
-   ('P010', 'Joyería'),
-   ('P011', 'Ropa'),
-   ('P012', 'Juguetes'),
-   ('P013', 'Electrónica'),
-   ('P014', 'Alimentación');
+   ('P002', 'Regalos'),
+   ('P003', 'Accesorios'),
+   ('P003', 'Regalos'),
+   ('P004', 'Peluches'),
+   ('P005', 'Vasos'),
+   ('P005', 'Regalos'),
+   ('P006', 'Vasos'),
+   ('P007', 'Ropa'),
+   ('P008', 'Vasos'),
+   ('P009', 'Accesorios'),
+   ('P010', 'Papelería'),
+   ('P010', 'Regalos'),
+   ('P011', 'Peluches'),
+   ('P012', 'Ropa'),
+   ('P013', 'Papelería'),
+   ('P014', 'Peluches');
 
 SELECT * FROM categoria
 

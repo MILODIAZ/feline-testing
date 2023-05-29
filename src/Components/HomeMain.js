@@ -53,7 +53,7 @@ function HomeMain() {
 
         <ProductContainer code={productCode} name={productName} price={productPrice} stock={productStock} description={productDescription} />
 
-        <div className="xl:px-60 pt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-8">
+        <div className="xl:px-32 2xl:px-60 pt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-8">
           {hotsales.map(hotsale => (
             <ProductCard key={hotsale[0]} name={hotsale[2]} price={hotsale[4]} img={hotsale[0]} handleClick={showProductContainer} stock={hotsale[5]} description={hotsale[3]}/>
           ))}

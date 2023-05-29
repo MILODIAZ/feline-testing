@@ -15,7 +15,7 @@ function MainPage(props) {
           </div>
         </div>
       </main>
-      <footer className='fixed bottom-3 right-10 '>
+      <footer className='fixed bottom-3 right-10'>
 
         <Link className='inline-flex items-center rounded-md bg-[#56efd3] px-6 py-3 
         text-2xl font-medium text-white-700 bold shadow-lg

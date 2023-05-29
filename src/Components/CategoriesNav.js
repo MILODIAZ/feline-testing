@@ -58,9 +58,9 @@ function CategoriesNav() {
         </button>
         <div className='lg:w-full lg:relative overflow-hidden'>
           <div ref={sliderDiv} className='lg:w-full lg:absolute transition-all'>
-            <ul ref={sliderRef} className='-z-1 text-[0.95rem] grid grid-cols-4 gap-y-3 lg:flex lg:flex-row lg:text-[1.5rem] lg:justify-start lg:text-center'>
+            <ul ref={sliderRef} className='-z-1 text-[0.75rem] sm:text-[0.95rem] grid grid-cols-4 gap-y-3 lg:flex lg:flex-row lg:text-[1.5rem] lg:justify-start lg:text-center'>
               {categories.map(categorie => (
-                <li key={categorie[0]} className='mx-auto'>
+                <li key={categorie[0]} className='mx-auto justify-items-center'>
                   <a href={`/${categorie[0]}`} className='text-black hover:text-white uppercase transition-all'>{categorie[0]}</a>
                 </li>
               ))}

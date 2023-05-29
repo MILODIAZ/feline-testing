@@ -4,6 +4,7 @@ import HomeMain from './Components/HomeMain';
 import CategorieMain from './Components/CategorieMain';
 import NosotrosMain from './Components/NosotrosMain';
 import Login from './Components/Login';
+import CambioContraseña from './Components/CambioContraseña';
 import PrivateRoute from './Components/PrivateRoute';
 import Private from './Components/Private';
 import Inventario from './PrivateComponents/Inventario';
@@ -35,7 +36,11 @@ const router = createBrowserRouter([
   },  
   {
     path:'/login',
-    element: <Login />         
+    element: <Login />           
+  },
+  {
+    path:'/login/changePass',
+    element: <CambioContraseña />
   },
   {
     path:'/private',

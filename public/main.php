@@ -67,5 +67,35 @@
         }
         
     }
+
+    if ($query == 4){
+
+        include ("connectDB.php"); 
+
+        $sql="SELECT * FROM producto";
+        $sentencia=$conn->prepare($sql);
+        $sentencia->execute();
+        $resultado=$sentencia->fetchAll(); 
+
+        include("disconnectDB.php");
+
+        header("Content-Type: application/json");
+        echo json_encode($resultado);
+    }
+
+    if ($query == 5){
+
+        include ("connectDB.php"); 
+
+        $sql="SELECT * FROM proveedor";
+        $sentencia=$conn->prepare($sql);
+        $sentencia->execute();
+        $resultado=$sentencia->fetchAll(); 
+
+        include("disconnectDB.php");
+
+        header("Content-Type: application/json");
+        echo json_encode($resultado);
+    }
     
 ?>
