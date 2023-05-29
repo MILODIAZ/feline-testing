@@ -195,37 +195,9 @@ function Productos(){
         </div>
       </div>
 
-      <div className='flex flex-row px-80 py-5 justify-around'>
+      <div className='flex flex-wrap px-80 py-5 justify-around'>
         
-        <div className="max-w-sm border border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">          
-         
-          <img
-            alt='Imagen del producto'
-            className='rounded-t-lg'
-            src={formData.imagen ? URL.createObjectURL(formData.imagen) : require(`../images/feline-logo.png`)}
-          />
-          
-          <div className='p-5'>
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
-              {formData.nombre}
-            </h5>
-            <p
-              className="mb-3 font-normal text-gray-700 bold dark:text-gray-700">
-              {formData.descripcion} 
-            </p>
-            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
-              Precio: ${formData.precio}
-            </h5>
-            <p
-              className="mb-3 font-normal text-gray-700 dark:text-gray-700">
-              Stock: {formData.stock}
-            </p>
-            <p
-              className="mb-3 font-normal text-gray-700 dark:text-gray-900">
-              Codigo del producto: {formData.codigo}
-            </p>
-          </div>
-        </div>
+        
 
         <div className='pt-2'>
           <form onSubmit={handleSubmit}>
@@ -306,12 +278,42 @@ function Productos(){
               <input type="file" accept='image/*' id='imagen' name='imagen' onChange={handleFileChange} />
             </div>
 
-            <div className='mt-8 flex justify-center'>
-              <button className="text-sm text-white transition duration-150 hover:bg-[#93c47d] bg-[#00ff00] font-bold py-2 px-4 rounded">AGREGAR</button>
+            <div className='mt-8 flex justify-center mb-[10px]'>
+              <button className="text-sm text-black transition duration-150 hover:bg-pink-400 bg-pink-300 font-bold py-2 px-4 rounded">AGREGAR</button>
             </div>
 
           </form>
-        </div>          
+        </div>  
+        {/* Producto previsualizado */}
+        <div className="max-w-sm min-w-[300px]  border mt-[20px]  lg:mt-[10px] border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">          
+         
+          <img
+            alt='Imagen del producto'
+            className='rounded-t-lg'
+            src={formData.imagen ? URL.createObjectURL(formData.imagen) : require(`../images/feline-logo.png`)}
+          />
+          
+          <div className='p-5'>
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
+              {formData.nombre}
+            </h5>
+            <p
+              className="mb-3 font-normal text-gray-700 bold dark:text-gray-700">
+              {formData.descripcion} 
+            </p>
+            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
+              Precio: ${formData.precio}
+            </h5>
+            <p
+              className="mb-3 font-normal text-gray-700 dark:text-gray-700">
+              Stock: {formData.stock}
+            </p>
+            <p
+              className="mb-3 font-normal text-gray-700 dark:text-gray-900">
+              Codigo del producto: {formData.codigo}
+            </p>
+          </div>
+        </div>        
       </div>
 
     </div>
