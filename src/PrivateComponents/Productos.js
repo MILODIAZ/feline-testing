@@ -307,7 +307,7 @@ function Productos(){
             </div>
 
             <div className='mt-8 flex justify-center'>
-              <button className='bg-[#93c47d] p-3 rounded-lg border-[1px] border-black'>AGREGAR</button>
+              <button className="text-sm text-white transition duration-150 hover:bg-[#93c47d] bg-[#00ff00] font-bold py-2 px-4 rounded">AGREGAR</button>
             </div>
 
           </form>

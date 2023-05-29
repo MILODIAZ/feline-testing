@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ScrollToTopButton from '../Components/ScrollToTopButton';
+import SetStock from './SetStock';
 
 function Inventario() {
 
@@ -38,8 +39,21 @@ function Inventario() {
             .catch(error => console.log(error));
     };
 
+    //MODIFICAR STOCK
+    const [openStock, setOpenStock] = useState(false);
+
+    const handleOpenStock = () => {
+        if (openStock){
+            setOpenStock(false);
+        } else {
+            setOpenStock(true);
+        }
+        console.log(openStock);
+    }
+
     return (
         <div>
+            {openStock? <SetStock handleClick={handleOpenStock} /> : null}
             <div>
                 {/*  htmlFor={categoryFilterID} */}
                 <label>Filtro categoria</label>
@@ -102,15 +116,16 @@ function Inventario() {
                                                 {/* Botones */}
                                                 <td>
                                                     <button
+                                                        onClick={handleOpenStock}
                                                         className="text-sm text-white transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded-l">
-                                                        Modificar Stock
+                                                        Actualizar Stock
                                                     </button>
                                                 </td>
 
                                                 <td>
 
                                                     <button
-                                                        className="text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded-r">
+                                                        className="text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4">
                                                         Modificar Producto
                                                     </button>
                                                 </td>

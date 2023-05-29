@@ -136,10 +136,10 @@ function UsersList () {
       {dataLoaded ? (
         users.map(user => (
           (user[1]!=='Mirle Jaque' && user[0]!=='15912517-3')?
-            <div key={user[0]} className='flex flex-row justify-between'>
+            <div key={user[0]} className='flex flex-row justify-between pb-2'>
             <p>{user[0]}</p>
             <p className='pl-8 text-left'>{user[1]}</p>
-            <button onClick={() => deleteUser(user[0])} className='pl-8 underline text-red-500'>Eliminar</button>
+            <button onClick={() => deleteUser(user[0])} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
             </div>
             :null          
         ))
@@ -159,8 +159,8 @@ function UsersList () {
             <label htmlFor='userName'>Nombre de usuario</label>
             <input id='userName' type='text' value={userName} onChange={handleUserNameChange}></input>
           </div>
-          <div>
-            <button className='underline text-blue-500'>+ Agregar</button>
+          <div className='flex justify-center'>
+            <button className='text-sm text-white transition duration-150 hover:bg-[#93c47d] bg-[#00ff00] font-bold py-2 px-4 rounded mt-4'>Registrar</button>
           </div>
           
         </form>
