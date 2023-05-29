@@ -303,7 +303,7 @@ function Productos(){
 
             <div className="flex flex-row justify-between pb-2">
               <label htmlFor='imagen' className="pr-6">IMAGEN*</label>
-              <input type="file" id='imagen' name='imagen' onChange={handleFileChange} />
+              <input type="file" accept='image/*' id='imagen' name='imagen' onChange={handleFileChange} />
             </div>
 
             <div className='mt-8 flex justify-center'>
