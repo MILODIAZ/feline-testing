@@ -41,8 +41,8 @@ CREATE TABLE lote(
 
 
 CREATE TABLE corresponde(
-	codigo_producto TEXT NOT NULL REFERENCES producto(codigo),
-	nombre_categoria TEXT NOT NULL REFERENCES categoria(nombre),
+	codigo_producto TEXT NOT NULL REFERENCES producto(codigo) ON DELETE CASCADE ON UPDATE CASCADE,
+	nombre_categoria TEXT NOT NULL REFERENCES categoria(nombre) ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (codigo_producto, nombre_categoria)
 );
 

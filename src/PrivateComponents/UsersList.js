@@ -87,7 +87,7 @@ function UsersList () {
         }
 
       })
-      .catch(error => console.log(error));
+      .catch(error => alert("Ya se encuentra registrado un usuario con ese rut."));
     } else {
       alert("RUT inválido");
     }
@@ -160,7 +160,7 @@ function UsersList () {
             <input id='userName' type='text' value={userName} placeholder='Nombre' onChange={handleUserNameChange}></input>
           </div>
           <div className='flex justify-center'>
-            <button className='text-sm text-white transition duration-150 hover:bg-[#00ff00] bg-[#93c47d]  font-bold py-2 px-4 rounded mt-4'>Registrar</button>
+            <button className='text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-4 rounded mt-4'>Registrar</button>
           </div>
           
         </form>

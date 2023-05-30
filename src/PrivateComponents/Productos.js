@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 
 
 function Productos(){
+
+  //LÓGICA DE AGREGAR PRODUCTOS
+
   const [categories, setCategories] = useState([]);
   const [providers, setProviders] = useState([]);
   const [dataCategoryLoaded, setDataCategoryLoaded] = useState(false);
@@ -148,9 +151,8 @@ function Productos(){
           resetFormData();
           alert("Producto agregado con éxito");
         })
-        .catch((error) => {
-          console.error(error);
-          alert("Error al agregar producto");       
+        .catch((error) => {          
+          alert("Ya se ha registrado un producto con el mismo código.");       
         });
     } else {
       alert("Complete los campos requeridos");
@@ -188,10 +190,10 @@ function Productos(){
 
       <div className='flex flex-row justify-between py-8'>
         <div className='w-6/12 text-center'>
-          <button className='underline hover:text-blue-500'>+ NUEVO PRODUCTO</button>
+          <p className='text-xl font-bold'>AGREGAR NUEVO PRODUCTO</p>
         </div>
         <div className='w-6/12 text-center'>            
-          <button className='underline hover:text-blue-500'>CATEGORÍAS</button>          
+          <button className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4'>Administrar Categorias</button>          
         </div>
       </div>
 

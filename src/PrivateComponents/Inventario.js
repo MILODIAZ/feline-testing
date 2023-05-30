@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ScrollToTopButton from '../Components/ScrollToTopButton';
 import SetStock from './SetStock';
+import DeleteProduct from './DeleteProduct';
 
 function Inventario() {
 
@@ -63,8 +64,24 @@ function Inventario() {
         }
     }
 
+    //ELIMINAR PRODUCTO
+    const [openDeleteProduct, setOpenDeleteProduct] = useState(false);    
+
+    const handleOpenDelete = (name, code) => {
+        if(openDeleteProduct){
+            setOpenDeleteProduct(false);
+            setProductName('');
+            setProductCode('');
+        } else {
+            setOpenDeleteProduct(true);
+            setProductName(name);
+            setProductCode(code);
+        }       
+    }
+
     return (
         <div>
+            {openDeleteProduct? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
             <div>
                 {/*  htmlFor={categoryFilterID} */}
@@ -93,7 +110,7 @@ function Inventario() {
                                             ${(() => {
                                                         switch (true) {
                                                             case product[5] >= product[6]:
-                                                                return 'bg-[#00ff00]';
+                                                                return 'bg-[#b6efb0]';
                                                             case product[5] < product[7]:
                                                                 return 'bg-[#dd7e6b]';
                                                             default:
@@ -153,6 +170,7 @@ function Inventario() {
 
                                                     <td>
                                                         <button
+                                                            onClick={() => handleOpenDelete(product[2],product[0])}
                                                             className="text-sm text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-4 rounded-r">
                                                             Eliminar Producto
                                                         </button>

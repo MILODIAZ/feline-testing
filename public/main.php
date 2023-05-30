@@ -118,14 +118,44 @@
         $sentencia->bindValue(':newStock', $nuevoStock);
         $sentencia->execute();
 
-        $rowCount = $sentencia->rowCount(); // Obtener el número de filas afectadas por la consulta
+        $rowCount = $sentencia->rowCount();
 
         include("disconnectDB.php");
 
-        $response = ($rowCount > 0) ? true : false; // Verificar si se actualizó al menos una fila
+        $response = ($rowCount > 0) ? true : false;
 
         echo json_encode($response);
     
-    }    
+    } 
+    
+    if($query == 7){
+
+        $codigo = $_GET['codigo'];
+
+        include ("connectDB.php");
+
+        $sql = "DELETE FROM producto             
+            WHERE codigo = :codigo";
+
+        $sentencia = $conn->prepare($sql);
+        $sentencia->bindValue(':codigo', $codigo);
+        $sentencia->execute();
+
+        $rowCount = $sentencia->rowCount();
+
+        include("disconnectDB.php");
+
+        $response = ($rowCount > 0) ? true : false;
+
+        if($response){
+            $ruta = '../src/productsImages/' . $codigo . '.jpg';
+            if (file_exists($ruta)){
+                unlink($ruta);
+            }
+        }
+
+        echo json_encode($response);
+        
+    }
     
 ?>
