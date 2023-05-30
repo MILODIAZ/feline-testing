@@ -195,10 +195,9 @@ function Productos(){
         </div>
       </div>
 
-      <div className='flex flex-wrap px-80 py-5 justify-around'>
-        
-        
 
+      {/* Div del producto */}
+      <div className='flex flex-wrap px-80 py-5 justify-around'>
         <div className='pt-2'>
           <form onSubmit={handleSubmit}>
             <div className='pb-2'>
@@ -239,7 +238,7 @@ function Productos(){
                      checked={selectedCategories.includes(categorie[0])}
                      onChange={handleChangeCategories}
                     />
-                    <label htmlFor={categorie[0]}>{categorie[0]}</label>
+                    <label className='mx-2' htmlFor={categorie[0]}>{categorie[0]}</label>
                   </div>                
                 ))}
               </div>                                       
