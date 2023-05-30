@@ -230,7 +230,7 @@ function Productos(){
               </div>
               <div className='grid grid-cols-3 gap-4'>
                 {categories.map(categorie => (
-                  <div key={categorie[0]}>
+                  <div key={categorie[0]} className='flex min-w-[150px]'>
                     <input
                      type='checkbox'
                      id={categorie[0]}
