@@ -193,7 +193,7 @@ function Productos(){
           <p className='text-xl font-bold'>AGREGAR NUEVO PRODUCTO</p>
         </div>
         <div className='w-6/12 text-center'>            
-          <button className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4'>Administrar Categorias</button>          
+          <button className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Categorias</button>          
         </div>
       </div>
 

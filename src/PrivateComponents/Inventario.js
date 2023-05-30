@@ -105,7 +105,7 @@ function Inventario() {
                                     {dataProductLoaded ?
                                         <tbody>
                                             {products.map(product => (
-                                                <tr key={product[0]} className={`px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
+                                                <tr key={product[0]} className={`rounded px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
                                             
                                             ${(() => {
                                                         switch (true) {
@@ -123,7 +123,7 @@ function Inventario() {
                                                     <td className='w-[40%] px-5 py-5 border-gray-200 text-sm'>
                                                         <div className='flex items-center'>
                                                             <div className='w-1/2  flex-shrink-0'>
-                                                                <img alt='product' className='h-[140px] lg:h-[140px]  min-w-1/2' src={require(`../productsImages/${product[0]}.jpg`)} />
+                                                                <img alt='product' className='rounded h-[140px] lg:h-[140px]  min-w-1/2' src={require(`../productsImages/${product[0]}.jpg`)} />
                                                             </div>
                                                             <div className='w-1/2 ml-3 text-lg md:text-xl lg:text-2xl'>
                                                                 <h2 className='text-gray-900 font-bold whitespace-no-wrap'>

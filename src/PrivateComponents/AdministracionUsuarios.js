@@ -15,10 +15,10 @@ function AdministracionUsuarios(){
 
   return(
     <div id='usersAdminContainer' ref={userAdminContainer} className='fixed z-[99] inset-0 flex justify-center items-center invisible opacity-0 transition-all'>
-      <div className='flex flex-col bg-[#f8efe6] p-2 border-2 border-black text-[1.5rem]'>
+      <div className='flex flex-col bg-[#f8efe6] p-2 border-2 border-black text-[1.5rem] rounded-lg'>
         <div className='flex justify-end'>
           <button onClick={hideProductContainer}>
-            <FaTimes className='hover:text-white' />
+            <FaTimes className='hover:text-[#a5d5d5]' />
           </button>
         </div>
         <div className='p-8'>

@@ -2,7 +2,7 @@ import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../Contexts/AuthContext';
 import AdministracionUsuarios from '../PrivateComponents/AdministracionUsuarios';
 
-const linksStyles='text-[1rem] w-2/6 py-2 text-center border-black border-e border-y-[1px] bg-white';
+const linksStyles='text-[1rem] w-2/6 py-2 text-center border-black border-e border-t-[1px] border-b-[2px] bg-white rounded-t-lg';
 
 function Private(){
 
@@ -31,7 +31,7 @@ function Private(){
     <div className='bg-[#b0efef] flex flex-col justify-content-center h-screen'> 
       <div className='flex flex-row justify-between pb-16'>
 
-        <div className='text-[2.5rem]'>
+        <div className='pt-2 pl-4 text-[2.5rem]'>
           <h2>Bienvenid@ {userName}</h2>
         </div>
 
