@@ -128,7 +128,7 @@ function Inventario() {
                                                             Recomendado: {product[6]}
                                                         </p>
                                                         <p className='sm:text-md lg:text-md text-gray-900 whitespace-no-wrap'>
-                                                            bajo: {product[7]}
+                                                            Mínimo: {product[7]}
                                                         </p>
 
                                                     </td>
