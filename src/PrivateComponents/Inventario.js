@@ -109,12 +109,12 @@ function Inventario() {
                                                                 <img alt='product' className='h-[140px] lg:h-[140px]  min-w-1/2' src={require(`../productsImages/${product[0]}.jpg`)} />
                                                             </div>
                                                             <div className='w-1/2 ml-3 text-lg md:text-xl lg:text-2xl'>
-                                                                <p className='text-sm md:text-md lg:text-lg text-gray-900  whitespace-no-wrap'>
-                                                                    {product[0]}
-                                                                </p>
                                                                 <h2 className='text-gray-900 font-bold whitespace-no-wrap'>
                                                                     {product[2]}
                                                                 </h2>
+                                                                <p className='text-sm md:text-md lg:text-md text-gray-900  whitespace-no-wrap'>
+                                                                    {product[0]}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -124,10 +124,10 @@ function Inventario() {
                                                         <p className='text-md md:text-xl lg:text-2xl font-bold text-gray-900 whitespace-no-wrap'>
                                                             Stock: {product[5]}
                                                         </p>
-                                                        <p className='sm:text-md lg:text-lg text-gray-900 whitespace-no-wrap'>
+                                                        <p className='sm:text-md lg:text-md text-gray-900 whitespace-no-wrap'>
                                                             Recomendado: {product[6]}
                                                         </p>
-                                                        <p className='sm:text-md lg:text-lg text-gray-900 whitespace-no-wrap'>
+                                                        <p className='sm:text-md lg:text-md text-gray-900 whitespace-no-wrap'>
                                                             bajo: {product[7]}
                                                         </p>
 
