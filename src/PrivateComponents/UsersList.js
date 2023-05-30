@@ -153,14 +153,14 @@ function UsersList () {
 
           <div className='flex flex-col'>
             <label htmlFor='userRut'>Rut</label>
-            <input id='userRut' type='text' value={userRut} onChange={handleUserRutChange}></input>
+            <input id='userRut' type='text' value={userRut} placeholder='0000000-0' onChange={handleUserRutChange}></input>
           </div>
           <div className='flex flex-col'>
             <label htmlFor='userName'>Nombre de usuario</label>
-            <input id='userName' type='text' value={userName} onChange={handleUserNameChange}></input>
+            <input id='userName' type='text' value={userName} placeholder='Nombre' onChange={handleUserNameChange}></input>
           </div>
           <div className='flex justify-center'>
-            <button className='text-sm text-white transition duration-150 hover:bg-[#93c47d] bg-[#00ff00] font-bold py-2 px-4 rounded mt-4'>Registrar</button>
+            <button className='text-sm text-white transition duration-150 hover:bg-[#00ff00] bg-[#93c47d]  font-bold py-2 px-4 rounded mt-4'>Registrar</button>
           </div>
           
         </form>

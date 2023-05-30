@@ -242,9 +242,7 @@ if ($query == 6){
       $sentencia->execute();
     }
 
-  }
-
-  
+  }  
 
   $rowCount = $sentencia->rowCount();
 

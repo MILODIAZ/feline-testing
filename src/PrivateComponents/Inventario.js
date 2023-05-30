@@ -21,6 +21,11 @@ function Inventario() {
             .catch(error => console.log(error));
     }
 
+    const reloadProducts = () => {
+        setDataProductLoaded(false);
+        dataProduct();
+    }
+
     // Categorias
     const [dataCategoryLoaded, setDataCategoryLoaded] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -41,19 +46,26 @@ function Inventario() {
 
     //MODIFICAR STOCK
     const [openStock, setOpenStock] = useState(false);
+    const [productCode, setProductCode] = useState('');
+    const [productName, setProductName] = useState('');
+    const [productStock, setProductStock] = useState(0);
 
-    const handleOpenStock = () => {
+    const handleOpenStock = (code, name, stock) => {        
         if (openStock){
             setOpenStock(false);
+            setProductCode('');
+            setProductStock(0);                    
         } else {
             setOpenStock(true);
-        }
-        console.log(openStock);
-    }
+            setProductCode(code);
+            setProductStock(stock);
+            setProductName(name);          
+        }               
+    }   
 
     return (
         <div>
-            {openStock? <SetStock handleClick={handleOpenStock} /> : null}
+            {openStock? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
             <div>
                 {/*  htmlFor={categoryFilterID} */}
                 <label>Filtro categoria</label>
@@ -73,6 +85,7 @@ function Inventario() {
                         <div className="lg:-mx-4 w-[100%]  px-4 sm:px-8  overflow-x-auto">
                             <div className="inline-block  shadow rounded-lg overflow-hidden">
                                 <table className='min-w-full leading-normal'>
+                                    {dataProductLoaded?
                                     <tbody>
                                         {products.map(product => (
                                             <tr key={product[0]} className={`px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
@@ -116,7 +129,7 @@ function Inventario() {
                                                 {/* Botones */}
                                                 <td>
                                                     <button
-                                                        onClick={handleOpenStock}
+                                                        onClick={() => handleOpenStock(product[0], product[2], product[5])}
                                                         className="text-sm text-white transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded-l">
                                                         Actualizar Stock
                                                     </button>
@@ -138,7 +151,7 @@ function Inventario() {
                                                 </td>
                                             </tr>
                                         ))}
-                                    </tbody>
+                                    </tbody> : null }
 
                                 </table>
                             </div>

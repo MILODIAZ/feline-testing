@@ -11,10 +11,10 @@ function Productos(){
     nombre: '',
     proveedor: 'SIN PROVEEDOR',
     categorias: [],
-    precio: 0,
-    stock: 0,
-    stockRecomendado: 0,
-    stockMinimo: 0,
+    precio: '',
+    stock: '',
+    stockRecomendado: '',
+    stockMinimo: '',
     descripcion: '',
     imagen: null
   });
