@@ -92,7 +92,7 @@ function Inventario() {
                 })
                 .catch(error => console.log(error));
         }
-    }, [selectedCategory, selectedFilter]);
+    }, [selectedCategory, selectedFilter, products]);
 
     const handleCategoryChange = (event) => {
         const selectedOption = event.target.value;
