@@ -75,6 +75,9 @@ function CategoriesNav() {
                   <a href={`/${categorie[0]}`} className='text-black hover:text-white uppercase transition-all'>{categorie[0]}</a>
                 </li>
               ))}
+              <li className='mx-auto justify-items-center'>
+                <a href={'/Otros'} className='text-black hover:text-white uppercase transition-all'>Otros</a>
+              </li>
             </ul>
           </div>
         </div>

@@ -118,6 +118,7 @@ function Inventario() {
                             {categorie[0]}
                         </option>
                     ))}
+                    <option id='Otros' value='Otros'>Otros</option>
                 </select>
                 <label>Filtro por stock</label>
                 <select value={selectedFilter} onChange={handleFilterChange}>
