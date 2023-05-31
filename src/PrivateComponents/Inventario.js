@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ScrollToTopButton from '../Components/ScrollToTopButton';
 import SetStock from './SetStock';
-import DeleteProduct from './DeleteProduct';
 
 function Inventario() {
-
     const [dataProductLoaded, setDataProductLoaded] = useState(false);
     const [products, setProducts] = useState([]);
 
@@ -45,7 +43,7 @@ function Inventario() {
             .catch(error => console.log(error));
     };
 
-    //MODIFICAR STOCK
+    // MODIFICAR STOCK
     const [openStock, setOpenStock] = useState(false);
     const [productCode, setProductCode] = useState('');
     const [productName, setProductName] = useState('');
@@ -64,37 +62,54 @@ function Inventario() {
         }
     }
 
-    //ELIMINAR PRODUCTO
-    const [openDeleteProduct, setOpenDeleteProduct] = useState(false);    
+    const [selectedCategory, setSelectedCategory] = useState('todas');
+    const [categoriesSelected, setCategoriesSelected] = useState([]);
 
-    const handleOpenDelete = (name, code) => {
-        if(openDeleteProduct){
-            setOpenDeleteProduct(false);
-            setProductName('');
-            setProductCode('');
+    useEffect(() => {
+        if (selectedCategory === 'todas') {
+            setCategoriesSelected(products);
         } else {
-            setOpenDeleteProduct(true);
-            setProductName(name);
-            setProductCode(code);
-        }       
+            fetch(`http://localhost/feline-testing/public/main.php?query=3&categoria=${selectedCategory}`)
+                .then(response => response.json())
+                .then(data => {
+                    setCategoriesSelected(data);
+                })
+                .catch(error => console.log(error));
+        }
+    }, [selectedCategory, products]);
+
+    const handleCategoryChange = (event) => {
+        const selectedOption = event.target.value;
+        setSelectedCategory(selectedOption);
     }
+
+    const [minStock, setMinStock] = useState(0);
+    const [maxStock, setMaxStock] = useState(9999);
+
+    const applyStockFilter = () => {
+        let filteredProducts = [...products]; // Hacer una copia de los productos originales
+        filteredProducts = filteredProducts.filter(product => product[5] >= minStock && product[5] <= maxStock);
+        setCategoriesSelected(filteredProducts);
+    };
 
     return (
         <div>
-            {openDeleteProduct? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
             <div>
-                {/*  htmlFor={categoryFilterID} */}
                 <label>Filtro categoria</label>
-                {/* <select id={categoryFilterID} onChange={handleChangeCategory}></select> */}
-                <select>
+                <select value={selectedCategory} onChange={handleCategoryChange}>
                     <option id='todas' value={'todas'}>Todas</option>
                     {categories.map(categorie => (
-                        <option key={categorie[0]} id={categorie[0]} value={categorie[0]}>{categorie[0]}</option>
+                        <option key={categorie[0]} id={categorie[0]} value={categorie[0]}>
+                            {categorie[0]}
+                        </option>
                     ))}
                 </select>
+                <label>Filtro stock</label>
+                <input type="number" value={minStock} onChange={(event) => setMinStock(parseInt(event.target.value))} placeholder="Mínimo" />
+                <input type="number" value={maxStock} onChange={(event) => setMaxStock(parseInt(event.target.value))} placeholder="Máximo" />
+                <button onClick={applyStockFilter}>Aplicar</button>
             </div>
-            {/* Lista de productos */}
             <div className="lg:p-8 rounded-md w-[100%]">
                 <ScrollToTopButton />
                 <div className=" flex items-center  justify-between pb-6">
@@ -104,13 +119,14 @@ function Inventario() {
                                 <table className='min-w-full leading-normal'>
                                     {dataProductLoaded ?
                                         <tbody>
-                                            {products.map(product => (
-                                                <tr key={product[0]} className={`rounded px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
+
+                                            {categoriesSelected.map(product => (
+                                                <tr key={product[0]} className={`px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
                                             
                                             ${(() => {
                                                         switch (true) {
                                                             case product[5] >= product[6]:
-                                                                return 'bg-[#b6efb0]';
+                                                                return 'bg-[#00ff00]';
                                                             case product[5] < product[7]:
                                                                 return 'bg-[#dd7e6b]';
                                                             default:
@@ -145,7 +161,7 @@ function Inventario() {
                                                             Recomendado: {product[6]}
                                                         </p>
                                                         <p className='sm:text-md lg:text-md text-gray-900 whitespace-no-wrap'>
-                                                            Mínimo: {product[7]}
+                                                            bajo: {product[7]}
                                                         </p>
 
                                                     </td>
@@ -170,7 +186,6 @@ function Inventario() {
 
                                                     <td>
                                                         <button
-                                                            onClick={() => handleOpenDelete(product[2],product[0])}
                                                             className="text-sm text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-4 rounded-r">
                                                             Eliminar Producto
                                                         </button>
