@@ -146,7 +146,7 @@ function Inventario() {
                                                     (selectedFilter === 'lowstock' && isLowStock)
                                                 ) {
                                                     return (
-                                                        <tr key={product[0]} className={`px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
+                                                        <tr key={product[0]} className={`rounded px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
                                             
                                             ${(() => {
                                                                 switch (true) {
