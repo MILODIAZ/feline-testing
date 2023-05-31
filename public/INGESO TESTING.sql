@@ -72,26 +72,26 @@ VALUES
 INSERT INTO producto (codigo, nombre_proveedor, nombre, descripción, precio, stock_actual, stock_recomendado, stock_bajo, favorito)
 VALUES
    ('P001', 'Proveedor A', 'Aros de Gato de Plata', 'Descripción del producto 1, aros de gato muy bonitos que brillan y todo eso.', 2990, 50, 100, 20, true),
-   ('P002', 'Proveedor B', 'Pijama de Gato Invierno', 'Descripción del producto 2, disponibles en S M L XL de algodon.', 11990, 30, 80, 10, false),
-   ('P003', 'Proveedor C', 'Pulsera Metálica de Gato', 'Descripción del producto 3, te dice la hora, se conecta por bluetooth, es bkn.', 7990, 100, 200, 50, true),
+   ('P002', 'Proveedor B', 'Pijama de Gato Invierno', 'Descripción del producto 2, disponibles en S M L XL de algodon.', 11990, 90, 80, 10, false),
+   ('P003', 'Proveedor C', 'Pulsera Metálica de Gato', 'Descripción del producto 3, te dice la hora, se conecta por bluetooth, es bkn.', 7990, 250, 200, 50, true),
    ('P004', 'Proveedor A', 'Peluche de Gatito', 'Descripción del producto 4, ideal para los niños.', 14990, 20, 50, 5, true),
-   ('P005', 'Proveedor B', 'Azucarero de Gato', 'Descripción del producto 5, de loza', 6990, 80, 150, 30, false),
+   ('P005', 'Proveedor B', 'Azucarero de Gato', 'Descripción del producto 5, de loza', 6990, 20, 150, 30, false),
    ('P006', 'Proveedor C', 'Vaso para niño, Gatito', 'Descripción del producto 6, 300 ml, para microondas.', 6000, 60, 120, 15, false),
-   ('P007', 'Proveedor A', 'Camisa de Gato Gordo', 'Descripción del producto 7, unisex S M L XL.', 12990, 10, 30, 3, true),
+   ('P007', 'Proveedor A', 'Camisa de Gato Gordo', 'Descripción del producto 7, unisex S M L XL.', 12990, 40, 30, 3, true),
    ('P008', 'Proveedor B', 'Taza de perrito', 'Descripción del producto 8, de loza.', 7990, 40, 100, 20, false),
-   ('P009', 'Proveedor C', 'Lentes Estilo Felino', 'Descripción del producto 9, de fantasía, sin aumento.', 8990, 70, 180, 40, true),
+   ('P009', 'Proveedor C', 'Lentes Estilo Felino', 'Descripción del producto 9, de fantasía, sin aumento.', 8990, 190, 180, 40, true),
    ('P010', 'Proveedor A', 'Lapicera Patitas de Gato', 'Descripción del producto 10, disponible en blanco, rosado, negro y amarillo.', 1990, 90, 200, 60, true),
    ('P011', 'Proveedor B', 'Luna, Sailor Moon 🌙', 'Descripción del producto 11. Algodón, Tamaño: 30 CM.', 15990, 30, 80, 10, false),
-   ('P012', 'Proveedor C', 'Camisa Niño de Perrito', 'Descripción del producto 12', 8990, 50, 120, 15, false),
+   ('P012', 'Proveedor C', 'Camisa Niño de Perrito', 'Descripción del producto 12', 8990, 10, 120, 15, false),
    ('P013', 'Proveedor A', 'Agenda Gato Gordo', 'Descripción del producto 13, 400 páginas, anillado.', 10990, 10, 30, 3, true),
    ('P014', 'Proveedor B', 'Peluche Perrito', 'Descripción del producto 14', 14990, 60, 150, 30, false),
-   ('P015', 'Proveedor C', 'Producto 15', 'Descripción del producto 15', 80, 40, 100, 20, false),
+   ('P015', 'Proveedor C', 'Lentes para Mascota', 'Descripción del producto 15', 80, 40, 100, 20, false),
    ('P016', 'Proveedor A', 'Mate de gatito 😺', 'Descripción del producto 16, 500 ml, metálico.', 14990, 80, 180, 40, true),
    ('P017', 'Proveedor B', 'Aros de Gatito', 'Descripción del producto 17, acero inoxidable.', 3990, 70, 200, 60, true),
-   ('P018', 'Proveedor C', 'Producto 18', 'Descripción del producto 18', 95, 30, 80, 10, false),
-   ('P019', 'Proveedor A', 'Producto 19', 'Descripción del producto 19', 100, 50, 120, 15, false),
-   ('P020', NULL, 'Producto 20', 'Descripción del producto 20', 80, 100, 50, 30, false),
-   ('P021', 'Proveedor D', 'Producto 21', 'Descripción del producto 21', 80, 20, 50, 30, false);
+   ('P018', 'Proveedor C', 'Lapiz de Perrito', 'Descripción del producto 18', 95, 30, 80, 10, false),
+   ('P019', 'Proveedor A', 'Lapiz Pasta Huella de Perrito', 'Descripción del producto 19', 100, 50, 120, 15, false),
+   ('P020', NULL, 'Agenda Canina', 'Descripción del producto 20', 80, 100, 50, 30, false),
+   ('P021', 'Proveedor D', 'Estuche de Perrito', 'Descripción del producto 21', 80, 20, 50, 30, false);
    
 INSERT INTO corresponde (codigo_producto, nombre_categoria)
 VALUES
