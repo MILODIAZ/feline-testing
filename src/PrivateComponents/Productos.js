@@ -229,8 +229,8 @@ function Productos(){
 
 
       {/* Div del producto */}
-      <div className='flex flex-wrap px-80 py-5 justify-around'>
-        <div className='pt-2'>
+      <div className='flex flex-col lg:flex-row xl:px-30 2xl:px-48 py-5 justify-around'>
+        <div className='pt-2 mx-auto'>
           <form onSubmit={handleSubmit}>
             <div className='pb-2'>
               <span className='text-xs'>(*) Campos requeridos</span>
@@ -316,7 +316,7 @@ function Productos(){
           </form>
         </div>  
         {/* Producto previsualizado */}
-        <div className="max-w-sm min-w-[300px]  border mt-[20px]  lg:mt-[10px] border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">          
+        <div className="max-w-sm min-w-[300px] mx-auto border mt-[20px]  lg:mt-[10px] border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">          
          
           <img
             alt='Imagen del producto'
