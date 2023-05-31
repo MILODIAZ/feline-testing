@@ -171,7 +171,7 @@ INNER JOIN contiene ON producto.id_producto = contiene.id_producto
 WHERE contiene.id_lote = 'L001'
 
 /************************************FUNCIONES Y TRIGGERS****************************************************/
-
+CREATE OR REPLACE FUNCTION VerificarProveedores() RETURNS TRIGGER AS $$
 DECLARE
     nombreProveedorProducto TEXT;
     nombreProveedorLote TEXT;
