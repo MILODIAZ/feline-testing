@@ -62,7 +62,7 @@ function CategorieMain () {
   
             <ProductContainer code={productCode} name={productName} price={productPrice} stock={productStock} description={productDescription} />
   
-            <div className="xl:px-60 pt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-8">
+            <div className="xl:px-60 py-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-8">
               {
                   categorieProducts.map(categorieProducts => (
                     <ProductCard key={categorieProducts[0]} 

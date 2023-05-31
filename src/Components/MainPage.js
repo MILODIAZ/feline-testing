@@ -8,18 +8,22 @@ function MainPage(props) {
     <div>
       <NavBar />
       <CategoriesNav />
-      <main>
+      <main className='min-h-[600px]'>
         <div>
           <div>
             <Outlet />
           </div>
         </div>
       </main>
-      <footer className='fixed bottom-3 right-10'>
-
-        <Link className='inline-flex items-center rounded-md bg-[#56efd3] px-6 py-3 
+      
+      <footer className='bg-[#56efd3] min-h-[185px]'>
+        <CategoriesNav />
+        <div className='fixed bottom-3 right-10'>
+          <Link className='inline-flex items-center rounded-md bg-[#b6efb0] px-6 py-3 
         text-2xl font-medium text-white-700 bold shadow-lg
          ring-1 ring-inset ring-pink-700/10' to={'/login'}>Login</Link>
+        </div>
+        
       </footer>
     </div>
   );
