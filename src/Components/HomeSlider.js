@@ -63,7 +63,7 @@ function HomeSlider () {
           </button>
         </div>
         
-        <div ref={sliderDiv} className='relative z-1 transition-all'>          
+        <div ref={sliderDiv} className='relative z-1 transition-all ease-in duration-500'>          
           <ul ref={sliderRef} className='w-[300%] -z-1 flex flex-row'>
             <li>
               <img alt='slider-sample' src={require('../images/slider-example.jpg')} />

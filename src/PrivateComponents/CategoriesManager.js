@@ -1,8 +1,6 @@
 import { FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 
-
-
 function CategoriesManager(props) {
 
   const [dataLoaded, setDataLoaded] = useState(false);
