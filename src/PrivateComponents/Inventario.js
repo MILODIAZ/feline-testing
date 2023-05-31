@@ -64,6 +64,7 @@ function Inventario() {
 
     const [selectedCategory, setSelectedCategory] = useState('todas');
     const [categoriesSelected, setCategoriesSelected] = useState([]);
+    const [selectedFilter, setSelectedFilter] = useState('all');
 
     useEffect(() => {
         if (selectedCategory === 'todas') {
@@ -76,21 +77,18 @@ function Inventario() {
                 })
                 .catch(error => console.log(error));
         }
-    }, [selectedCategory, products]);
+    }, [selectedCategory, selectedFilter, products]);
 
     const handleCategoryChange = (event) => {
         const selectedOption = event.target.value;
         setSelectedCategory(selectedOption);
     }
 
-    const [minStock, setMinStock] = useState(0);
-    const [maxStock, setMaxStock] = useState(9999);
+    const handleFilterChange = (event) => {
+        const selectedOption = event.target.value;
+        setSelectedFilter(selectedOption);
+    }
 
-    const applyStockFilter = () => {
-        let filteredProducts = [...products]; // Hacer una copia de los productos originales
-        filteredProducts = filteredProducts.filter(product => product[5] >= minStock && product[5] <= maxStock);
-        setCategoriesSelected(filteredProducts);
-    };
 
     return (
         <div>
@@ -106,9 +104,11 @@ function Inventario() {
                     ))}
                 </select>
                 <label>Filtro stock</label>
-                <input type="number" value={minStock} onChange={(event) => setMinStock(parseInt(event.target.value))} placeholder="Mínimo" />
-                <input type="number" value={maxStock} onChange={(event) => setMaxStock(parseInt(event.target.value))} placeholder="Máximo" />
-                <button onClick={applyStockFilter}>Aplicar</button>
+                <select value={selectedFilter} onChange={handleFilterChange}>
+                    <option value="all">Todos</option>
+                    <option value="overstock">Sobre stock</option>
+                    <option value="lowstock">Bajo stock</option>
+                </select>
             </div>
             <div className="lg:p-8 rounded-md w-[100%]">
                 <ScrollToTopButton />
@@ -120,78 +120,89 @@ function Inventario() {
                                     {dataProductLoaded ?
                                         <tbody>
 
-                                            {categoriesSelected.map(product => (
-                                                <tr key={product[0]} className={`px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
+                                            {categoriesSelected.map(product => {
+                                                const isOverstock = product[5] >= product[6];
+                                                const isLowStock = product[5] < product[7];
+
+                                                if (
+                                                    (selectedFilter === 'all') ||
+                                                    (selectedFilter === 'overstock' && isOverstock) ||
+                                                    (selectedFilter === 'lowstock' && isLowStock)
+                                                ) {
+                                                    return (
+                                                        <tr key={product[0]} className={`px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0
                                             
                                             ${(() => {
-                                                        switch (true) {
-                                                            case product[5] >= product[6]:
-                                                                return 'bg-[#00ff00]';
-                                                            case product[5] < product[7]:
-                                                                return 'bg-[#dd7e6b]';
-                                                            default:
-                                                                return 'bg-[#fff2cc]';
-                                                        }
-                                                    })()}
+                                                                switch (true) {
+                                                                    case product[5] >= product[6]:
+                                                                        return 'bg-[#00ff00]';
+                                                                    case product[5] < product[7]:
+                                                                        return 'bg-[#dd7e6b]';
+                                                                    default:
+                                                                        return 'bg-[#fff2cc]';
+                                                                }
+                                                            })()}
                                             
                                             `}>
-                                                    {/* Nombre e imagen */}
-                                                    <td className='w-[40%] px-5 py-5 border-gray-200 text-sm'>
-                                                        <div className='flex items-center'>
-                                                            <div className='w-1/2  flex-shrink-0'>
-                                                                <img alt='product' className='rounded h-[140px] lg:h-[140px]  min-w-1/2' src={require(`../productsImages/${product[0]}.jpg`)} />
-                                                            </div>
-                                                            <div className='w-1/2 ml-3 text-lg md:text-xl lg:text-2xl'>
-                                                                <h2 className='text-gray-900 font-bold whitespace-no-wrap'>
-                                                                    {product[2]}
-                                                                </h2>
-                                                                <p className='text-sm md:text-md lg:text-md text-gray-900  whitespace-no-wrap'>
-                                                                    {product[0]}
+                                                            {/* Nombre e imagen */}
+                                                            <td className='w-[40%] px-5 py-5 border-gray-200 text-sm'>
+                                                                <div className='flex items-center'>
+                                                                    <div className='w-1/2  flex-shrink-0'>
+                                                                        <img alt='product' className='rounded h-[140px] lg:h-[140px]  min-w-1/2' src={require(`../productsImages/${product[0]}.jpg`)} />
+                                                                    </div>
+                                                                    <div className='w-1/2 ml-3 text-lg md:text-xl lg:text-2xl'>
+                                                                        <h2 className='text-gray-900 font-bold whitespace-no-wrap'>
+                                                                            {product[2]}
+                                                                        </h2>
+                                                                        <p className='text-sm md:text-md lg:text-md text-gray-900  whitespace-no-wrap'>
+                                                                            {product[0]}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+
+                                                            {/* Stock */}
+                                                            <td className='w-[40%] px-5 py-5 border-gray-200'>
+                                                                <p className='text-md md:text-xl lg:text-2xl font-bold text-gray-900 whitespace-no-wrap'>
+                                                                    Stock: {product[5]}
                                                                 </p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                                <p className='sm:text-md lg:text-md text-gray-900 whitespace-no-wrap'>
+                                                                    Recomendado: {product[6]}
+                                                                </p>
+                                                                <p className='sm:text-md lg:text-md text-gray-900 whitespace-no-wrap'>
+                                                                    Mínimo: {product[7]}
+                                                                </p>
 
-                                                    {/* Stock */}
-                                                    <td className='w-[40%] px-5 py-5 border-gray-200'>
-                                                        <p className='text-md md:text-xl lg:text-2xl font-bold text-gray-900 whitespace-no-wrap'>
-                                                            Stock: {product[5]}
-                                                        </p>
-                                                        <p className='sm:text-md lg:text-md text-gray-900 whitespace-no-wrap'>
-                                                            Recomendado: {product[6]}
-                                                        </p>
-                                                        <p className='sm:text-md lg:text-md text-gray-900 whitespace-no-wrap'>
-                                                            Mínimo: {product[7]}
-                                                        </p>
-
-                                                    </td>
+                                                            </td>
 
 
-                                                    {/* Botones */}
-                                                    <td>
-                                                        <button
-                                                            onClick={() => handleOpenStock(product[0], product[2], product[5])}
-                                                            className="text-sm text-white transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded-l">
-                                                            Actualizar Stock
-                                                        </button>
-                                                    </td>
+                                                            {/* Botones */}
+                                                            <td>
+                                                                <button
+                                                                    onClick={() => handleOpenStock(product[0], product[2], product[5])}
+                                                                    className="text-sm text-white transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded-l">
+                                                                    Actualizar Stock
+                                                                </button>
+                                                            </td>
 
-                                                    <td>
+                                                            <td>
 
-                                                        <button
-                                                            className="text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4">
-                                                            Modificar Producto
-                                                        </button>
-                                                    </td>
+                                                                <button
+                                                                    className="text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4">
+                                                                    Modificar Producto
+                                                                </button>
+                                                            </td>
 
-                                                    <td>
-                                                        <button
-                                                            className="text-sm text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-4 rounded-r">
-                                                            Eliminar Producto
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                                            <td>
+                                                                <button
+                                                                    className="text-sm text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-4 rounded-r">
+                                                                    Eliminar Producto
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
+                                            })}
                                         </tbody> : null}
 
                                 </table>
