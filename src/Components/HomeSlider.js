@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 function HomeSlider () {
@@ -31,6 +31,24 @@ function HomeSlider () {
     }
   }
 
+  useEffect(() => {
+    const slideInterval = setInterval(() => {
+      nextSlide();
+    }, 4000);
+
+    const handleResize = () => {
+      sliderDiv.current.style.left = '0px';
+      setCounter(0);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearInterval(slideInterval);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [counter]);
+
   return(
     <div className='flex flex-row justify-center xl:px-32 2xl:px-72'>     
       
@@ -45,7 +63,7 @@ function HomeSlider () {
           </button>
         </div>
         
-        <div ref={sliderDiv} className='relative z-1 transition-all'>          
+        <div ref={sliderDiv} className='relative z-1 transition-all ease-in duration-500'>          
           <ul ref={sliderRef} className='w-[300%] -z-1 flex flex-row'>
             <li>
               <img alt='slider-sample' src={require('../images/slider-example.jpg')} />
