@@ -92,7 +92,7 @@ function Inventario() {
                 })
                 .catch(error => console.log(error));
         }
-    }, [selectedCategory, selectedFilter, products]);
+    }, [selectedCategory, selectedFilter]);
 
     const handleCategoryChange = (event) => {
         const selectedOption = event.target.value;
@@ -110,7 +110,7 @@ function Inventario() {
             {openDeleteProduct ? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
             <div>
-                <label>Filtro categoria</label>
+                <label>Filtrar por categoría</label>
                 <select value={selectedCategory} onChange={handleCategoryChange}>
                     <option id='todas' value={'todas'}>Todas</option>
                     {categories.map(categorie => (
@@ -119,11 +119,12 @@ function Inventario() {
                         </option>
                     ))}
                 </select>
-                <label>Filtro stock</label>
+                <label>Filtro por stock</label>
                 <select value={selectedFilter} onChange={handleFilterChange}>
-                    <option value="all">Todos</option>
-                    <option value="overstock">Sobre stock</option>
-                    <option value="lowstock">Bajo stock</option>
+                    <option value="all">---</option>
+                    <option value="overstock">Recomendado</option>
+                    <option value='normalstock'>Aceptable</option>
+                    <option value="lowstock">Bajo</option>
                 </select>
             </div>
             <div className="lg:p-8 rounded-md w-[100%]">
@@ -139,11 +140,13 @@ function Inventario() {
                                             {categoriesSelected.map(product => {
                                                 const isOverstock = product[5] >= product[6];
                                                 const isLowStock = product[5] < product[7];
+                                                const isNormalStock = (product[5] < product[6] && product[5]>=product[7]);
 
                                                 if (
                                                     (selectedFilter === 'all') ||
                                                     (selectedFilter === 'overstock' && isOverstock) ||
-                                                    (selectedFilter === 'lowstock' && isLowStock)
+                                                    (selectedFilter === 'lowstock' && isLowStock) ||
+                                                    (selectedFilter === 'normalstock' && isNormalStock)
                                                 ) {
                                                     return (
                                                         <tr key={product[0]} className={`rounded px-[10px] items-center border-solid border-2 border-gray-400 w-[100%] h-[150px] inline-flex mt-2 xs:mt-0

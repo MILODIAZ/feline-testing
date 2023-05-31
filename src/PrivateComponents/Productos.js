@@ -223,7 +223,7 @@ function Productos(){
           <p className='text-xl font-bold'>AGREGAR NUEVO PRODUCTO</p>
         </div>
         <div className='w-6/12 text-center'>            
-          <button onClick={handleOpenCategories} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Categorias</button>          
+          <button onClick={handleOpenCategories} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Categorías</button>          
         </div>
       </div>
 
