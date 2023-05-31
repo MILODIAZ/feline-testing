@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 
 
 
-function CategoriesManager (props) {
+function CategoriesManager(props) {
 
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [categories, setCategories] = useState([]);  
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     loadData();
-  },[]);
+  }, []);
 
   const loadData = () => {
     fetch("http://localhost/feline-testing/public/main.php?query=1")
@@ -21,9 +21,19 @@ function CategoriesManager (props) {
       })
       .catch(error => console.log(error));
   };
-
-  const deleteCategorie = () => {
-    
+  const deleteCategorie = (cartegorieN) => {
+    console.log(categorieName);
+    fetch(`http://localhost/feline-testing/public/main.php?query=9&categoria=${cartegorieN}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data) {
+          alert("Categoria eliminada");
+          setDataLoaded(false);
+          loadData();
+        }
+      })
+      .catch(error => console.log(error));
   }
 
   const [categorieName, setCategorieName] = useState('');
@@ -38,21 +48,22 @@ function CategoriesManager (props) {
     fetch(`http://localhost/feline-testing/public/main.php?query=8&categoria=${categorieName}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        if(data){
-          alert("Categoria ingresada");
-          setDataLoaded(false);          
+        if (data === true) {
+          setDataLoaded(false);
           loadData();
-        }        
+        } else {
+          alert('Error al eliminar al usuario');
+        }
+
       })
       .catch(error => console.log(error));
   }
 
-  return(
+  return (
     <div className='fixed z-[99] inset-0 flex justify-center items-center'>
       <div className='flex flex-col bg-[#f8efe6] p-2 border-2 border-black text-[1.5rem] rounded-lg'>
-        <div className='flex justify-end'>          
-          <button onClick={()=>props.handleClose()}>
+        <div className='flex justify-end'>
+          <button onClick={() => props.handleClose()}>
             <FaTimes className='hover:text-[#a5d5d5]' />
           </button>
         </div>
