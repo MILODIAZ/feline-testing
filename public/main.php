@@ -51,22 +51,11 @@ if ($query == 3) {
 
         include("connectDB.php");
 
-        if($categoria!=='Otros'){
-            $sql = "SELECT producto.codigo, nombre_proveedor, nombre, descripción, precio, stock_actual FROM producto
+        $sql = "SELECT producto.codigo, nombre_proveedor, nombre, descripción, precio, stock_actual FROM producto
             INNER JOIN corresponde ON producto.codigo = corresponde.codigo_producto
             WHERE corresponde.nombre_categoria = :categoria";
-            $sentencia = $conn->prepare($sql);
-            $sentencia->bindParam(':categoria', $categoria);
-        } else {
-            $sql = "SELECT *
-            FROM producto
-            WHERE codigo NOT IN (
-                SELECT codigo_producto
-                FROM corresponde)";
-            $sentencia = $conn->prepare($sql);            
-        }
-
-        
+        $sentencia = $conn->prepare($sql);
+        $sentencia->bindParam(':categoria', $categoria);
         $sentencia->execute();
         $resultado = $sentencia->fetchAll();
 
