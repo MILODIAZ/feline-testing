@@ -157,5 +157,27 @@
         echo json_encode($response);
         
     }
+
+    if($query == 8){
+
+        $categoria = $_GET['categoria'];
+
+        include ("connectDB.php");
+
+        $sql = "INSERT INTO categoria (nombre)
+        VALUES (:categoria)";
+        $sentencia = $conn->prepare($sql);
+        $sentencia->bindValue(':categoria', $categoria);
+        $sentencia->execute();
+
+        $rowCount = $sentencia->rowCount();
+
+        include("disconnectDB.php");
+
+        $response = ($rowCount > 0) ? true : false;
+
+        echo json_encode($response);
+
+    }
     
 ?>

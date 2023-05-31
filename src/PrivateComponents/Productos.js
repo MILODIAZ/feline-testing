@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CategoriesManager from './CategoriesManager';
 
 
 function Productos(){
@@ -185,15 +186,44 @@ function Productos(){
           .catch(error => console.log(error));
   };
 
+  //LÓGICA ADMINISTRACIÓN CATEGORIAS
+
+  const [openCategories, setOpenCategories] = useState(false);
+
+  const handleOpenCategories = () => {
+    if(openCategories){
+      setOpenCategories(false);
+    } else {
+      setOpenCategories(true);
+    }    
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return(
     <div>
+
+      {openCategories? <CategoriesManager handleClose={handleOpenCategories} /> : null}
 
       <div className='flex flex-row justify-between py-8'>
         <div className='w-6/12 text-center'>
           <p className='text-xl font-bold'>AGREGAR NUEVO PRODUCTO</p>
         </div>
         <div className='w-6/12 text-center'>            
-          <button className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Categorias</button>          
+          <button onClick={handleOpenCategories} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Categorias</button>          
         </div>
       </div>
 
