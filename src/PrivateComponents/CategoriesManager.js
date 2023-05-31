@@ -61,16 +61,21 @@ function CategoriesManager (props) {
             <h3 className='text-[1.75rem] font-bold pb-6'>Administración de categorías</h3>
           </div>
 
-          {dataLoaded? 
-          (categories.map(categorie => (
-            <div key={categorie[0]} className='flex flex-row justify-between pb-2'>
-              <p>{categorie[0]}</p>
-              <div className='flex justify-end'>
-                <button className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Modificar</button>
-                <button onClick={() => deleteCategorie(categorie[0])} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
-              </div>              
+          <div className='relative overflow-y-scroll min-h-[352px]'>
+            <div className='absolute w-full'>
+              {dataLoaded? 
+              (categories.map(categorie => (
+                <div key={categorie[0]} className='flex flex-row justify-between pb-2 mr-2'>
+                  <p>{categorie[0]}</p>
+                  <div className='flex justify-end'>
+                    <button className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Modificar</button>
+                    <button onClick={() => deleteCategorie(categorie[0])} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
+                  </div>              
+                </div>
+              ))) : null }
             </div>
-          ))) : null }
+            
+          </div>       
 
           <div>
 
@@ -78,9 +83,9 @@ function CategoriesManager (props) {
             <form onSubmit={insertCategorie}>
               <div className='flex flex-col'>
                 <label htmlFor='nombre'>Nombre</label>
-                <input name='nombre' type='text' placeholder='Nombre' value={categorieName} onChange={handleCategorieNameChange} />
+                <input name='nombre' type='text' placeholder='categoría' value={categorieName} onChange={handleCategorieNameChange} autoComplete='off' />
               </div>
-              <div>
+              <div className='flex justify-center'>
                 <button className='text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-4 rounded mt-4'>Agregar</button>
               </div>
             </form>

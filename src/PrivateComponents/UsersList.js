@@ -133,17 +133,27 @@ function UsersList () {
   return(
     <div className='flex flex-col'>
 
-      {dataLoaded ? (
-        users.map(user => (
-          (user[1]!=='Mirle Jaque' && user[0]!=='15912517-3')?
-            <div key={user[0]} className='flex flex-row justify-between pb-2'>
-            <p>{user[0]}</p>
-            <p className='pl-8 text-left'>{user[1]}</p>
-            <button onClick={() => deleteUser(user[0])} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
-            </div>
-            :null          
-        ))
-      ) : null}
+      
+      <div className='relative overflow-y-scroll min-h-[150px] min-w-[480px]'>
+        <div className='absolute w-full'>
+          {dataLoaded ? (
+          users.map(user => (
+            (user[1]!=='Mirle Jaque' && user[0]!=='15912517-3')?
+              <div key={user[0]} className='flex flex-row justify-between pt-2'>
+                <div className='flex flex-row justify start'>
+                  <p className='whitespace-nowrap'>{user[0]}</p>
+                  <p className='whitespace-nowrap pl-8 text-left'>{user[1]}</p>
+                </div>
+                <div className='flex justify-end pl-8'>
+                  <button onClick={() => deleteUser(user[0])} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
+                </div>
+              
+              </div>
+              :null          
+          ))
+        ) : null}
+        </div>
+      </div>      
 
       <div>
 
