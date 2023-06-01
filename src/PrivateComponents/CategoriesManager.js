@@ -70,7 +70,7 @@ function CategoriesManager(props) {
             <h3 className='text-[1.75rem] font-bold pb-6'>Administración de categorías</h3>
           </div>
 
-          <div className='relative overflow-y-scroll min-h-[352px]'>
+          <div className='relative overflow-y-scroll min-h-[169px]'>
             <div className='absolute w-full'>
               {dataLoaded? 
               (categories.map(categorie => (
