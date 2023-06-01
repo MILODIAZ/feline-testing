@@ -18,7 +18,7 @@ function ProductContainer (props) {
                    
         {/* NUEVA CARD */}
         <div className="max-w-md border border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">
-          <img alt='product' className='rounded-t-lg' src={require(`../productsImages/${props.code}.jpg`)}/>
+          <img alt='product' className='rounded-t-lg w-full' src={require(`../productsImages/${props.code}.jpg`)}/>
           <div className='p-5'>
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
               {props.name}
