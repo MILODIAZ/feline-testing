@@ -171,6 +171,9 @@ INNER JOIN contiene ON producto.id_producto = contiene.id_producto
 WHERE contiene.id_lote = 'L001'
 
 /************************************FUNCIONES Y TRIGGERS****************************************************/
+
+
+/****Trigger para verificar proveedores****/
 CREATE OR REPLACE FUNCTION VerificarProveedores() RETURNS TRIGGER AS $$
 DECLARE
     nombreProveedorProducto TEXT;
@@ -194,4 +197,20 @@ BEFORE INSERT ON contiene
 FOR EACH ROW
 EXECUTE FUNCTION VerificarProveedores();
 
+
+/****Trigger para evitar borrar otros****/
+CREATE OR REPLACE FUNCTION CategoriaOtros() RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.nombre = 'otros' THEN
+  		RAISE EXCEPTION 'No se puede borrar esta categoria';
+    END IF;
+    
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_categoria_otros
+BEFORE DELETE ON categoria
+FOR EACH ROW
+EXECUTE FUNCTION CategoriaOtros();
  
