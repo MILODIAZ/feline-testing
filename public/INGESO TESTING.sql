@@ -138,37 +138,6 @@ VALUES
    (8,'L5','P011'),
    (1,'L6','P012');
 
-SELECT * FROM categoria
-
-SELECT * FROM producto
-WHERE favorito=true
-
-SELECT producto.codigo, nombre_proveedor, nombre, descripción, precio FROM producto
-INNER JOIN corresponde ON producto.codigo = corresponde.codigo_producto
-WHERE corresponde.nombre_categoria = 'Ropa'
-
-SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-
-SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-WHERE stock_actual > stock_recomendado
-
-SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-WHERE stock_actual < stock_recomendado AND stock_actual > stock_bajo
-
-SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-WHERE stock_actual < stock_bajo
-
-SELECT nombre_proveedor FROM proveedor
-
-SELECT id_lote, nombre_proveedor, fecha_pedido, fecha_llegada, fecha_llegada - current_date from lote
-ORDER BY fecha_llegada
-
-SELECT id_lote, nombre_proveedor, fecha_pedido, fecha_llegada, fecha_llegada - current_date from lote
-WHERE lote.nombre_proveedor IS NULL
-
-SELECT producto.id_producto, nombre_producto, unidades FROM producto
-INNER JOIN contiene ON producto.id_producto = contiene.id_producto
-WHERE contiene.id_lote = 'L001'
 
 /************************************FUNCIONES Y TRIGGERS****************************************************/
 
@@ -196,21 +165,4 @@ CREATE TRIGGER trigger_verificar_proveedores
 BEFORE INSERT ON contiene
 FOR EACH ROW
 EXECUTE FUNCTION VerificarProveedores();
-
-
-/****Trigger para evitar borrar otros****/
-CREATE OR REPLACE FUNCTION CategoriaOtros() RETURNS TRIGGER AS $$
-BEGIN
-    IF OLD.nombre = 'otros' THEN
-  		RAISE EXCEPTION 'No se puede borrar esta categoria';
-    END IF;
-    
-    RETURN OLD;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_categoria_otros
-BEFORE DELETE ON categoria
-FOR EACH ROW
-EXECUTE FUNCTION CategoriaOtros();
  
