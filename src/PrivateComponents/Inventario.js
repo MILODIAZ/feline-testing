@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ScrollToTopButton from '../Components/ScrollToTopButton';
 import SetStock from './SetStock';
 import DeleteProduct from './DeleteProduct';
+import { FaStar } from 'react-icons/fa';
 
 function Inventario() {
     const [dataProductLoaded, setDataProductLoaded] = useState(false);
@@ -104,6 +105,38 @@ function Inventario() {
         setSelectedFilter(selectedOption);
     }
 
+    //LÓGICA DE FAVORITOS
+
+    const updateFavorite = (newStatus, codigo, setIcon) => {        
+        fetch(`http://localhost/feline-testing/public/main.php?query=10&favoriteStatus=${newStatus}&codigo=${codigo}`)
+            .then(response => response.json())
+            .then(data => {                
+                setIcon();
+            })
+            .catch(error => console.log(error));
+    }
+
+    const setIconTrue = (event) => {
+       event.target.classList.remove('text-white');
+       event.target.classList.remove('text-[25px]');
+       event.target.classList.add('text-[#f7d000]');
+       event.target.classList.add('text-[40px]');
+    }
+
+    const setIconFalse = (event) => {
+        event.target.classList.remove('text-[#f7d000]');
+        event.target.classList.remove('text-[40px]');
+        event.target.classList.add('text-white');
+        event.target.classList.add('text-[25px]');
+    }
+
+    const setFavorite = (event, codigo) => {        
+        if(event.target.classList.contains('text-white')){            
+            updateFavorite(true, codigo, setIconTrue(event));
+        } else {            
+            updateFavorite(false, codigo, setIconFalse(event));
+        }        
+    }
 
     return (
         <div>
@@ -167,6 +200,11 @@ function Inventario() {
                                                             {/* Nombre e imagen */}
                                                             <td className='w-[40%] px-5 py-5 border-gray-200 text-sm'>
                                                                 <div className='flex items-center'>
+                                                                    <div className='pr-16 relative w-[35px] h-[35px]'>
+                                                                        <button className='absolute top-[8px] left-[8px]'>
+                                                                            <p onClick={(event)=>setFavorite(event, product[0])} className={product[8]? 'text-[#f7d000] text-[40px] transition-all' : 'text-white text-[25px] transition-all'}>&#9733;</p>
+                                                                        </button>
+                                                                    </div>
                                                                     <div className='w-1/2  flex-shrink-0'>
                                                                         <img alt='product' className='rounded h-[140px] lg:h-[140px]  min-w-1/2' src={require(`../productsImages/${product[0]}.jpg`)} />
                                                                     </div>

@@ -210,4 +210,31 @@ if ($query == 9) {
     echo json_encode($response);
 }
 
+/*ACTUALIZAR <STOCK>*/
+if ($query == 10) {
+
+    $favoriteStatus = $_GET['favoriteStatus'];
+    $codigo = $_GET['codigo'];    
+
+    include("connectDB.php");
+
+    $sql = "UPDATE producto
+            SET favorito = :favoriteStatus
+            WHERE codigo = :codigo";
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':favoriteStatus', $favoriteStatus);   
+    $sentencia->bindValue(':codigo', $codigo); 
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+
+}
+
 ?>
