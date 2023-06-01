@@ -1,5 +1,6 @@
 import { FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
+import DeleteCategorie from './DeleteCategorie';
 
 function CategoriesManager(props) {
 
@@ -19,19 +20,28 @@ function CategoriesManager(props) {
       })
       .catch(error => console.log(error));
   };
-  const deleteCategorie = (cartegorieN) => {
-    console.log(categorieName);
-    fetch(`http://localhost/feline-testing/public/main.php?query=9&categoria=${cartegorieN}`)
+
+  const deleteCategorie = () => {    
+    fetch(`http://localhost/feline-testing/public/main.php?query=9&categoria=${categorieNameDeleting}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        if (data) {
-          alert("Categoria eliminada");
+        if (data) {         
           setDataLoaded(false);
           loadData();
         }
       })
       .catch(error => console.log(error));
+  }
+
+  const [deletingCategorie, setDeletingCategorie] = useState(false);
+
+  const openDeleteCategorie = () => {
+    if(deletingCategorie){
+      setDeletingCategorie(false);
+    } else {
+      setDeletingCategorie(true);
+    }    
   }
 
   const [categorieName, setCategorieName] = useState('');
@@ -40,9 +50,10 @@ function CategoriesManager(props) {
     setCategorieName(event.target.value);
   }
 
+  const [categorieNameDeleting, setCategorieNameDeleting] = useState('');  
+
   const insertCategorie = (event) => {
-    event.preventDefault();
-    console.log(categorieName);
+    event.preventDefault();    
     fetch(`http://localhost/feline-testing/public/main.php?query=8&categoria=${categorieName}`)
       .then(response => response.json())
       .then(data => {
@@ -50,7 +61,7 @@ function CategoriesManager(props) {
           setDataLoaded(false);
           loadData();
         } else {
-          alert('Error al eliminar al usuario');
+          alert('Error al agregar la categoría');
         }
 
       })
@@ -59,6 +70,7 @@ function CategoriesManager(props) {
 
   return (
     <div className='fixed z-[99] inset-0 flex justify-center items-center'>
+      {deletingCategorie? <DeleteCategorie handleClick={openDeleteCategorie} name={categorieNameDeleting} deleteCategorie={()=>{deleteCategorie(categorieName); openDeleteCategorie();}} /> : null}
       <div className='flex flex-col bg-[#f8efe6] p-2 border-2 border-black text-[1.5rem] rounded-lg'>
         <div className='flex justify-end'>
           <button onClick={() => props.handleClose()}>
@@ -78,7 +90,7 @@ function CategoriesManager(props) {
                   <p>{categorie[0]}</p>
                   <div className='flex justify-end'>
                     <button className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Modificar</button>
-                    <button onClick={() => deleteCategorie(categorie[0])} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
+                    <button onClick={()=>{openDeleteCategorie();setCategorieNameDeleting(categorie[0])}} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
                   </div>              
                 </div>
               ))) : null }

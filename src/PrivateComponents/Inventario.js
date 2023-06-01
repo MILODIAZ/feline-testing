@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ScrollToTopButton from '../Components/ScrollToTopButton';
 import SetStock from './SetStock';
 import DeleteProduct from './DeleteProduct';
-import { FaStar } from 'react-icons/fa';
 
 function Inventario() {
     const [dataProductLoaded, setDataProductLoaded] = useState(false);
@@ -28,7 +27,6 @@ function Inventario() {
     }
 
     // Categorias
-    const [dataCategoryLoaded, setDataCategoryLoaded] = useState(false);
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
@@ -39,7 +37,6 @@ function Inventario() {
         fetch("http://localhost/feline-testing/public/main.php?query=1")
             .then(response => response.json())
             .then(data => {
-                setDataCategoryLoaded(true);
                 setCategories(data);
             })
             .catch(error => console.log(error));
@@ -261,7 +258,7 @@ function Inventario() {
                                                             </td>
                                                         </tr>
                                                     )
-                                                }
+                                                } else {return null;}
                                             })}
                                         </tbody> : null}
 

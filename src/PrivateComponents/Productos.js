@@ -198,21 +198,6 @@ function Productos(){
     }    
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return(
     <div>
 
@@ -254,8 +239,8 @@ function Productos(){
                 ))}
               </select>
             </div>
-
-            <div className='flex flex-row justify-between pb-2'>
+            
+            {dataCategoryLoaded? <div className='flex flex-row justify-between pb-2'>
               <div>
                 <label htmlFor='categorias' className='pr-6'>CATEGORÍAS</label>
               </div>
@@ -274,7 +259,8 @@ function Productos(){
                   </div>                
                 ))}
               </div>                                       
-            </div>
+            </div> : null }
+            
 
             <div className='flex flex-row justify-between pb-2'>
               <label htmlFor='precio' className='pr-6'>PRECIO *</label>
