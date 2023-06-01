@@ -152,6 +152,7 @@ function Inventario() {
                         </option>
                     ))}
                     <option id='Otros' value='Otros'>Otros</option>
+                    <option id='Favoritos' value='Favoritos'>Favoritos</option>
                 </select>
                 <label>Filtro por stock</label>
                 <select value={selectedFilter} onChange={handleFilterChange}>
@@ -200,8 +201,8 @@ function Inventario() {
                                                             {/* Nombre e imagen */}
                                                             <td className='w-[40%] px-5 py-5 border-gray-200 text-sm'>
                                                                 <div className='flex items-center'>
-                                                                    <div className='pr-16 relative w-[35px] h-[35px]'>
-                                                                        <button className='absolute top-[8px] left-[8px]'>
+                                                                    <div className='pr-16 flex w-[40px] h-[40px]'>
+                                                                        <button className='w-[40px]'>
                                                                             <p onClick={(event)=>setFavorite(event, product[0])} className={product[8]? 'text-[#f7d000] text-[40px] transition-all' : 'text-white text-[25px] transition-all'}>&#9733;</p>
                                                                         </button>
                                                                     </div>
