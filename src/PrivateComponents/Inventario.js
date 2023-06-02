@@ -186,7 +186,7 @@ function Inventario() {
                                             ${(() => {
                                                                 switch (true) {
                                                                     case product[5] >= product[6]:
-                                                                        return 'bg-[#00ff00]';
+                                                                        return 'bg-[#b6efb0]';
                                                                     case product[5] < product[7]:
                                                                         return 'bg-[#dd7e6b]';
                                                                     default:
