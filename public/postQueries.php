@@ -41,6 +41,8 @@ function formatearRut($rut)
 
  $query = $_POST['query'];
 
+ //VALIDAR CREDENCIALES LOGIN
+
  if ($query==1){
 
     $usuario = $_POST['usuario'];    
@@ -85,6 +87,8 @@ function formatearRut($rut)
     }
  }
 
+ //CAMBIAR CONTRASEÑA
+
  if ($query == 2) {
   $usuario = $_POST['rut'];
   $newPass = $_POST['newPass'];
@@ -118,12 +122,15 @@ function formatearRut($rut)
   
 }
 
+//OBTENER USUARIOS
+
 if ($query == 3){
   
   include ("connectDB.php"); 
 
   $sql="SELECT rut, nombre
-  FROM usuario";
+  FROM usuario
+  ORDER BY rut ASC";
   $sentencia=$conn->prepare($sql);
   $sentencia->execute();
   $resultado=$sentencia->fetchAll(); 
@@ -134,6 +141,8 @@ if ($query == 3){
   echo json_encode($resultado);
 
 }
+
+//ELIMINAR USUARIO
 
 if ($query == 4){
 
@@ -156,6 +165,8 @@ if ($query == 4){
   echo json_encode($response);
 
 }
+
+//REGISTRAR NUEVO USUARIO
 
 if ($query == 5){
 
@@ -190,6 +201,8 @@ if ($query == 5){
   
 
 }
+
+//AGREGAR NUEVO PRODUCTO
 
 if ($query == 6){
   $codigo = $_POST['codigo'];

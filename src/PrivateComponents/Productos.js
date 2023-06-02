@@ -186,6 +186,11 @@ function Productos(){
           .catch(error => console.log(error));
   };
 
+  const reloadCategories = () => {
+    setDataCategoryLoaded(false);
+    dataCategory();
+  }
+
   //LÓGICA ADMINISTRACIÓN CATEGORIAS
 
   const [openCategories, setOpenCategories] = useState(false);
@@ -201,7 +206,7 @@ function Productos(){
   return(
     <div>
 
-      {openCategories? <CategoriesManager handleClose={handleOpenCategories} /> : null}
+      {openCategories? <CategoriesManager reloadCategories={()=>reloadCategories()} handleClose={handleOpenCategories} /> : null}
 
       <div className='flex flex-row justify-between py-8'>
         <div className='w-6/12 text-center'>

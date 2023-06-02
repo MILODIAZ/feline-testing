@@ -14,7 +14,9 @@ if ($query == 1) {
 
     include("connectDB.php");
 
-    $sql = "SELECT * FROM categoria";
+    $sql = "SELECT *
+    FROM categoria
+    ORDER BY nombre ASC";
     $sentencia = $conn->prepare($sql);
     $sentencia->execute();
     $resultado = $sentencia->fetchAll();
@@ -105,7 +107,9 @@ if ($query == 5) {
 
     include("connectDB.php");
 
-    $sql = "SELECT * FROM proveedor";
+    $sql = "SELECT *
+    FROM proveedor
+    ORDER BY nombre ASC";
     $sentencia = $conn->prepare($sql);
     $sentencia->execute();
     $resultado = $sentencia->fetchAll();
@@ -142,6 +146,8 @@ if ($query == 6) {
     echo json_encode($response);
 
 }
+
+//ELIMINAR PRODUCTO
 
 if ($query == 7) {
 
@@ -229,6 +235,33 @@ if ($query == 10) {
     $sentencia = $conn->prepare($sql);
     $sentencia->bindValue(':favoriteStatus', $favoriteStatus);   
     $sentencia->bindValue(':codigo', $codigo); 
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+
+}
+
+/*MODIFICAR CATEGORÍA*/
+if($query == 11) {
+
+    $categorieModName = $_GET['categorieModName'];
+    $modCatSelected = $_GET['modCatSelected'];
+
+    include("connectDB.php");
+
+    $sql = "UPDATE categoria
+            SET nombre = :categorieModName
+            WHERE nombre = :modCatSelected";
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':categorieModName', $categorieModName);   
+    $sentencia->bindValue(':modCatSelected', $modCatSelected); 
     $sentencia->execute();
 
     $rowCount = $sentencia->rowCount();
