@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ScrollToTopButton from '../Components/ScrollToTopButton';
 import SetStock from './SetStock';
 import DeleteProduct from './DeleteProduct';
+import ModProducts from './ModProducts';
 
 function Inventario() {
     const [dataProductLoaded, setDataProductLoaded] = useState(false);
@@ -104,6 +105,16 @@ function Inventario() {
 
     //LÓGICA DE FAVORITOS
 
+    const [openModProd, setOpenModProd] = useState(false);    
+
+    const handleOpenModProd = () => {
+        if(openModProd){
+            setOpenModProd(false);
+        } else {
+            setOpenModProd(true);
+        }
+    }
+
     const updateFavorite = (newStatus, codigo, setIcon) => {        
         fetch(`http://localhost/feline-testing/public/main.php?query=10&favoriteStatus=${newStatus}&codigo=${codigo}`)
             .then(response => response.json())
@@ -135,8 +146,19 @@ function Inventario() {
         }        
     }
 
+    //MODIFICAR PRODUCTOS
+
+    const [currentCode, setCurrentCode] = useState('');
+    const [currentName, setCurrentName] = useState('');
+    const [currentProvider, setCurrentProvider] = useState('');
+    const [currentPrice, setCurrentPrice] = useState(0);
+    const [currentRecStock, setCurrentRecStock] = useState(0);
+    const [currentMinStock, setCurrentMinStock] = useState(0);
+    const [currentDescription, setCurrentDescription] = useState(0);
+
     return (
         <div>
+            {openModProd? <ModProducts  handleClick={handleOpenModProd} code={currentCode} name={currentName} provider={currentProvider} price={currentPrice} recStock={currentRecStock} minStock={currentMinStock} description={currentDescription} /> : null}
             {openDeleteProduct ? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
             <div>
@@ -188,7 +210,7 @@ function Inventario() {
                                                                     case product[5] >= product[6]:
                                                                         return 'bg-[#b6efb0]';
                                                                     case product[5] < product[7]:
-                                                                        return 'bg-[#dd7e6b]';
+                                                                        return 'bg-[#eb8792]';
                                                                     default:
                                                                         return 'bg-[#fff2cc]';
                                                                 }
@@ -244,6 +266,20 @@ function Inventario() {
                                                             <td>
 
                                                                 <button
+                                                                onClick={()=>{
+                                                                    handleOpenModProd();                                                                    
+                                                                    setCurrentCode(product[0]);
+                                                                    setCurrentName(product[2]);
+                                                                    if(product[1]===null){
+                                                                        setCurrentProvider('SIN ´PROVEEDOR');
+                                                                    } else {
+                                                                        setCurrentProvider(product[1]);
+                                                                    }                                                                    
+                                                                    setCurrentPrice(product[4]);
+                                                                    setCurrentRecStock(product[6]);
+                                                                    setCurrentMinStock(product[7]);
+                                                                    setCurrentDescription(product[3]);
+                                                                }}
                                                                     className="text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4">
                                                                     Modificar Producto
                                                                 </button>

@@ -274,4 +274,27 @@ if($query == 11) {
 
 }
 
+/*CATEGORÍAS DE UN PRODUCTO ESPECÍFICO*/
+if($query == 12){
+
+    $code = $_GET['code'];
+
+    include("connectDB.php");
+
+    $sql = "SELECT nombre_categoria
+    FROM corresponde
+    WHERE codigo_producto = :code
+    ORDER BY nombre_categoria ASC";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':code', $code);
+    $sentencia->execute();
+    $resultado = $sentencia->fetchAll();
+
+    include("disconnectDB.php");
+
+    header("Content-Type: application/json");
+    echo json_encode($resultado);
+
+}
+
 ?>
