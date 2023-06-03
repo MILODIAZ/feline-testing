@@ -312,4 +312,21 @@ if($query == 13){
 
 }
 
+if ($query == 14) {
+
+    include("connectDB.php");
+
+    $sql = "SELECT codigo, nombre_proveedor, fecha_pedido, fecha_llegada, fecha_llegada - CURRENT_DATE AS dias_restantes
+    FROM lote
+    ORDER BY fecha_llegada ASC";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->execute();
+    $resultado = $sentencia->fetchAll();
+
+    include("disconnectDB.php");
+
+    header("Content-Type: application/json");
+    echo json_encode($resultado);
+}
+
 ?>

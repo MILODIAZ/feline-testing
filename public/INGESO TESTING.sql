@@ -117,9 +117,9 @@ VALUES
 INSERT INTO lote (codigo,nombre_proveedor,fecha_pedido,fecha_llegada)
 VALUES
    ('L1', 'Proveedor A','31-05-2023', '05-06-2023'),
-   ('L2', 'Proveedor B','27-05-2023', '07-06-2023'),
+   ('L2', null,'27-05-2023', '07-06-2023'),
    ('L3', 'Proveedor C','28-05-2023', '10-06-2023'),
-   ('L4', 'Proveedor A','29-05-2023', '05-06-2023'),
+   ('L4', 'Proveedor A','29-05-2023', '01-06-2023'),
    ('L5', 'Proveedor B','31-05-2023', '07-06-2023'),
    ('L6', 'Proveedor C','01-05-2023', '05-06-2023');
 
