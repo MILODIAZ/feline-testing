@@ -52,7 +52,7 @@ function HomeSlider () {
   return(
     <div className='flex flex-row justify-center xl:px-32 2xl:px-72'>     
       
-      <div className='overflow-hidden relative  border-4 border-[#ff7795] rounded-xl'>
+      <div className='overflow-hidden relative border-4 lg:border-8 lg:border-t-0 border-[#ff7795] lg:border-[#ffb2e0] rounded-b-xl'>
 
         <div className='absolute w-full h-full z-10 flex justify-between'>
           <button onClick={prevSlide}>
