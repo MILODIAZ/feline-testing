@@ -112,7 +112,7 @@ function Inventario() {
             setOpenModProd(false);
         } else {
             setOpenModProd(true);
-        }
+        }        
     }
 
     const updateFavorite = (newStatus, codigo, setIcon) => {        
@@ -158,7 +158,7 @@ function Inventario() {
 
     return (
         <div>
-            {openModProd? <ModProducts  handleClick={handleOpenModProd} code={currentCode} name={currentName} provider={currentProvider} price={currentPrice} recStock={currentRecStock} minStock={currentMinStock} description={currentDescription} /> : null}
+            {openModProd? <ModProducts  handleClick={handleOpenModProd} reloadProducts={reloadProducts} code={currentCode} name={currentName} provider={currentProvider} price={currentPrice} recStock={currentRecStock} minStock={currentMinStock} description={currentDescription} /> : null}
             {openDeleteProduct ? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
             <div>
@@ -271,7 +271,7 @@ function Inventario() {
                                                                     setCurrentCode(product[0]);
                                                                     setCurrentName(product[2]);
                                                                     if(product[1]===null){
-                                                                        setCurrentProvider('SIN ´PROVEEDOR');
+                                                                        setCurrentProvider('SIN PROVEEDOR');
                                                                     } else {
                                                                         setCurrentProvider(product[1]);
                                                                     }                                                                    

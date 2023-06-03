@@ -297,4 +297,19 @@ if($query == 12){
 
 }
 
+if($query == 13){
+
+    $oldCode = $_GET['oldCode'];
+
+    $ruta = '../src/productsImages/' . $oldCode . '.jpg';
+
+    if (file_exists($ruta)) {
+    unlink($ruta);
+    echo json_encode("Archivo eliminado correctamente.");
+    } else {
+    echo json_encode("El archivo a eliminar no existe.");
+    }
+
+}
+
 ?>

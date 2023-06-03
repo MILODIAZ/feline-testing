@@ -64,6 +64,7 @@ function ModProducts (props) {
     const selectedProvider = event.target.value;
     const updatedFormData = { ...formData, proveedor:selectedProvider };
     setFormData(updatedFormData);
+    console.log(formData.proveedor);
   }
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -128,14 +129,15 @@ function ModProducts (props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     if(DatosObligatorios()){
       const updatedFormData = {
         ...formData,
         categorias: selectedCategories
-      };
-    
+      };      
       const formDataToSend = new FormData();
       formDataToSend.append('query', '7');
+      formDataToSend.append('currentCode', props.code);
       Object.keys(updatedFormData).forEach((key) => {
         if (key === 'categorias') {
           if (selectedCategories.length > 0) {
@@ -163,8 +165,12 @@ function ModProducts (props) {
         body: formDataToSend
       })
         .then((response) => response.json())
-        .then((data) => {          
-          alert("Producto modificado con éxito");
+        .then((data) => {  
+          console.log(data);
+          alert("Producto modificado con éxito");          
+          props.handleClick();
+          deleteOldImage();
+          window.location.reload();       
         })
         .catch((error) => {          
           alert("Ya existe un producto con el mismo código.");       
@@ -173,7 +179,16 @@ function ModProducts (props) {
       alert("Complete los campos requeridos");
     }
     
-  };    
+  };
+  
+  const deleteOldImage = () => {
+    fetch(`http://localhost/feline-testing/public/main.php?query=13&oldCode=${props.code}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);        
+      })
+      .catch(error => console.log(error));
+  }
   
   return(
     <div className='fixed inset-0 z-[100] flex flex justify-center items-center'>      
@@ -191,7 +206,7 @@ function ModProducts (props) {
           <div className='flex flex-wrap lg:flex-row'>
             {/*Formulario*/}          
             <div>              
-              <form>
+              <form onSubmit={handleSubmit}>
 
                 <div className='pb-2'>
                   <span className='text-xs'>(*) Campos requeridos</span>
@@ -210,7 +225,7 @@ function ModProducts (props) {
                 <div className='flex flex-row justify-between pb-2'>              
                   <label htmlFor='proveedor' className='pr-6'>PROVEEDOR</label>
                   <select name='proveedor' onChange={handleProviderChange} value={formData.proveedor}>
-                    <option id='SIN PROVEEDOR' value={'SIN PROVEEDOR'}>SIN PROVEEDOR</option>
+                    <option id='SIN PROVEEDOR' value='SIN PROVEEDOR'>SIN PROVEEDOR</option>
                     {providers.map(provider => (
                       <option key={provider[0]} id={provider[0]} value={provider[0]} defaultValue={provider[0]==='Proveedor A'}>{provider[0]}</option>
                     ))}
