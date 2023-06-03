@@ -284,7 +284,8 @@ function ModProducts (props) {
               </div>
 
               <div className='mt-8 flex justify-center mb-[10px]'>
-                <button className="text-sm text-black transition duration-150 hover:bg-pink-400 bg-pink-300 font-bold py-2 px-4 rounded">MODIFICAR</button>
+                <button type='submit' className="text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-4 rounded">Confirmar</button>
+                <button onClick={()=>props.handleClick()} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-8'>Cancelar</button>
               </div>
 
               </form>
