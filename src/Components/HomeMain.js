@@ -49,7 +49,7 @@ function HomeMain() {
     return (
       <div>
 
-        <HomeSlider />
+        <HomeSlider dataLoaded={dataLoaded} />
 
         <ProductContainer code={productCode} name={productName} price={productPrice} stock={productStock} description={productDescription} />
 
