@@ -182,12 +182,14 @@ function ModProducts (props) {
   };
   
   const deleteOldImage = () => {
-    fetch(`http://localhost/feline-testing/public/main.php?query=13&oldCode=${props.code}`)
+    if(formData.codigo!==props.code){
+      fetch(`http://localhost/feline-testing/public/main.php?query=13&oldCode=${props.code}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);        
       })
       .catch(error => console.log(error));
+    }    
   }
   
   return(
