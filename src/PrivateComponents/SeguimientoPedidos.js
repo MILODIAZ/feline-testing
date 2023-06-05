@@ -21,7 +21,7 @@ function SeguimientoPedidos () {
   }
 
   return(
-    <div className='px-60'>
+    <div className='xl:px-40'>
       <div className='py-4 pl-10'>
         <p className='text-xl font-bold'>SEGUIMIENTO DE PEDIDOS</p>
       </div>

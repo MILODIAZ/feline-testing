@@ -1,7 +1,7 @@
 function LoteCard(props){   
 
   return (
-    <div className={`flex justify-between items-center px-10 py-6 mt-2 rounded border-2 border-gray-400
+    <div className={`flex justify-between items-center px-4 xl:px-10 py-6 mt-2 rounded border-2 border-gray-400
     
     ${(()=>{switch(true){
       case props.dias_restantes>=3:
@@ -13,22 +13,22 @@ function LoteCard(props){
     }})()}
     
     `}>
-        <div>
+        <div className="md:w-[5%] text-center">
             <p className='text-[1.25rem] font-bold'>{props.id}</p>
         </div>
-        <div className='w-[120px]'>
-            <p className='whitespace-nowrap'>{props.proveedor}</p>
+        <div className='w-[10%]'>
+            <p className='whitespace-nowrap md:text-xl'>{props.proveedor}</p>
         </div>
-        <div>
-            <p>Pedido:</p>
+        <div className="w-[10%]">
+            <p className="font-bold">Pedido:</p>
             <p>{props.fecha_pedido}</p>
         </div>
-        <div>
-            <p>Llegada:</p>
+        <div className="w-[10%]">
+            <p className="font-bold">Llegada:</p>
             <p>{props.fecha_llegada}</p>
         </div>        
-        <div>
-          <p>Estado:</p>
+        <div className="w-[10%]">
+          <p className="font-bold">Estado:</p>
           {
               (() => {
               switch (true) {
@@ -46,18 +46,18 @@ function LoteCard(props){
               })()
           }                                 
         </div>
-        <div className='flex flex-row'>
+        <div className='flex flex-col w-[20%] md:w-[10%] md:flex-wrap'>
           <div>
-            <button className='text-sm text-white transition duration-150 hover:bg-[#157c61] bg-[#93c47d]  font-bold py-2 px-4 rounded-l'>Confirmar</button>
+            <button className='text-sm my-[1px] text-black  transition duration-150 hover:bg-[#157c61] bg-[#93c47d]  font-bold w-[100%] py-2 md:px-4'>Confirmar</button>
           </div>
           <div>
-            <button className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 ml-1'>Detalle</button>
+            <button className='text-sm my-[1px] text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold w-[100%] py-2 md:px-4'>Detalles</button>
           </div>
           <div>
-            <button className='text-sm text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-4 mx-1'>Eliminar</button>
+            <button className='text-sm my-[1px] text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold w-[100%] py-2 md:px-4'>Eliminar</button>
           </div>
           <div>
-            <button className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded-r'>Modificar</button>
+            <button className='text-sm my-[1px] text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold w-[100%] py-2 md:px-4'>Modificar</button>
           </div>
         </div>
     </div>

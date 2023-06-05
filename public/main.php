@@ -65,7 +65,7 @@ if ($query == 3) {
             WHERE favorito=true";
             $sentencia = $conn->prepare($sql);            
         } else {
-            $sql = "SELECT producto.codigo, nombre_proveedor, nombre, descripción, precio, stock_actual FROM producto
+            $sql = "SELECT * FROM producto
             INNER JOIN corresponde ON producto.codigo = corresponde.codigo_producto
             WHERE corresponde.nombre_categoria = :categoria";
             $sentencia = $conn->prepare($sql);
