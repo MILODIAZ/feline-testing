@@ -8,7 +8,8 @@ function CategoriesNav() {
   const [counter, setCounter] = useState(0);
 
   const nextCategories = () => {
-    const slideCount = sliderRef.current.childElementCount;
+    if(sliderRef.current!==undefined){
+      const slideCount = sliderRef.current.childElementCount;
     const slideWidth = sliderRef.current.offsetWidth;         
     if(counter+1 === Math.ceil(slideCount/3)){
       setCounter(0);      
@@ -16,7 +17,8 @@ function CategoriesNav() {
     } else{
       setCounter(counter+1);      
       sliderDiv.current.style.left = `-${(counter+1) * slideWidth}px`;           
-    }    
+    } 
+    }       
   }
 
   const prevCategories = () => {

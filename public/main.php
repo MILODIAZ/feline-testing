@@ -67,7 +67,8 @@ if ($query == 3) {
         } else {
             $sql = "SELECT * FROM producto
             INNER JOIN corresponde ON producto.codigo = corresponde.codigo_producto
-            WHERE corresponde.nombre_categoria = :categoria";
+            WHERE corresponde.nombre_categoria = :categoria
+            ORDER BY producto.nombre ASC";
             $sentencia = $conn->prepare($sql);
             $sentencia->bindParam(':categoria', $categoria);
         }
@@ -220,7 +221,7 @@ if ($query == 9) {
     echo json_encode($response);
 }
 
-/*ACTUALIZAR <STOCK>*/
+/*ACTUALIZAR FAVORITOS*/
 if ($query == 10) {
 
     $favoriteStatus = $_GET['favoriteStatus'];
@@ -296,6 +297,8 @@ if($query == 12){
     echo json_encode($resultado);
 
 }
+
+/*ELIMINAR IMAGEN ANTIGUA DE PRODUCTO*/
 
 if($query == 13){
 
