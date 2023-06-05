@@ -7,6 +7,7 @@ import ModProducts from './ModProducts';
 function Inventario() {
     const [dataProductLoaded, setDataProductLoaded] = useState(false);
     const [products, setProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         dataProduct();
@@ -17,6 +18,7 @@ function Inventario() {
             .then(response => response.json())
             .then(data => {
                 setDataProductLoaded(true);
+                
                 setProducts(data);
             })
             .catch(error => console.log(error));
@@ -82,16 +84,24 @@ function Inventario() {
 
     useEffect(() => {
         if (selectedCategory === 'todas') {
-            setCategoriesSelected(products);
+            const filteredProducts = products.filter(product=>
+            product[2].toLowerCase().includes(searchTerm.toLowerCase()) 
+            || product[0].toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            
+            setCategoriesSelected(filteredProducts);
         } else {
             fetch(`http://localhost/feline-testing/public/main.php?query=3&categoria=${selectedCategory}`)
                 .then(response => response.json())
                 .then(data => {
-                    setCategoriesSelected(data);
+                    const filteredProducts = data.filter(product=>
+                        product[2].toLowerCase().includes(searchTerm.toLowerCase())
+                        || product[0].toLowerCase().includes(searchTerm.toLowerCase()))
+                    setCategoriesSelected(filteredProducts);
                 })
                 .catch(error => console.log(error));
         }
-    }, [selectedCategory, selectedFilter, products]);
+    }, [selectedCategory, selectedFilter, searchTerm,products]);
 
     const handleCategoryChange = (event) => {
         const selectedOption = event.target.value;
@@ -180,14 +190,18 @@ function Inventario() {
                     <option value='normalstock'>Aceptable</option>
                     <option value="lowstock">Bajo</option>
                 </select>
+                <input 
+                type='text'
+                value={searchTerm}
+                onChange={event => setSearchTerm(event.target.value)} />
             </div>
             <div className="lg:p-8 rounded-md w-[100%]">
                 <ScrollToTopButton />
                 <div className=" flex items-center  justify-between pb-6">
                     <div>
                         <div className="lg:-mx-4 w-[100%]  px-4 sm:px-8  overflow-x-auto">
-                            <div className="inline-block  shadow rounded-lg overflow-hidden">
-                                <table className='min-w-full leading-normal'>
+                            <div className="inline-block  shadow rounded-lg overflow-hidden ">
+                                <table className='min-w-[100%] w-[100%] leading-normal'>
                                     {dataProductLoaded ?
                                         <tbody>
 
@@ -220,15 +234,15 @@ function Inventario() {
                                                             {/* Nombre e imagen */}
                                                             <td className='w-[40%] px-5 py-5 border-gray-200 text-sm'>
                                                                 <div className='flex items-center'>
-                                                                    <div className='pr-16 flex w-[40px] h-[40px]'>
+                                                                    <div className='w-[10%] pr-16 flex w-[40px] h-[40px]'>
                                                                         <button className='w-[40px]'>
                                                                             <p onClick={(event)=>setFavorite(event, product[0])} className={product[8]? 'text-[#f7d000] text-[40px] transition-all' : 'text-white text-[25px] transition-all'}>&#9733;</p>
                                                                         </button>
                                                                     </div>
-                                                                    <div className='w-1/2  flex-shrink-0'>
+                                                                    <div className='w-[45%]  flex-shrink-0'>
                                                                         <img alt='product' className='rounded h-[140px] lg:h-[140px]  min-w-1/2' src={require(`../productsImages/${product[0]}.jpg`)} />
                                                                     </div>
-                                                                    <div className='w-1/2 ml-3 text-lg md:text-xl lg:text-2xl'>
+                                                                    <div className='w-[45%] ml-3 text-lg md:text-xl lg:text-2xl'>
                                                                         <h2 className='text-gray-900 font-bold whitespace-no-wrap'>
                                                                             {product[2]}
                                                                         </h2>
