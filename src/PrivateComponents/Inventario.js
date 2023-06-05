@@ -172,8 +172,12 @@ function Inventario() {
             {openDeleteProduct ? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
             <div>
+                <div  className='px-8 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-2 mt-4'>
+                    
                 <label>Filtrar por categoría</label>
-                <select value={selectedCategory} onChange={handleCategoryChange}>
+                <select
+                className=' px-4 py-2 text-black w-[80%] rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-md' 
+                value={selectedCategory} onChange={handleCategoryChange}>
                     <option id='todas' value={'todas'}>Todas</option>
                     {categories.map(categorie => (
                         <option key={categorie[0]} id={categorie[0]} value={categorie[0]}>
@@ -183,17 +187,27 @@ function Inventario() {
                     <option id='Otros' value='Otros'>Otros</option>
                     <option id='Favoritos' value='Favoritos'>Favoritos</option>
                 </select>
+                
                 <label>Filtro por stock</label>
-                <select value={selectedFilter} onChange={handleFilterChange}>
+                <select
+                className=' px-4 py-2 w-[80%] rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-md' 
+                 value={selectedFilter} onChange={handleFilterChange}>
                     <option value="all">---</option>
                     <option value="overstock">Recomendado</option>
                     <option value='normalstock'>Aceptable</option>
                     <option value="lowstock">Bajo</option>
                 </select>
+                </div>
+                <div className='px-8 py-3'>
+
+                <label>Buscar:</label>
                 <input 
+                className="px-8 py-3 w-[80%] max-w-[600px] ml-3 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                 type='text'
+                placeholder='Ingrese nombre o codigo del producto...'
                 value={searchTerm}
                 onChange={event => setSearchTerm(event.target.value)} />
+                </div>
             </div>
             <div className="lg:p-8 rounded-md w-[100%]">
                 <ScrollToTopButton />
