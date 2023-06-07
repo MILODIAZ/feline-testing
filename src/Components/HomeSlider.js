@@ -1,22 +1,24 @@
 import { useRef, useState, useEffect } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
-function HomeSlider () {
+function HomeSlider (props) {
 
   const sliderRef = useRef();
   const sliderDiv = useRef();  
   const [counter, setCounter] = useState(0);
 
   const nextSlide = () => {
-    const slideCount = sliderRef.current.childElementCount;
-    const slideWidth = (sliderRef.current.offsetWidth)/3;         
-    if(counter+1 === slideCount){
-      setCounter(0);      
-      sliderDiv.current.style.left = '0px';            
-    } else{
-      setCounter(counter+1);      
-      sliderDiv.current.style.left = `-${(counter+1) * slideWidth}px`;           
-    }    
+    if(props.dataLoaded){
+      const slideCount = sliderRef.current.childElementCount;
+      const slideWidth = (sliderRef.current.offsetWidth)/3;         
+      if(counter+1 === slideCount){
+        setCounter(0);      
+        sliderDiv.current.style.left = '0px';            
+      } else{
+        setCounter(counter+1);      
+        sliderDiv.current.style.left = `-${(counter+1) * slideWidth}px`;           
+      } 
+    }       
   }
 
   const prevSlide = () => {
@@ -52,7 +54,7 @@ function HomeSlider () {
   return(
     <div className='flex flex-row justify-center xl:px-32 2xl:px-72'>     
       
-      <div className='overflow-hidden relative  border-4 border-[#ff7795] rounded-xl'>
+      <div className='overflow-hidden relative border-4 lg:border-8 lg:border-t-0 border-[#ff7795] lg:border-[#ffb2e0] rounded-b-xl'>
 
         <div className='absolute w-full h-full z-10 flex justify-between'>
           <button onClick={prevSlide}>

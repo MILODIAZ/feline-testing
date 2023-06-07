@@ -41,6 +41,8 @@ function formatearRut($rut)
 
  $query = $_POST['query'];
 
+ //VALIDAR CREDENCIALES LOGIN
+
  if ($query==1){
 
     $usuario = $_POST['usuario'];    
@@ -85,6 +87,8 @@ function formatearRut($rut)
     }
  }
 
+ //CAMBIAR CONTRASEÑA
+
  if ($query == 2) {
   $usuario = $_POST['rut'];
   $newPass = $_POST['newPass'];
@@ -104,11 +108,11 @@ function formatearRut($rut)
     $sentencia->bindValue(':newPass', $newPass);
     $sentencia->execute();
 
-    $rowCount = $sentencia->rowCount(); // Obtener el número de filas afectadas por la consulta
+    $rowCount = $sentencia->rowCount();
 
     include("disconnectDB.php");
 
-    $response = ($rowCount > 0) ? true : false; // Verificar si se actualizó al menos una fila
+    $response = ($rowCount > 0) ? true : false;
 
     echo json_encode($response);
   } else {
@@ -118,12 +122,15 @@ function formatearRut($rut)
   
 }
 
+//OBTENER USUARIOS
+
 if ($query == 3){
   
   include ("connectDB.php"); 
 
   $sql="SELECT rut, nombre
-  FROM usuario";
+  FROM usuario
+  ORDER BY rut ASC";
   $sentencia=$conn->prepare($sql);
   $sentencia->execute();
   $resultado=$sentencia->fetchAll(); 
@@ -134,6 +141,8 @@ if ($query == 3){
   echo json_encode($resultado);
 
 }
+
+//ELIMINAR USUARIO
 
 if ($query == 4){
 
@@ -147,15 +156,17 @@ if ($query == 4){
   $sentencia->bindParam(':usuario', $usuario);
   $sentencia->execute();
 
-  $rowCount = $sentencia->rowCount(); // Obtener el número de filas afectadas por la consulta
+  $rowCount = $sentencia->rowCount();
 
   include("disconnectDB.php");
 
-  $response = ($rowCount > 0) ? true : false; // Verificar si se actualizó al menos una fila
+  $response = ($rowCount > 0) ? true : false;
 
   echo json_encode($response);
 
 }
+
+//REGISTRAR NUEVO USUARIO
 
 if ($query == 5){
 
@@ -175,11 +186,11 @@ if ($query == 5){
     $sentencia->bindParam(':userName', $userName); 
     $sentencia->execute();
 
-    $rowCount = $sentencia->rowCount(); // Obtener el número de filas afectadas por la consulta
+    $rowCount = $sentencia->rowCount();
 
     include("disconnectDB.php");
 
-    $response = ($rowCount > 0) ? true : false; // Verificar si se actualizó al menos una fila
+    $response = ($rowCount > 0) ? true : false;
 
     echo json_encode($response);
     
@@ -190,6 +201,8 @@ if ($query == 5){
   
 
 }
+
+//AGREGAR NUEVO PRODUCTO
 
 if ($query == 6){
   $codigo = $_POST['codigo'];
@@ -205,11 +218,11 @@ if ($query == 6){
   $stockMinimo = $_POST['stockMinimo'];
   $descripcion = $_POST['descripcion'];
   if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-    // El campo 'imagen' se ha enviado y no hay errores
+    
     $imagen = $_FILES['imagen'];
-    // Resto de tu lógica para procesar la imagen
+    
   } else {
-    // El campo 'imagen' no se ha enviado o hay algún error
+    
     $imagen = null;
   }  
 
@@ -252,7 +265,7 @@ if ($query == 6){
   
   if($response==true && !is_null($imagen)){    
 
-    // Generar el nuevo nombre del archivo usando el código
+    
     $nuevoNombreArchivo = $codigo . '.jpg';
 
     $targetDirectory = '../src/productsImages/';
@@ -263,5 +276,104 @@ if ($query == 6){
   echo json_encode($response);
   
 }
+
+if ($query == 7){
+  $currentCode = $_POST['currentCode'];
+  $codigo = $_POST['codigo'];
+  $nombre = $_POST['nombre'];
+  $proveedor = $_POST['proveedor'];
+  if($proveedor=='SIN PROVEEDOR'){
+    $proveedor=null;
+  }
+  $categorias = $_POST['categorias'];
+  $precio = $_POST['precio'];  
+  $stockRecomendado = $_POST['stockRecomendado'];
+  $stockMinimo = $_POST['stockMinimo'];
+  $descripcion = $_POST['descripcion'];
+  if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+    
+    $imagen = $_FILES['imagen'];
+    
+  } else {
+    
+    $imagen = null;
+  }  
+
+  include ("connectDB.php"); 
+
+  $sql="DELETE FROM corresponde
+  WHERE codigo_producto = :codProd";
+
+  $sentencia=$conn->prepare($sql);
+  $sentencia->bindParam(':codProd', $currentCode);
+  $sentencia->execute();
+
+  $sql="UPDATE producto
+  SET codigo=:codigo, nombre_proveedor=:nombre_proveedor,
+   nombre=:nombre, descripción=:descripcion, precio=:precio, stock_recomendado=:stock_recomendado, stock_bajo=:stock_bajo
+  WHERE codigo=:currentCodigo";  
+
+  $sentencia=$conn->prepare($sql);
+  $sentencia->bindParam(':currentCodigo', $currentCode);
+  $sentencia->bindParam(':codigo', $codigo);
+  $sentencia->bindParam(':nombre_proveedor', $proveedor);
+  $sentencia->bindParam(':nombre', $nombre);
+  $sentencia->bindParam(':descripcion', $descripcion);
+  $sentencia->bindParam(':precio', $precio);  
+  $sentencia->bindParam(':stock_recomendado', $stockRecomendado);
+  $sentencia->bindParam(':stock_bajo', $stockMinimo);
+  $sentencia->execute();  
+
+  if($categorias!=[""]){    
+
+    foreach($categorias as $categoria) {
+      $sql = "INSERT INTO corresponde (codigo_producto, nombre_categoria)
+      VALUES (:codigo_producto, :nombre_categoria)
+      ON CONFLICT DO NOTHING";
+  
+      $sentencia=$conn->prepare($sql);
+      $sentencia->bindParam(':codigo_producto', $codigo);
+      $sentencia->bindParam(':nombre_categoria', $categoria);
+  
+      $sentencia->execute();
+    }
+
+  }
+
+  $rowCount = $sentencia->rowCount();
+
+  include("disconnectDB.php");
+
+  $response = ($rowCount > 0) ? true : false;
+  
+  if(!is_null($imagen)){      
+
+    $nuevoNombreArchivo = $codigo . '.jpg';
+
+    $targetDirectory = '../src/productsImages/';
+    $targetFile = $targetDirectory . basename($nuevoNombreArchivo);
+    move_uploaded_file($imagen['tmp_name'], $targetFile);     
+
+    echo json_encode($response);  
+      
+  }
+
+        
+
+  else if(is_null($imagen)){
+    $ruta = '../src/productsImages/' . $currentCode . '.jpg';
+    $nuevoNombreArchivo = $codigo . '.jpg';
+    $rutaNueva = '../src/productsImages/' . $nuevoNombreArchivo;
+    if (file_exists($ruta)) {
+      rename($ruta, $rutaNueva);
+      echo json_encode($response);
+    }
+  }
+
+  
+  
+}
+
+
 
 ?>

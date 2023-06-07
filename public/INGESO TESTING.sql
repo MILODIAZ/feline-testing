@@ -10,7 +10,7 @@ CREATE TABLE proveedor(
 
 CREATE TABLE producto(
 	codigo TEXT PRIMARY KEY,
-	nombre_proveedor TEXT REFERENCES proveedor(nombre),
+	nombre_proveedor TEXT REFERENCES proveedor(nombre) ON DELETE SET NULL ON UPDATE CASCADE,
 	nombre TEXT NOT NULL,	
 	descripción TEXT NOT NULL,
 	precio INT NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE categoria(
 
 CREATE TABLE lote(
 	codigo TEXT PRIMARY KEY,
-	nombre_proveedor TEXT REFERENCES proveedor(nombre),
+	nombre_proveedor TEXT REFERENCES proveedor(nombre) ON DELETE SET NULL ON UPDATE CASCADE,
 	fecha_pedido DATE NOT NULL,
 	fecha_llegada DATE NOT NULL
 );
@@ -114,37 +114,55 @@ VALUES
    ('P013', 'Papelería'),
    ('P014', 'Peluches');
 
-SELECT * FROM categoria
+INSERT INTO lote (codigo,nombre_proveedor,fecha_pedido,fecha_llegada)
+VALUES
+   ('L1', 'Proveedor A','31-05-2023', '05-06-2023'),
+   ('L2', null,'27-05-2023', '07-06-2023'),
+   ('L3', 'Proveedor C','28-05-2023', '10-06-2023'),
+   ('L4', 'Proveedor A','29-05-2023', '01-06-2023'),
+   ('L5', 'Proveedor B','31-05-2023', '07-06-2023'),
+   ('L6', 'Proveedor C','01-05-2023', '05-06-2023');
 
-SELECT * FROM producto
-WHERE favorito=true
-
-SELECT producto.codigo, nombre_proveedor, nombre, descripción, precio FROM producto
-INNER JOIN corresponde ON producto.codigo = corresponde.codigo_producto
-WHERE corresponde.nombre_categoria = 'Ropa'
-
-SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-
-SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-WHERE stock_actual > stock_recomendado
-
-SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-WHERE stock_actual < stock_recomendado AND stock_actual > stock_bajo
-
-SELECT id_producto, nombre_producto, stock_actual, stock_recomendado FROM producto
-WHERE stock_actual < stock_bajo
-
-SELECT nombre_proveedor FROM proveedor
-
-SELECT id_lote, nombre_proveedor, fecha_pedido, fecha_llegada, fecha_llegada - current_date from lote
-ORDER BY fecha_llegada
-
-SELECT id_lote, nombre_proveedor, fecha_pedido, fecha_llegada, fecha_llegada - current_date from lote
-WHERE lote.nombre_proveedor IS NULL
-
-SELECT producto.id_producto, nombre_producto, unidades FROM producto
-INNER JOIN contiene ON producto.id_producto = contiene.id_producto
-WHERE contiene.id_lote = 'L001'
+INSERT INTO contiene (unidades,codigo_lote,codigo_producto)
+VALUES
+   (5,'L1','P001'),
+   (10,'L2','P002'),
+   (6,'L3','P003'),
+   (7,'L4','P004'),
+   (9,'L5','P005'),
+   (4,'L6','P006'),
+   (5,'L1','P007'),
+   (7,'L2','P008'),
+   (5,'L3','P009'),
+   (5,'L4','P010'),
+   (8,'L5','P011'),
+   (1,'L6','P012');
 
 
+/************************************FUNCIONES Y TRIGGERS****************************************************/
+
+
+/****Trigger para verificar proveedores****/
+CREATE OR REPLACE FUNCTION VerificarProveedores() RETURNS TRIGGER AS $$
+DECLARE
+    nombreProveedorProducto TEXT;
+    nombreProveedorLote TEXT;
+BEGIN
+    -- Obtener los nombres de las tablas relacionadas
+    SELECT nombre_proveedor INTO nombreProveedorProducto FROM producto WHERE codigo = NEW.codigo_producto;
+    SELECT nombre_proveedor INTO nombreProveedorLote FROM lote WHERE codigo = NEW.codigo_lote;
+    
+    -- Verificar si los nombres son iguales
+    IF  nombreProveedorProducto <> nombreProveedorLote THEN
+        RAISE EXCEPTION 'Los proveedores no coinciden en las tablas relacionadas.';
+    END IF;
+	RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_verificar_proveedores
+BEFORE INSERT ON contiene
+FOR EACH ROW
+EXECUTE FUNCTION VerificarProveedores();
  
