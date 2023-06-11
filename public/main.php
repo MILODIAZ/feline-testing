@@ -53,17 +53,17 @@ if ($query == 3) {
 
         include("connectDB.php");
 
-        if($categoria=='Otros'){
+        if ($categoria == 'Otros') {
             $sql = "SELECT *
             FROM producto
             WHERE codigo NOT IN (
                 SELECT codigo_producto
                 FROM corresponde)";
             $sentencia = $conn->prepare($sql);
-        } else if ($categoria=='Favoritos') {
+        } else if ($categoria == 'Favoritos') {
             $sql = "SELECT * FROM producto
             WHERE favorito=true";
-            $sentencia = $conn->prepare($sql);            
+            $sentencia = $conn->prepare($sql);
         } else {
             $sql = "SELECT * FROM producto
             INNER JOIN corresponde ON producto.codigo = corresponde.codigo_producto
@@ -73,7 +73,7 @@ if ($query == 3) {
             $sentencia->bindParam(':categoria', $categoria);
         }
 
-        
+
         $sentencia->execute();
         $resultado = $sentencia->fetchAll();
 
@@ -225,7 +225,7 @@ if ($query == 9) {
 if ($query == 10) {
 
     $favoriteStatus = $_GET['favoriteStatus'];
-    $codigo = $_GET['codigo'];    
+    $codigo = $_GET['codigo'];
 
     include("connectDB.php");
 
@@ -234,8 +234,8 @@ if ($query == 10) {
             WHERE codigo = :codigo";
 
     $sentencia = $conn->prepare($sql);
-    $sentencia->bindValue(':favoriteStatus', $favoriteStatus);   
-    $sentencia->bindValue(':codigo', $codigo); 
+    $sentencia->bindValue(':favoriteStatus', $favoriteStatus);
+    $sentencia->bindValue(':codigo', $codigo);
     $sentencia->execute();
 
     $rowCount = $sentencia->rowCount();
@@ -249,7 +249,7 @@ if ($query == 10) {
 }
 
 /*MODIFICAR CATEGORÍA*/
-if($query == 11) {
+if ($query == 11) {
 
     $categorieModName = $_GET['categorieModName'];
     $modCatSelected = $_GET['modCatSelected'];
@@ -261,8 +261,8 @@ if($query == 11) {
             WHERE nombre = :modCatSelected";
 
     $sentencia = $conn->prepare($sql);
-    $sentencia->bindValue(':categorieModName', $categorieModName);   
-    $sentencia->bindValue(':modCatSelected', $modCatSelected); 
+    $sentencia->bindValue(':categorieModName', $categorieModName);
+    $sentencia->bindValue(':modCatSelected', $modCatSelected);
     $sentencia->execute();
 
     $rowCount = $sentencia->rowCount();
@@ -276,7 +276,7 @@ if($query == 11) {
 }
 
 /*CATEGORÍAS DE UN PRODUCTO ESPECÍFICO*/
-if($query == 12){
+if ($query == 12) {
 
     $code = $_GET['code'];
 
@@ -300,17 +300,17 @@ if($query == 12){
 
 /*ELIMINAR IMAGEN ANTIGUA DE PRODUCTO*/
 
-if($query == 13){
+if ($query == 13) {
 
     $oldCode = $_GET['oldCode'];
 
     $ruta = '../src/productsImages/' . $oldCode . '.jpg';
 
     if (file_exists($ruta)) {
-    unlink($ruta);
-    echo json_encode("Archivo eliminado correctamente.");
+        unlink($ruta);
+        echo json_encode("Archivo eliminado correctamente.");
     } else {
-    echo json_encode("El archivo a eliminar no existe.");
+        echo json_encode("El archivo a eliminar no existe.");
     }
 
 }
@@ -332,4 +332,70 @@ if ($query == 14) {
     echo json_encode($resultado);
 }
 
+/*AGREGAR PROVEEDOR*/
+if ($query == 15) {
+
+    $proveedor = $_GET['proveedor'];
+
+    include("connectDB.php");
+
+    $sql = "INSERT INTO proveedor (nombre)
+        VALUES (:proveedor)";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':proveedor', $proveedor);
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+}
+/*ELIMINAR PROVEEDOR*/
+if ($query == 16) {
+    $proveedor = $_GET['proveedor'];
+    include("connectDB.php");
+
+    $sql = "DELETE FROM proveedor
+            WHERE nombre = :proveedor";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':proveedor', $proveedor);
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+}
+//MODIFICAR PROVEEDOR
+if ($query == 17) {
+
+    $proveedorModName = $_GET['proveedorModName'];
+    $modProSelected = $_GET['modPRoSelected'];
+
+    include("connectDB.php");
+
+    $sql = "UPDATE proveedor
+            SET nombre = :proveedorModName
+            WHERE nombre = :modProSelected";
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':proveedorModName', $proveedorModName);
+    $sentencia->bindValue(':modProSelected', $modProSelected);
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+
+}
 ?>
