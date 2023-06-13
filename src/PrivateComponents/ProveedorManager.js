@@ -33,20 +33,20 @@ function ProveedorManager(props) {
     }
     const insertProveedor = (event) => {
         event.preventDefault();
-        fetch(`http://localhost/feline-testing/public/main.php?query=15&proveedor=${proveedorName}`)
+        fetch(`http://localhost/feline-testing/public/main.php?query=21&proveedor=${proveedorName}`)
             .then(response => response.json())
             .then(data => {
                 if (data === true) {
                     setDataLoaded(false);
                     loadData();
-                    props.reloadProveedores();
+                    //props.reloadProveedores();
                 } else {
                     alert("Error al agregar proveedor");
                 }
             })
             .catch(error => {
                 alert(`El proveedor ${proveedorName} ya existe`);
-                console.log(error)
+                console.log(error);
             });
     }
 
@@ -69,11 +69,11 @@ function ProveedorManager(props) {
                 if (data) {
                     setDataLoaded(false);
                     loadData();
-                    props.reloadProvedores();
+                    //props.reloadProvedores();
                 }
             })
             .catch(error => {
-                console.log(error)
+                console.log(error);
             });
     }
 
@@ -100,13 +100,14 @@ function ProveedorManager(props) {
     const ModProveedor = (event) => {
         event.preventDefault();
         if (proveedorModName !== '') {
+            console.log(proveedorModName);
             fetch(`http://localhost/feline-testing/public/main.php?query=20&modProSelected=${modProSelected}&proveedorModName=${proveedorModName}`)
                 .then(response => response.json())
                 .then(data => {
                     openModPro(false);
                     setDataLoaded(false);
                     loadData();
-                    props.reloadProveedor();
+                    //props.reloadProveedor();
                     alert(`Proveedor ${modProSelected} ahora es ${proveedorModName}`);
                 })
                 .catch(error => {
