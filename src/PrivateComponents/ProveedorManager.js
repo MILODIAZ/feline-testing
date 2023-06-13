@@ -63,7 +63,7 @@ function ProveedorManager(props) {
         }
     }
     const deleteProveedor = () => {
-        fetch(`http://localhost/feline-testing/public/main.php?query=16&proveedor=${ProveedorNameDeleting}`)
+        fetch(`http://localhost/feline-testing/public/main.php?query=18&proveedor=${ProveedorNameDeleting}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
