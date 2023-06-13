@@ -63,7 +63,7 @@ function ProveedorManager(props) {
         }
     }
     const deleteProveedor = () => {
-        fetch(`http://localhost/feline-testing/public/main.php?query=16&proveedor=${ProveedorNameDeleting}`)
+        fetch(`http://localhost/feline-testing/public/main.php?query=19&proveedor=${ProveedorNameDeleting}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -100,7 +100,7 @@ function ProveedorManager(props) {
     const ModProveedor = (event) => {
         event.preventDefault();
         if (proveedorModName !== '') {
-            fetch(`http://localhost/feline-testing/public/main.php?query=17&modProSelected=${modProSelected}&proveedorModName=${proveedorModName}`)
+            fetch(`http://localhost/feline-testing/public/main.php?query=20&modProSelected=${modProSelected}&proveedorModName=${proveedorModName}`)
                 .then(response => response.json())
                 .then(data => {
                     openModPro(false);

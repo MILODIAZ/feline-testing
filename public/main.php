@@ -474,4 +474,50 @@ if ($query == 15) {
 
     echo json_encode($response);
 }
+
+/*ELIMINAR PROVEEDOR*/
+if ($query == 19) {
+    $proveedor = $_GET['proveedor'];
+    include("connectDB.php");
+
+    $sql = "DELETE FROM proveedor
+            WHERE nombre = :proveedor";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':proveedor', $proveedor);
+    $sentencia->execute();
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+}
+// Modificar PROVEEDOR
+if ($query == 20) {
+
+    $proveedorModName = $_GET['proveedorModName'];
+    $modProSelected = $_GET['modProSelected'];
+
+    include("connectDB.php");
+
+    $sql = "UPDATE proveedor
+            SET nombre = :proveedorModName
+            WHERE nombre = :modProSelected";
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':proveedorModName', $proveedorModName);
+    $sentencia->bindValue(':modProSelected', $modProSelected);
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+}
+
+
 ?>
