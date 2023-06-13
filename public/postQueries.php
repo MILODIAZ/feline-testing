@@ -395,7 +395,7 @@ if ($query == 8){
   if($productos!=[""]){
 
     foreach($productos as $producto) {
-      $unidades = $_POST['unidades']
+      $unidades = $_POST['unidades'];
       $sql = "INSERT INTO contiene (unidades, codigo_lote,codigo_producto)
       VALUES (:unidades,:codigo, :codigo_producto)";
   

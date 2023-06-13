@@ -357,56 +357,55 @@ if ($query == 15) {
 }
 
 //AGREGAR NUEVO LOTE
-if ($query == 16){
-    $codigo = $_POST['codigo'];
-    $proveedor = $_POST['nombre_proveedor'];
-    $fecha_pedido = $_POST['fecha_pedido'];
-    $fecha_llegada = $_POST['fecha_llegada'];
-    $productos = $_POST['productos'];
-    if($proveedor=='SIN PROVEEDOR'){
-      $proveedor=null;
-    } 
-    include ("connectDB.php"); 
-  
-    $sql="INSERT INTO lote (codigo, nombre_proveedor,fecha_pedido, fecha_llegada)
-    VALUES (:codigo, :nombre_proveedor, :fecha_pedido, :fecha_llegada)";
-  
-    $sentencia=$conn->prepare($sql);
-    $sentencia->bindParam(':codigo', $codigo);
-    $sentencia->bindParam(':nombre_proveedor', $proveedor);
-    $sentencia->bindParam(':fecha_pedido', $fecha_pedido);
-    $sentencia->bindParam(':fecha_llegada', $fecha_llegada);
-    $sentencia->execute(); 
-  
-    if($productos!=[""]){
-  
-      foreach($productos as $producto) {
-        $unidades = $_POST['unidades']
-        $sql = "INSERT INTO contiene (unidades, codigo_lote,codigo_producto)
-        VALUES (:unidades,:codigo, :codigo_producto)";
+    if ($query == 16){
+        $codigo = $_POST['codigo'];
+        $proveedor = $_POST['nombre_proveedor'];
+        $fecha_pedido = $_POST['fecha_pedido'];
+        $fecha_llegada = $_POST['fecha_llegada'];
+        $productos = $_POST['productos'];
+        if($proveedor=='SIN PROVEEDOR'){
+        $proveedor=null;
+        } 
+        include ("connectDB.php"); 
+    
+        $sql="INSERT INTO lote (codigo, nombre_proveedor,fecha_pedido, fecha_llegada)
+        VALUES (:codigo, :nombre_proveedor, :fecha_pedido, :fecha_llegada)";
     
         $sentencia=$conn->prepare($sql);
-        $sentencia->bindParam(':unidades', $unidades);
         $sentencia->bindParam(':codigo', $codigo);
-        $sentencia->bindParam(':codigo_producto', $producto);
-        $sentencia->execute();
-      }
-  
-    }  
-  
-    $rowCount = $sentencia->rowCount();
-  
-    include("disconnectDB.php");
-  
-    $response = ($rowCount > 0) ? true : false;
-    echo json_encode($response);
+        $sentencia->bindParam(':nombre_proveedor', $proveedor);
+        $sentencia->bindParam(':fecha_pedido', $fecha_pedido);
+        $sentencia->bindParam(':fecha_llegada', $fecha_llegada);
+        $sentencia->execute(); 
     
-  }
+        if($productos!=[""]){
+    
+        foreach($productos as $producto) {
+            $unidades = $_POST['unidades'];
+            $sql = "INSERT INTO contiene (unidades, codigo_lote,codigo_producto)
+            VALUES (:unidades,:codigo, :codigo_producto)";
+        
+            $sentencia=$conn->prepare($sql);
+            $sentencia->bindParam(':unidades', $unidades);
+            $sentencia->bindParam(':codigo', $codigo);
+            $sentencia->bindParam(':codigo_producto', $producto);
+            $sentencia->execute();
+        }
+    
+        }  
+    
+        $rowCount = $sentencia->rowCount();
+    
+        include("disconnectDB.php");
+    
+        $response = ($rowCount > 0) ? true : false;
+        echo json_encode($response);
+    }
   
   //MODIFICAR LOTE
   if ($query == 17){
     $codigoAntiguo = $_POST['codigo'];
-    $codigoNuevo = $_POST['codigo_nuevo']
+    $codigoNuevo = $_POST['codigo_nuevo'];
     $proveedor = $_POST['nombre_proveedor'];
     $fecha_pedido = $_POST['fecha_pedido'];
     $fecha_llegada = $_POST['fecha_llegada'];
@@ -434,7 +433,7 @@ if ($query == 16){
     if($productos!=[""]){
   
       foreach($productos as $producto) {
-        $unidades = $_POST['unidades']
+        $unidades = $_POST['unidades'];
         $sql = "INSERT INTO contiene (unidades, codigo_lote,codigo_producto)
         VALUES (:unidades,:codigo_nuevo, :codigo_producto)";
     
