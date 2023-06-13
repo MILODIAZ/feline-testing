@@ -456,7 +456,7 @@ if ($query == 15) {
   }
 
   //ELIMINAR LOTE
-  if ($query == 9) {
+  if ($query == 18) {
     $codigo_lote = $_GET['codigo_lote'];
     include("connectDB.php");
 

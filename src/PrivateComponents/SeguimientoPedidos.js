@@ -61,7 +61,7 @@ function SeguimientoPedidos () {
 
       {dataLoaded ? 
         lotesFiltrados.map(lote => (                    
-          <LoteCard id={lote[0]} proveedor={lote[1]==null? 'SIN PROVEEDOR' : lote[1]} fecha_pedido={lote[2]} fecha_llegada={lote[3]} dias_restantes={lote[4]} />                     
+          <LoteCard key={lote[0]} id={lote[0]} proveedor={lote[1]==null? 'SIN PROVEEDOR' : lote[1]} fecha_pedido={lote[2]} fecha_llegada={lote[3]} dias_restantes={lote[4]} />                     
         )) : <h1>Cargando...</h1>}        
     </div>
   );

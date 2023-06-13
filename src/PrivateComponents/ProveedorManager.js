@@ -84,7 +84,7 @@ function ProveedorManager(props) {
     const [proveedorModName, setProveedorModName] = useState('');
 
     const handleProveedorModNameChange = (event) => {
-        setProveedorName(event.target.value);
+        setProveedorModName(event.target.value);
     }
 
     const openModPro = (proveedor) => {
