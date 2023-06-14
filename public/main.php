@@ -551,7 +551,7 @@ if ($query == 22) {
         include("connectDB.php");
         $sql = "SELECT * FROM contiene
         WHERE codigo_lote = :lote
-        ORDER BY producto.nombre ASC";
+        ORDER BY contiene.codigo_producto ASC";
         $sentencia = $conn->prepare($sql);
         $sentencia->bindParam(':lote', $lote);
         $sentencia->execute();
