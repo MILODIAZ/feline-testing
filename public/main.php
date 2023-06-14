@@ -356,7 +356,7 @@ if ($query == 15) {
 
 }
 
-//AGREGAR NUEVO LOTE
+//AGREGAR NUEVO LOTE (necesito que el producto sea un objeto que tenga las caracteristicas codigo(string) y unidades(int))
 if ($query == 16) {
     $codigo = $_POST['codigo'];
     $proveedor = $_POST['nombre_proveedor'];
@@ -381,14 +381,15 @@ if ($query == 16) {
     if ($productos != [""]) {
 
         foreach ($productos as $producto) {
-            $unidades = $_POST['unidades'];
+            $unidades = $producto->unidades;
+            $codigo_producto = $producto->codigo;
             $sql = "INSERT INTO contiene (unidades, codigo_lote,codigo_producto)
             VALUES (:unidades,:codigo, :codigo_producto)";
 
             $sentencia = $conn->prepare($sql);
             $sentencia->bindParam(':unidades', $unidades);
             $sentencia->bindParam(':codigo', $codigo);
-            $sentencia->bindParam(':codigo_producto', $producto);
+            $sentencia->bindParam(':codigo_producto', $codigo_producto);
             $sentencia->execute();
         }
 
@@ -433,14 +434,15 @@ if ($query == 17) {
     if ($productos != [""]) {
 
         foreach ($productos as $producto) {
-            $unidades = $_POST['unidades'];
+            $unidades = $producto->unidades;
+            $codigo_producto = $producto->codigo;
             $sql = "INSERT INTO contiene (unidades, codigo_lote,codigo_producto)
-        VALUES (:unidades,:codigo_nuevo, :codigo_producto)";
+            VALUES (:unidades,:codigo, :codigo_producto)";
 
             $sentencia = $conn->prepare($sql);
             $sentencia->bindParam(':unidades', $unidades);
-            $sentencia->bindParam(':codigo_nuevo', $codigoNuevo);
-            $sentencia->bindParam(':codigo_producto', $producto);
+            $sentencia->bindParam(':codigo', $codigo);
+            $sentencia->bindParam(':codigo_producto', $codigo_producto);
             $sentencia->execute();
         }
 
@@ -540,5 +542,28 @@ if ($query == 21) {
     echo json_encode($response);
 }
 
+//Mostrar productos lote
+if ($query == 22) {
+
+    if (isset($_GET['lote'])) {
+
+        $lote = $_GET['lote'];
+        include("connectDB.php");
+        $sql = "SELECT * FROM contiene
+        WHERE codigo_lote = :lote
+        ORDER BY producto.nombre ASC";
+        $sentencia = $conn->prepare($sql);
+        $sentencia->bindParam(':lote', $lote);
+        $sentencia->execute();
+        $resultado = $sentencia->fetchAll();
+
+        include("disconnectDB.php");
+
+        header("Content-Type: application/json");
+        echo json_encode($resultado);
+
+    }
+
+}
 
 ?>
