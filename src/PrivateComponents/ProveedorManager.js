@@ -33,13 +33,21 @@ function ProveedorManager(props) {
     }
     const insertProveedor = (event) => {
         event.preventDefault();
+        if(proveedorName === '') {
+            return alert('Debe ingresar un nombre!')
+        }
         fetch(`http://localhost/feline-testing/public/main.php?query=21&proveedor=${proveedorName}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data === true) {
                     setDataLoaded(false);
                     loadData();
-                    //props.reloadProveedores();
+                    alert(`El proveedor ${proveedorName} ha sido ingresado`)
                 } else {
                     alert("Error al agregar proveedor");
                 }
@@ -48,6 +56,7 @@ function ProveedorManager(props) {
                 alert(`El proveedor ${proveedorName} ya existe`);
                 console.log(error);
             });
+            setProveedorName('');
     }
 
     // ELIMINAR PROVEEDOR
@@ -69,7 +78,6 @@ function ProveedorManager(props) {
                 if (data) {
                     setDataLoaded(false);
                     loadData();
-                    //props.reloadProvedores();
                 }
             })
             .catch(error => {
@@ -107,7 +115,6 @@ function ProveedorManager(props) {
                     openModPro(false);
                     setDataLoaded(false);
                     loadData();
-                    //props.reloadProveedor();
                     alert(`Proveedor ${modProSelected} ahora es ${proveedorModName}`);
                 })
                 .catch(error => {
@@ -127,6 +134,7 @@ function ProveedorManager(props) {
                     <button onClick={() => props.handleClose()}>
                         <FaTimes className='hover:text-[#a5d5d5]' />
                     </button>
+                    </div>
                     <div className='p-8'>
                         <div>
                             <h3 className='text-[1.75rem] font-bold pb-6'>Administración de proveedores</h3>
@@ -168,7 +176,6 @@ function ProveedorManager(props) {
                             </form>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     );
