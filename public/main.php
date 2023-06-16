@@ -542,26 +542,31 @@ if ($query == 21) {
     echo json_encode($response);
 }
 
-//Mostrar productos lote
+/*Mostrar productos lote, con sus detalles
+Recibe el codigo de lote como parametro
+Devuelve todos los productos de ese lote, junto con toda su informacion
+*/
 if ($query == 22) {
 
     if (isset($_GET['lote'])) {
-
         $lote = $_GET['lote'];
         include("connectDB.php");
-        $sql = "SELECT * FROM contiene
-        WHERE codigo_lote = :lote
-        ORDER BY contiene.codigo_producto ASC";
+        
+        $sql = "SELECT p.*, c.unidades FROM producto p
+                INNER JOIN contiene c ON p.codigo = c.codigo_producto
+                WHERE c.codigo_lote = :lote
+                ORDER BY p.codigo ASC";
+        
         $sentencia = $conn->prepare($sql);
         $sentencia->bindParam(':lote', $lote);
         $sentencia->execute();
         $resultado = $sentencia->fetchAll();
-
+    
         include("disconnectDB.php");
-
+    
         header("Content-Type: application/json");
         echo json_encode($resultado);
-
+    
     }
 
 }
