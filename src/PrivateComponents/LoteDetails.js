@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import ProductoLote from "./lote/productoLote";
+import HeaderLote from "./lote/headerLote";
 
-function LoteDetails(props){
+function LoteDetails(props) {
     const [productos, setProductos] = useState([])
 
     useEffect(() => {
@@ -9,45 +11,35 @@ function LoteDetails(props){
     }, []);
 
     const datosProductos = () => {
-        fetch(`http://localhost/feline-testing/public/main.php?query=22&lote=L1`)
+        fetch(`http://localhost/feline-testing/public/main.php?query=22&lote=${props.id}`)
             .then(response => response.json())
             .then(data => {
                 setProductos(data);
-                console.log(data)
             })
             .catch(error => console.log(error));
     }
 
-    return(
-        <div className='fixed inset-0 z-[100] flex flex justify-center items-center'>    
-            <div className='flex flex-col bg-[#f8efe6] h-[60%] w-[80%] p-2 border-2 border-black rounded-l'>  
+    return (
+        <div className='fixed inset-0 z-[100] flex flex justify-center items-center'>
+            <div className='flex flex-col bg-[#f8efe6] h-[60%] w-[80%] p-2 border-2 border-black rounded-l'>
                 <div className='flex justify-end '>
                     <button onClick={() => props.handleClose()}>
                         <FaTimes className='text-3xl hover:text-[#a5d5d5]' />
                     </button>
                 </div>
-                {/* Seccion header con los detalles del lote */}
-                <div className="px-4 flex gap-[6px]">
-                    <h1 className="font-bold text-2xl px-4">Lote: {props.id}</h1>
-                    <p>{props.proveedor}</p>
-                        
-
-                    <p>{props.fechaPedido}</p>
-                    <p>{props.fechaLlegada}</p>
-                    <input type="date" defaultValue={props.fechaPedido} />
-<input type="date" defaultValue={props.fechaLlegada} />
-                    <p>{props.diasRestantes}</p>
-                </div>
+                {/* Componente que contiene los detalles del Lote */}
+                <HeaderLote 
+                    id={props.id}
+                    nombreProveedor={props.proveedor} 
+                    fechaPedido={props.fechaPedido} 
+                    fechaLlegada={props.fechaLlegada} 
+                    diasRestantes={props.diasRestantes}  
+                />
                 {/* Seccion body con los productos que posee el lote */}
-                <div>
+                <div className="bg-teal-400 grid grid-cols-2  h-[70%]">
                     {productos.map(producto => (
-                        <div key={producto[0]} className="flex gap-[5px]">
-                            <h1>Codigo: {producto[0]}</h1>
-                            <p>Proveedor: {producto[1]}</p>
-                            <p>Nombre: {producto[2]}</p>
-                            <p>Precio: {producto[4]}</p>
-                            <p>Stock enviado: {producto[9]}</p>
-                        </div>
+                        // Componente que contiene los productos de un lote
+                        <ProductoLote id={producto[0]} nombre={producto[2]} stockEnviado={producto[9]} />
                     ))}
                 </div>
             </div>

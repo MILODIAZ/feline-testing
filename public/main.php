@@ -542,8 +542,8 @@ if ($query == 21) {
     echo json_encode($response);
 }
 
-/*Mostrar productos lote, con sus detalles
-Recibe el codigo de lote como parametro
+/*Mostrar productos Lote, con sus detalles
+Recibe el codigo de Lote como parametro
 Devuelve todos los productos de ese lote, junto con toda su informacion
 */
 if ($query == 22) {
@@ -569,6 +569,38 @@ if ($query == 22) {
     
     }
 
+}
+
+// Modificar Lote
+
+if ($query == 23) {
+    if (isset($_GET['lote'])) {
+        $lote = $_GET['lote'];
+        include("connectDB.php");
+        
+        // Aquí se realiza la modificación de los atributos del lote seleccionado
+        $sql = "UPDATE lote SET nombre_proveedor = :nombreProveedor, codigo = :codigo, fecha_pedido = :fechaPedido, fecha_llegada = :fechaLlegada WHERE codigo = :lote";
+        
+        $sentencia = $conn->prepare($sql);
+        $sentencia->bindParam(':nombreProveedor', $nombreProveedor);
+        $sentencia->bindParam(':codigo', $codigo);
+        $sentencia->bindParam(':fechaPedido', $fechaPedido);
+        $sentencia->bindParam(':fechaLlegada', $fechaLlegada);
+        $sentencia->bindParam(':lote', $lote);
+        
+        // Asigna los valores adecuados a las variables correspondientes
+        $nombreProveedor = $_GET['nombre_proveedor'];
+        $codigo = $_GET['codigo'];
+        $fechaPedido = $_GET['fecha_pedido'];
+        $fechaLlegada = $_GET['fecha_llegada'];
+        
+        $sentencia->execute();
+    
+        include("disconnectDB.php");
+    
+        header("Content-Type: application/json");
+        echo json_encode(array("mensaje" => "Atributos del lote modificados con éxito"));
+    }
 }
 
 ?>
