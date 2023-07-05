@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import CategoriesManager from './CategoriesManager';
+import CategoriesManager from '../Categories/Manager-Categories';
 
 
 function Productos(){
@@ -312,7 +312,7 @@ function Productos(){
           <img
             alt='Imagen del producto'
             className='rounded-t-lg'
-            src={formData.imagen ? URL.createObjectURL(formData.imagen) : require(`../images/feline-logo.png`)}
+            src={formData.imagen ? URL.createObjectURL(formData.imagen) : require(`../../images/feline-logo.png`)}
           />
           
           <div className='p-5'>

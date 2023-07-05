@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ProveedorManager from './ProveedorManager';
+import ProveedorManager from './Proveedor/Manager-Proveedor';
 import SeguimientoPedidos from './SeguimientoPedidos';
 
 function Producción() {

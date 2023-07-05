@@ -1,6 +1,6 @@
 import { FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-import DeleteCategorie from './DeleteCategorie';
+import DeleteCategorie from './Delete-Categories';
 
 function CategoriesManager(props) {
 

@@ -297,7 +297,7 @@ function ModProducts (props) {
                 <img
                   alt='Imagen del producto'
                   className='rounded-t-lg'
-                  src={formData.imagen ? URL.createObjectURL(formData.imagen) : require(`../productsImages/${props.code}.jpg`)}
+                  src={formData.imagen ? URL.createObjectURL(formData.imagen) : require(`../../productsImages/${props.code}.jpg`)}
                 />
                 
                 <div className='p-5'>

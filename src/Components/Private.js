@@ -1,6 +1,6 @@
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../Contexts/AuthContext';
-import AdministracionUsuarios from '../PrivateComponents/AdministracionUsuarios';
+import AdministracionUsuarios from '../PrivateComponents/Users/Manager-Users';
 import { useEffect, useState } from 'react';
 
 const linksStyles='text-[1rem] w-2/6 py-2 text-center border-black border-e border-t-[1px] border-b-[2px] bg-white rounded-t-lg';

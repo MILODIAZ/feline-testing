@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import LoteCard from "./LoteCard";
+import LoteCard from "./Lote/Card-Lote";
 
 function SeguimientoPedidos () {
 

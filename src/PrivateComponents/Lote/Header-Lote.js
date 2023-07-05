@@ -9,7 +9,6 @@ function HeaderLote(props){
             <input type="date" defaultValue={props.fechaLlegada} />
             <input type='text' defaultValue={props.diasRestantes}/>
         </div>
-        
         )
 }
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ScrollToTopButton from '../Components/ScrollToTopButton';
-import SetStock from './SetStock';
-import DeleteProduct from './DeleteProduct';
-import ModProducts from './ModProducts';
+import SetStock from './Products/SetStock';
+import DeleteProduct from './Products/Delete-Product';
+import ModProducts from './Products/Mod-Products';
 
 function Inventario() {
     const [dataProductLoaded, setDataProductLoaded] = useState(false);

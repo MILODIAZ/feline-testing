@@ -8,7 +8,7 @@ import CambioContraseña from './Components/CambioContraseña';
 import PrivateRoute from './Components/PrivateRoute';
 import Private from './Components/Private';
 import Inventario from './PrivateComponents/Inventario';
-import Productos from './PrivateComponents/Productos';
+import Productos from './PrivateComponents/Products/Productos';
 import Producción from './PrivateComponents/Producción';
 import Logout from './Components/Logout';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';

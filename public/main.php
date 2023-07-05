@@ -603,4 +603,28 @@ if ($query == 23) {
     }
 }
 
+
+if ($query == 24) {
+    
+        $lote = $_GET['lote'];
+        $codProducto = $_GET['codProducto'];
+        $cantidad = $_GET['cantidad'];
+
+        include("connectDB.php");
+
+        $sql = "INSERT INTO contiene (unidades, codigo_lote, codigo_producto) VALUES (:cantidad, :lote, :codProducto)";
+        $sentencia = $conn->prepare($sql);
+        $sentencia->bindValue(':cantidad', $cantidad);
+        $sentencia->bindValue(':lote', $lote);
+        $sentencia->bindValue(':codProducto', $codProducto);
+        $sentencia->execute();
+
+        $rowCount = $sentencia->rowCount();
+
+        include("disconnectDB.php");
+
+        $response = ($rowCount > 0) ? true : false;
+        echo json_encode($response);
+}
+
 ?>

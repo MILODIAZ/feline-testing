@@ -1,7 +1,7 @@
 import { FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-import DeleteProveedor from './DeleteProveedor';
-import ModProveedores from './ModProveedores';
+import DeleteProveedor from './Delete-Proveedor';
+import ModProveedores from './Mod-Proveedores';
 
 
 function ProveedorManager(props) {

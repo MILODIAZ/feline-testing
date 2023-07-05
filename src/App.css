@@ -10,6 +10,7 @@ html {
 body {
   background-image: url(./images/background.jpg);
   background-size: contain;
+
   background-position: center;
   min-height: 937px;  
 }

@@ -1,5 +1,5 @@
 import { FaTimes } from 'react-icons/fa';
-import UsersList from './UsersList';
+import UsersList from './List-Users';
 
 function AdministracionUsuarios(props){    
 

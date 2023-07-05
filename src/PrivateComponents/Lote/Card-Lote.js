@@ -1,4 +1,4 @@
-import LoteDetails from "./LoteDetails";
+import LoteDetails from "./Details-Lote";
 import { useState } from "react";
 function LoteCard(props){   
 
