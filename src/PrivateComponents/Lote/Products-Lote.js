@@ -13,7 +13,6 @@ function ProductoLote(props)  {
         .then((response) => response.json())
         .then((data) => {
             if (data) {
-            alert('Producto eliminado del lote');
             props.cargarProductos();
             }
         })

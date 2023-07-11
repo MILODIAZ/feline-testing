@@ -7,6 +7,9 @@ function AddMoreProducts(props) {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [unidadesProductos, setUnidadesProductos] = useState([])
+    const[submitted, setSubmitted] = useState(false);
+
     const [unidades, setUnidades] = useState(0)
     useEffect(() => {
         dataProduct();
@@ -27,10 +30,31 @@ function AddMoreProducts(props) {
             .catch(error => console.log(error));
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+      
+        selectedProducts.forEach((product) => {
+          const codigoProducto = product[0];
+          const unidadesProducto = unidadesProductos[product[0]]; // Obtener las unidades asociadas al producto
+          fetch(`http://localhost/feline-testing/public/main.php?query=24&lote=${props.id}&codProducto=${codigoProducto}&cantidad=${unidadesProducto}`)
+          .then(data => {
+            if (data) {
+              console.log(codigoProducto)
+              props.cargarProductos();
+            }
+          })
+        });
+      
+        setSelectedProducts([]);
+        setUnidadesProductos({});
+        setSubmitted(true);
+      };
+
     const handleAdd = (product) => {
         const updatedProducts = products.filter((p) => p[0] !== product[0]);
         setProducts(updatedProducts);
         setSelectedProducts([...selectedProducts, product]);
+        setUnidadesProductos({...unidadesProductos, [product[0]]:0})
     };
 
     const handleDelete = (product) => {
@@ -38,32 +62,6 @@ function AddMoreProducts(props) {
         setSelectedProducts(updatedSelectedProducts);
         setProducts([...products, product]);
     };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-      
-        const product = selectedProducts[0];
-        const unidadesProducto = 1;
-        const codigoProducto = product;
-        const codigoLote = props.loteId;
-      
-        const url = `http://localhost/feline-testing/public/main.php?query=24&lote=${codigoLote}&codProducto=${codigoProducto}&cantidad=${unidadesProducto}`;
-      
-        fetch(url)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            if (data) {
-              console.log("Producto agregado al lote exitosamente");
-            } else {
-              console.log("Error al agregar el producto al lote");
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            console.log("Error en la solicitud de inserción");
-          });
-      };
 
     return (
         <div className="fixed  bg-[#f8efe6] overflow-hidden z-[60] h-[80%] w-[80%]  border-solid border-[3px] border-[#000] rounded-[5px] p-2 flex flex-col">
@@ -89,7 +87,7 @@ function AddMoreProducts(props) {
 
                     <ul className=" h-[100%]">
                         {filteredProducts.map((product) => (
-                            <li className="bg-[#fc7494] text-[#000] flex items-center justify-between my-2 h-[80px] w-[90%] rounded-[5px] border-solid border-[3px] border-[#000]">
+                            <li key={product[0]} className="bg-[#fc7494] text-[#000] flex items-center justify-between my-2 h-[80px] w-[90%] rounded-[5px] border-solid border-[3px] border-[#000]">
                                 <img alt='product' className='rounded h-[100%] ' src={require(`../../../productsImages/${product[0]}.jpg`)} />
                                 <p className="text-xl text-bold ">
                                     {product[2]} | {product[0]}
@@ -120,8 +118,8 @@ function AddMoreProducts(props) {
                                     <p className="text-xl w-[50%] text-bold ">
                                         {product[2]}
                                     </p>
-                                    <input className="w-[10%]" type="number" value={unidades} onChange={(e) => setUnidades(e.target.value)}/>
-  <button className="w-[10%]" onClick={() => handleDelete(product)}>
+                                    <input className="w-[10%]" type="number" value={unidadesProductos[product[0]]} onChange={(e) => setUnidadesProductos({ ...unidadesProductos, [product[0]]: e.target.value })} />
+                                    <button className="w-[10%]" onClick={() => handleDelete(product)}>
                                         <FaArrowLeft className="bg-[#000] text-3xl rounded-[25px] border-solid border-[2px] border-[#000] my-auto text-[#fc7494] mr-4 hover:bg-[#54e9dd] hover:border-[#54e9dd] transition-all" />
                                     </button>
                                 </li>

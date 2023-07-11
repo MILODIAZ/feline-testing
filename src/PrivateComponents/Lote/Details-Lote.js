@@ -46,7 +46,8 @@ function LoteDetails(props) {
           handleClick={handleOpenAddProducts}
           handleClose={handleOpenAddProducts}
           id={loteId}
-          agregarProducto={agregarProducto} // Pasa la función agregarProducto como prop
+          agregarProducto={agregarProducto} 
+          cargarProductos={reloadProducts}
         />
       )}
       <div className="flex flex-col bg-[#f8efe6] h-[80%] w-[80%] p-2 border-2 border-black rounded-l">

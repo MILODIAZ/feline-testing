@@ -14,13 +14,12 @@ function AddProductosLote(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const upperCaseCodProducto = codProducto.toUpperCase();
-   fetch(`http://localhost/feline-testing/public/main.php?query=24&lote=${props.id}&codProducto=${upperCaseCodProducto}&cantidad=${cantidad}`)
-  .then(data => {
-    if (data) {
-      alert('Producto agregado al lote');
-      props.cargarProductos();
-    } 
-  })
+    fetch(`http://localhost/feline-testing/public/main.php?query=24&lote=${props.id}&codProducto=${upperCaseCodProducto}&cantidad=${cantidad}`)
+      .then(data => {
+        if (data) {
+          props.cargarProductos();
+        }
+      })
 
     setCodProducto('');
     setCantidad('');
