@@ -29,6 +29,7 @@ function LoteDetails(props) {
       .catch((error) => console.log(error));
   };
 
+  
   const reloadProducts = () => {
     setDataProductLoaded(false);
     cargarProductos();
@@ -85,6 +86,8 @@ function LoteDetails(props) {
                 id={producto[0]}
                 nombre={producto[2]}
                 stockEnviado={producto[9]}
+                idLote={props.id}
+                cargarProductos={reloadProducts}
               />
             ))
           ) : (

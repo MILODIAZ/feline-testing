@@ -627,4 +627,24 @@ if ($query == 24) {
         echo json_encode($response);
 }
 
+if ($query == 25) {
+    $lote = $_GET['lote'];
+    $codProducto = $_GET['codProducto'];
+
+    include("connectDB.php");
+
+    $sql = "DELETE FROM contiene WHERE codigo_lote = :lote AND codigo_producto = :codProducto";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':lote', $lote);
+    $sentencia->bindValue(':codProducto', $codProducto);
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+    echo json_encode($response);
+}
+
 ?>
