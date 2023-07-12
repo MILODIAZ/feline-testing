@@ -22,7 +22,7 @@ function AddMoreProducts(props) {
     );
 
     const dataProduct = () => {
-        fetch("http://localhost/feline-testing/public/main.php?query=4")
+        fetch(`http://localhost/feline-testing/public/main.php?query=15&proveedor=${props.proveedor}`)
             .then(response => response.json())
             .then(data => {
                 setProducts(data);
@@ -40,11 +40,11 @@ function AddMoreProducts(props) {
           .then(data => {
             if (data) {
               console.log(codigoProducto)
-              props.cargarProductos();
             }
-          })
+        })
         });
-      
+        
+        props.cargarProductos();
         setSelectedProducts([]);
         setUnidadesProductos({});
         setSubmitted(true);
@@ -64,7 +64,7 @@ function AddMoreProducts(props) {
     };
 
     return (
-        <div className="fixed  bg-[#f8efe6] overflow-hidden z-[60] h-[80%] w-[80%]  border-solid border-[3px] border-[#000] rounded-[5px] p-2 flex flex-col">
+        <div className="fixed  bg-[#f8efe6] overflow-hidden z-[60] h-[90%] w-[80%]  border-solid border-[3px] border-[#000] rounded-[5px] p-2 flex flex-col">
             <div className=' flex justify-end '>
                 <button onClick={() => props.handleClose()}>
                     <FaTimes className='text-3xl hover:text-[#a5d5d5]' />

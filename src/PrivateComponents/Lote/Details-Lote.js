@@ -46,11 +46,12 @@ function LoteDetails(props) {
           handleClick={handleOpenAddProducts}
           handleClose={handleOpenAddProducts}
           id={loteId}
+          proveedor={props.proveedor}
           agregarProducto={agregarProducto} 
           cargarProductos={reloadProducts}
         />
       )}
-      <div className="flex flex-col bg-[#f8efe6] h-[80%] w-[80%] p-2 border-2 border-black rounded-l">
+      <div className="flex flex-col bg-[#f8efe6] h-[90%] w-[80%] p-2 border-2 border-black rounded-l">
         <div className="flex justify-end">
           <button onClick={() => props.handleClose()}>
             <FaTimes className="text-3xl hover:text-[#a5d5d5]" />
@@ -79,7 +80,7 @@ function LoteDetails(props) {
             Agregar Varios Productos
           </button>
         </div>
-        <div className="grid grid-cols-2 h-[70%]">
+        <div className="grid grid-cols-2 h-[70%] overflow-y-scroll">
           {dataProductLoaded && productos.length > 0 ? (
             productos.map((producto) => (
               <ProductoLote
