@@ -464,6 +464,7 @@ if ($query == 18) {
 
     $sql = "DELETE FROM lote
             WHERE codigo = :codigo_lote";
+            
     $sentencia = $conn->prepare($sql);
     $sentencia->bindValue(':codigo_lote', $codigo_lote);
     $sentencia->execute();
@@ -603,7 +604,7 @@ if ($query == 23) {
     }
 }
 
-
+// Agregar producto a Lote
 if ($query == 24) {
     
         $lote = $_GET['lote'];
@@ -627,6 +628,8 @@ if ($query == 24) {
         echo json_encode($response);
 }
 
+
+// Eliminar producto de Lote
 if ($query == 25) {
     $lote = $_GET['lote'];
     $codProducto = $_GET['codProducto'];
@@ -647,4 +650,25 @@ if ($query == 25) {
     echo json_encode($response);
 }
 
+
+// Eliminar lote de la tabla contiene
+if ($query == 26) {
+    $codigo_lote = $_GET['codigo_lote'];
+    include("connectDB.php");
+
+    $sql = "DELETE FROM contiene
+            WHERE codigo_lote = :codigo_lote";
+            
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':codigo_lote', $codigo_lote);
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+}
 ?>

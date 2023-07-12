@@ -1,8 +1,53 @@
 import LoteDetails from "./Details-Lote";
 import { useState } from "react";
+import ConfirmationModal from "../Extras/ModalConfirm";
+
 function LoteCard(props){   
 
   const [openDetailLote, setOpenDetailLote] = useState(false);    
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const eliminarLote = () => {
+  setShowConfirmation(false);
+  console.log(props.id);
+  eliminarContenido();
+  
+  fetch(`http://localhost/feline-testing/public/main.php?query=18&codigo_lote=${props.id}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Error en la solicitud');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data) {
+        console.log('eliminado', props.id);
+        props.cargarProductos();
+      }
+    })
+    .catch((error) => console.log(error));
+};
+
+const eliminarContenido = () => {
+  setShowConfirmation(false);
+  console.log(props.id);
+  fetch(`http://localhost/feline-testing/public/main.php?query=26&codigo_lote=${props.id}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Error en la solicitud');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data) {
+        console.log('eliminado', props.id);
+        props.cargarProductos();
+      }
+    })
+    .catch((error) => console.log(error));
+};
 
   const handleOpenDetailLote = () => {
       if(openDetailLote){
@@ -86,9 +131,18 @@ function LoteCard(props){
                   className="text-sm my-[1px] text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold w-[100%] py-2 md:px-4">
                   Detalles
             </button>
+            {/* Eliminar */}
           <div>
-            <button className='text-sm my-[1px] text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold w-[100%] py-2 md:px-4'>Eliminar</button>
+            <button onClick={() => setShowConfirmation(true)} className='text-sm my-[1px] text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold w-[100%] py-2 md:px-4'>Eliminar</button>
           </div>
+          {showConfirmation && (
+                                <ConfirmationModal
+                                message={`¿Estás seguro de que deseas eliminar el Lote ${props.id}?`}
+                                onConfirm={eliminarLote}
+                                onCancel={() => setShowConfirmation(false)}
+                                />
+                            
+                        )}
         </div>
     </div>
   );   

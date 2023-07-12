@@ -91,8 +91,27 @@ VALUES
    ('P018', 'Proveedor C', 'Lapiz de Perrito', 'Descripción del producto 18', 95, 30, 80, 10, false),
    ('P019', 'Proveedor A', 'Lapiz Pasta Huella de Perrito', 'Descripción del producto 19', 100, 50, 120, 15, false),
    ('P020', NULL, 'Agenda Canina', 'Descripción del producto 20', 80, 100, 50, 30, false),
-   ('P021', 'Proveedor D', 'Estuche de Perrito', 'Descripción del producto 21', 80, 20, 50, 30, false);
-   
+   ('P021', 'Proveedor D', 'Estuche de Perrito', 'Descripción del producto 21', 80, 20, 50, 30, false),
+   ('P022', 'Proveedor D', 'Collar de Gatito', 'Descripción del producto 22, ajustable y con cascabel.', 4990, 80, 150, 20, false),
+   ('P023', 'Proveedor A', 'Calcetines de Gato', 'Descripción del producto 23, pack de 3 pares, talla única.', 2990, 120, 200, 40, true),
+   ('P024', 'Proveedor B', 'Plato para Mascota', 'Descripción del producto 24, de acero inoxidable, tamaño mediano.', 5990, 50, 100, 10, false),
+   ('P025', 'Proveedor C', 'Rompecabezas de Gato', 'Descripción del producto 25, 1000 piezas, ilustración de gatos.', 9990, 30, 80, 5, true),
+   ('P026', 'Proveedor D', 'Camiseta Estampada de Gato', 'Descripción del producto 26, disponible en varios diseños y tallas.', 8990, 60, 120, 15, true),
+   ('P027', 'Proveedor A', 'Collar Antipulgas para Gato', 'Descripción del producto 27, protección duradera contra pulgas y garrapatas.', 7990, 90, 150, 30, false),
+   ('P028', 'Proveedor B', 'Bolso de Transporte para Mascota', 'Descripción del producto 28, tamaño grande, seguro y cómodo.', 14990, 20, 50, 5, true),
+   ('P029', 'Proveedor C', 'Alimento Húmedo para Gato', 'Descripción del producto 29, sabor pollo, pack de 12 latas.', 3990, 100, 200, 40, false),
+   ('P030', 'Proveedor D', 'Cepillo para Gato', 'Descripción del producto 30, cerdas suaves, ayuda a eliminar el pelo suelto.', 2990, 80, 150, 20, false),
+   ('P031', 'Proveedor A', 'Casita para Gato', 'Descripción del producto 31, diseño acogedor, ideal para descansar.', 6990, 50, 100, 10, true),
+   ('P032', 'Proveedor B', 'Juguete Interactivo para Gato', 'Descripción del producto 32, bola giratoria con luces y sonidos.', 1990, 120, 200, 40, true),
+   ('P033', 'Proveedor C', 'Rascador para Gato', 'Descripción del producto 33, poste de rascado cubierto de sisal.', 4990, 60, 120, 15, false),
+   ('P034', 'Proveedor D', 'Transportadora para Perro', 'Descripción del producto 34, tamaño mediano, resistente y segura.', 10990, 30, 80, 5, false),
+   ('P035', 'Proveedor A', 'Arnés para Perro', 'Descripción del producto 35, ajustable y cómodo, talla mediana.', 7990, 90, 150, 30, true),
+   ('P036', 'Proveedor B', 'Juguete Mordedor para Perro', 'Descripción del producto 36, resistente y duradero.', 3990, 50, 100, 10, true),
+   ('P037', 'Proveedor C', 'Correa Retráctil para Perro', 'Descripción del producto 37, longitud ajustable hasta 5 metros.', 5990, 100, 200, 40, false),
+   ('P038', 'Proveedor D', 'Comedero Automático para Mascota', 'Descripción del producto 38, programable y con grabación de voz.', 14990, 80, 150, 20, false),
+   ('P039', 'Proveedor A', 'Champú para Mascotas', 'Descripción del producto 39, formulación suave, sin sulfatos.', 4990, 120, 200, 40, true),
+   ('P040', 'Proveedor B', 'Cama para Perro', 'Descripción del producto 40, acolchada y lavable, tamaño grande.', 8990, 60, 120, 15, true);
+
 INSERT INTO corresponde (codigo_producto, nombre_categoria)
 VALUES
    ('P001', 'Joyería'),

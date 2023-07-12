@@ -66,7 +66,7 @@ function LoteDetails(props) {
           diasRestantes={props.diasRestantes}
         />
         {/* Seccion body con los productos que posee el lote */}
-        <div className="h-[25%] bg-[#fc7494] rounded-[10px] border-[2px] border-[#000] p-[15px] grid grid-cols-2 gap-4 mx-[20px]">
+        <div className="h-[20%] bg-[#fc7494] rounded-[10px] border-[2px] border-[#000] p-[15px] grid grid-cols-2 gap-4 mx-[20px]">
           {/* Menu agregar 1 producto */}
           <AddProductosLote id={props.id} cargarProductos={reloadProducts} agregarProducto={agregarProducto} /> {/* Pasa la función agregarProducto como prop */}
           {/* Menu agregar varios productos */}
