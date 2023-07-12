@@ -1,15 +1,24 @@
 
-function HeaderLote(props){
-    
-    return(
-        <div className="px-4 flex gap-[6px] h-[20%] bg-white">
-            <p className="font-bold text-2xl   px-4">Lote:</p>
-            <input type="text" defaultValue={props.id} />
-            <input type="date" defaultValue={props.fechaPedido} />
-            <input type="date" defaultValue={props.fechaLlegada} />
-            <input type='text' defaultValue={props.diasRestantes}/>
+function HeaderLote(props) {
+
+    return (
+        <div className="text-center justify-center mb-[20px] items-center ">
+            <div className=" bg-[#fc7494] font-bold border-solid border-[2px] border-[#000] rounded-[10px] ">
+                <div class=" text-xl mb-[20px] ">
+                    <p>Numero de lote: {props.id}</p> {/* Código del lote */}
+                </div>
+                <div class="grid grid-cols-3 h-[70%] mb-[20px]">
+                    <input className="bg-[#fc7494] m-auto" type="date" defaultValue={props.fechaPedido} />
+                    <input className="bg-[#fc7494]  m-auto" type="date" defaultValue={props.fechaLlegada} />
+                    <p>Días de retrasos: {props.diasRestantes}</p>
+                </div>
+                <button className="bg-[#54e9d1] w-[250px] font-bold h-[50px] m-auto border-solid border-[2px] border-[#000] rounded-[10px] mb-[20px]">
+                    Modificar Fechas
+                </button>
+            </div>
         </div>
-        )
+
+    )
 }
 
 
