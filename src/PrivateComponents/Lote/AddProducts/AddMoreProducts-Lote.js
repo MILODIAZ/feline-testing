@@ -113,7 +113,7 @@ function AddMoreProducts(props) {
 
                         <ul>
                             {selectedProducts.map((product) => (
-                                <li key={product[0]} className="bg-[#fc7494] text-[#000] flex items-center justify-between pr-[10px] my-2 h-[80px] w-[90%] rounded-[5px] border-solid border-[3px] border-[#000]">
+                                <li className="bg-[#fc7494] text-[#000] flex items-center justify-between pr-[10px] my-2 h-[80px] w-[90%] rounded-[5px] border-solid border-[3px] border-[#000]">
                                     <img alt='product' className='rounded h-[100%] w-[15%]' src={require(`../../../productsImages/${product[0]}.jpg`)} />
                                     <p className="text-xl w-[50%] text-bold ">
                                         {product[2]}
