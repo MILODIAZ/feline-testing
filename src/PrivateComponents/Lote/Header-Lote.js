@@ -22,7 +22,7 @@ function HeaderLote(props) {
                 <div className=" text-xl mb-[20px] mt-[20px]">
                     <p>Numero de lote: {props.id}</p> {/* Código del lote */}
                 </div>
-                <div classNme="text-l grid grid-cols-3 h-[70%] mb-[20px]">
+                <div className="text-l grid grid-cols-3 h-[70%] mb-[20px]">
                     <div>Fecha del pedido: {props.fechaPedido}</div>
                     <div>Fecha de llegada: {props.fechaLlegada}</div>
                     <p>Días de retrasos: {props.diasRestantes}</p>
