@@ -39,41 +39,43 @@ function NewLote(props){
         })
     }
     return(
-        <div className="fixed z-[60] h-[100%] w-[100%] bg-[#ffe5f0] p-4"> 
-            <div className="flex justify-end">
-                <button onClick={props.handleClose}>
-                    <FaTimes className="text-4xl"/>
-                </button>
+        <div className="fixed z-[60]  h-[100%] w-[100%] bg-[#ffe5f0] p-4"> 
+                <div className="flex justify-end">
+                    <button onClick={props.handleClose}>
+                        <FaTimes className="text-4xl"/>
+                    </button>
+                </div>
+            <div className="flex items-center ">
+                <h1> New lote</h1>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="codigo">Codigo:</label>
+                        <input type="text" id="codigo" name="codigo" value={codigo} onChange={e => setCodigo(e.target.value)} />
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="fechaPedido">Fecha de Pedido:</label>
+                        <input type="date" id="fechaPedido" name="fechaPedido" value={fechaPedido} onChange={e => setFechaPedido(e.target.value)} />
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="fechaLlegada">Fecha de Llegada:</label>
+                        <input type="date" id="fechaLlegada" name="fechaLlegada" value={fechaLlegada} onChange={e => setFechaLlegada(e.target.value)} />
+                    </div>
+                    
+                    <div>
+                        <label htmlFor="proveedor">Proveedor:</label>
+                        <select id="proveedor" name="proveedor" onChange={(e) => setNombreProveedor(e.target.value)}>
+                        {providers.map((provider) => (
+                            <option key={provider[0]} value={provider[0]}>
+                            {provider[0]}
+                            </option>
+                        ))}
+                        </select>
+                    </div>
+                    <button type="submit">Crear Lote</button>
+                </form>
             </div>
-            <h1> New lote</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="codigo">Codigo:</label>
-                     <input type="text" id="codigo" name="codigo" value={codigo} onChange={e => setCodigo(e.target.value)} />
-                </div>
-                
-                <div>
-                    <label htmlFor="fechaPedido">Fecha de Pedido:</label>
-                    <input type="date" id="fechaPedido" name="fechaPedido" value={fechaPedido} onChange={e => setFechaPedido(e.target.value)} />
-                </div>
-                
-                <div>
-                    <label htmlFor="fechaLlegada">Fecha de Llegada:</label>
-                    <input type="date" id="fechaLlegada" name="fechaLlegada" value={fechaLlegada} onChange={e => setFechaLlegada(e.target.value)} />
-                </div>
-                
-                <div>
-                    <label htmlFor="proveedor">Proveedor:</label>
-                    <select id="proveedor" name="proveedor" onChange={(e) => setNombreProveedor(e.target.value)}>
-                    {providers.map((provider) => (
-                        <option key={provider[0]} value={provider[0]}>
-                        {provider[0]}
-                        </option>
-                    ))}
-                    </select>
-                </div>
-                <button type="submit">Crear Lote</button>
-            </form>
         </div>
         
     )

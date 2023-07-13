@@ -576,30 +576,31 @@ if ($query == 22) {
 
 if ($query == 23) {
     include("connectDB.php");
-
+    
+    $codigo = $_GET['codigo'];
+    $fechaPedido = $_GET['fechaPedido'];
+    $fechaLlegada = $_GET['fechaLlegada'];
+    $lote = $_GET['lote'];
     // Aquí se realiza la modificación de los atributos del lote seleccionado
     $sql = "UPDATE lote 
         SET codigo = :codigo, fecha_pedido = :fechaPedido, fecha_llegada = :fechaLlegada 
         WHERE codigo = :lote";
 
     $sentencia = $conn->prepare($sql);
+
     $sentencia->bindParam(':codigo', $codigo);
     $sentencia->bindParam(':fechaPedido', $fechaPedido);
     $sentencia->bindParam(':fechaLlegada', $fechaLlegada);
-    $sentencia->bindParam(':lote', $lote);
-
-    // Asigna los valores adecuados a las variables correspondientes
-    $codigo = $_GET['codigo'];
-    $fechaPedido = $_GET['fechaPedido'];
-    $fechaLlegada = $_GET['fechaLlegada'];
+    $sentencia->bindParam(':lote', $valorLote);
 
     $sentencia->execute();
+    $rowCount = $sentencia->rowCount();
 
     include("disconnectDB.php");
 
-    header("Content-Type: application/json");
-    echo json_encode(array("mensaje" => "Atributos del lote modificados con éxito"));
+    $response = ($rowCount > 0) ? true : false;
 
+    echo json_encode($response);
 }
 
 // Agregar producto a Lote
