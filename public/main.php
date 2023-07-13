@@ -671,4 +671,30 @@ if ($query == 26) {
 
     echo json_encode($response);
 }
+
+if ($query == 27) {
+    $codigo = $_GET['codigo'];
+    $nombreProveedor = $_GET['nombre_proveedor'];
+    $fechaPedido = $_GET['fecha_pedido'];
+    $fechaLlegada = $_GET['fecha_llegada'];
+
+    include("connectDB.php");
+
+    $sql = "INSERT INTO lote (codigo, nombre_proveedor, fecha_pedido, fecha_llegada)
+        VALUES (:codigo, :nombreProveedor, :fechaPedido, :fechaLlegada)";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':codigo', $codigo);
+    $sentencia->bindValue(':nombreProveedor', $nombreProveedor);
+    $sentencia->bindValue(':fechaPedido', $fechaPedido);
+    $sentencia->bindValue(':fechaLlegada', $fechaLlegada);
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+}
 ?>

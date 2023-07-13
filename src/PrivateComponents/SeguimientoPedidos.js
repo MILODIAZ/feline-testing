@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import LoteCard from "./Lote/Card-Lote";
 
-function SeguimientoPedidos () {
+function SeguimientoPedidos (reloadLotes) {
 
   const [lotesData, setLotesData ] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(true);
@@ -9,7 +9,7 @@ function SeguimientoPedidos () {
   
   useEffect(() => {
     loadLotes();
-  },[]);
+  },[reloadLotes]);
 
   const loadLotes = () => {
     fetch(`http://localhost/feline-testing/public/main.php?query=14`)
