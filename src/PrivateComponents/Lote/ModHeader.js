@@ -39,18 +39,29 @@ function ModHeader(props) {
     {/*Funcion para el cambio del Header*/ }
 
     const ModHeaderData = (event) => {
+        ModHeaderDataContiene();
         fetch(`http://localhost/feline-testing/public/main.php?query=23&codigo=${formHeader.idLote}&fechaPedido=${formHeader.ingresoFecha}&fechaLlegada=${formHeader.llegadaFecha}&lote=${formHeader.beforeIdLote}`)
             .then(response => response.json())
             .then(data => {
                 resetFormHeader();
+                alert(`Error`);
+            })
+            .catch(error => {
+                console.log(error);
+                alert(`Ya existe una categoría ${formHeader.idLote}`)
+            });
+    };
+    const ModHeaderDataContiene = (event) => {
+        fetch(`http://localhost/feline-testing/public/main.php?query=28&codigo_lote=${formHeader.idLote}&beforeCodigo=${formHeader.beforeIdLote}`)
+            .then(response => response.json())
+            .then(data => {
                 alert(`Lote ${formHeader.beforeIdLote} ahora es ${formHeader.idLote}`);
             })
             .catch(error => {
                 console.log(error);
                 alert(`Ya existe una categoría ${formHeader.idLote}`)
-            })
-    }
-
+            });
+    };
 
     return (
         <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#f8efe6] z-[60] border-solid border-[3px] border-[#000] rounded-[5px] flex justify-center items-center'>

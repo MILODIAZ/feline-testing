@@ -496,6 +496,7 @@ if ($query == 19) {
 
     echo json_encode($response);
 }
+
 // Modificar PROVEEDOR
 if ($query == 20) {
 
@@ -576,31 +577,33 @@ if ($query == 22) {
 
 if ($query == 23) {
     include("connectDB.php");
-    
+
     $codigo = $_GET['codigo'];
     $fechaPedido = $_GET['fechaPedido'];
     $fechaLlegada = $_GET['fechaLlegada'];
     $lote = $_GET['lote'];
+
     // Aquí se realiza la modificación de los atributos del lote seleccionado
     $sql = "UPDATE lote 
         SET codigo = :codigo, fecha_pedido = :fechaPedido, fecha_llegada = :fechaLlegada 
         WHERE codigo = :lote";
 
     $sentencia = $conn->prepare($sql);
-
     $sentencia->bindParam(':codigo', $codigo);
     $sentencia->bindParam(':fechaPedido', $fechaPedido);
     $sentencia->bindParam(':fechaLlegada', $fechaLlegada);
-    $sentencia->bindParam(':lote', $valorLote);
+
+
+    // Asigna los valores adecuados a las variables correspondientes
+
 
     $sentencia->execute();
-    $rowCount = $sentencia->rowCount();
 
     include("disconnectDB.php");
 
-    $response = ($rowCount > 0) ? true : false;
+    header("Content-Type: application/json");
+    echo json_encode(array("mensaje" => "Atributos del lote modificados con éxito"));
 
-    echo json_encode($response);
 }
 
 // Agregar producto a Lote
@@ -686,6 +689,29 @@ if ($query == 27) {
     $sentencia->bindValue(':nombreProveedor', $nombreProveedor);
     $sentencia->bindValue(':fechaPedido', $fechaPedido);
     $sentencia->bindValue(':fechaLlegada', $fechaLlegada);
+    $sentencia->execute();
+
+    $rowCount = $sentencia->rowCount();
+
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+
+    echo json_encode($response);
+}
+// MODIFICAR LOTE DE TABLA CONTIENE - LIGADA A Q23
+if ($query == 28) {
+    $codigo_lote = $_GET['codigo_lote'];
+    $beforeCodigo = $_GET['beforeCodigo'];
+
+    include("connectDB.php");
+
+    $sql = "UPDATE contiene
+            SET codigo_lote = :codigo_lote
+            WHERE codigo_lote = :beforeCodigo";
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':codigo_lote', $codigo_lote);
     $sentencia->execute();
 
     $rowCount = $sentencia->rowCount();
