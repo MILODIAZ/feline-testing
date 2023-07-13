@@ -464,7 +464,7 @@ if ($query == 18) {
 
     $sql = "DELETE FROM lote
             WHERE codigo = :codigo_lote";
-            
+
     $sentencia = $conn->prepare($sql);
     $sentencia->bindValue(':codigo_lote', $codigo_lote);
     $sentencia->execute();
@@ -552,22 +552,22 @@ if ($query == 22) {
     if (isset($_GET['lote'])) {
         $lote = $_GET['lote'];
         include("connectDB.php");
-        
+
         $sql = "SELECT p.*, c.unidades FROM producto p
                 INNER JOIN contiene c ON p.codigo = c.codigo_producto
                 WHERE c.codigo_lote = :lote
                 ORDER BY p.codigo ASC";
-        
+
         $sentencia = $conn->prepare($sql);
         $sentencia->bindParam(':lote', $lote);
         $sentencia->execute();
         $resultado = $sentencia->fetchAll();
-    
+
         include("disconnectDB.php");
-    
+
         header("Content-Type: application/json");
         echo json_encode($resultado);
-    
+
     }
 
 }
@@ -575,57 +575,55 @@ if ($query == 22) {
 // Modificar Lote
 
 if ($query == 23) {
-    if (isset($_GET['lote'])) {
-        $lote = $_GET['lote'];
-        include("connectDB.php");
-        
-        // Aquí se realiza la modificación de los atributos del lote seleccionado
-        $sql = "UPDATE lote SET nombre_proveedor = :nombreProveedor, codigo = :codigo, fecha_pedido = :fechaPedido, fecha_llegada = :fechaLlegada WHERE codigo = :lote";
-        
-        $sentencia = $conn->prepare($sql);
-        $sentencia->bindParam(':nombreProveedor', $nombreProveedor);
-        $sentencia->bindParam(':codigo', $codigo);
-        $sentencia->bindParam(':fechaPedido', $fechaPedido);
-        $sentencia->bindParam(':fechaLlegada', $fechaLlegada);
-        $sentencia->bindParam(':lote', $lote);
-        
-        // Asigna los valores adecuados a las variables correspondientes
-        $nombreProveedor = $_GET['nombre_proveedor'];
-        $codigo = $_GET['codigo'];
-        $fechaPedido = $_GET['fecha_pedido'];
-        $fechaLlegada = $_GET['fecha_llegada'];
-        
-        $sentencia->execute();
-    
-        include("disconnectDB.php");
-    
-        header("Content-Type: application/json");
-        echo json_encode(array("mensaje" => "Atributos del lote modificados con éxito"));
-    }
+    include("connectDB.php");
+
+    // Aquí se realiza la modificación de los atributos del lote seleccionado
+    $sql = "UPDATE lote 
+        SET codigo = :codigo, fecha_pedido = :fechaPedido, fecha_llegada = :fechaLlegada 
+        WHERE codigo = :lote";
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindParam(':codigo', $codigo);
+    $sentencia->bindParam(':fechaPedido', $fechaPedido);
+    $sentencia->bindParam(':fechaLlegada', $fechaLlegada);
+    $sentencia->bindParam(':lote', $lote);
+
+    // Asigna los valores adecuados a las variables correspondientes
+    $codigo = $_GET['codigo'];
+    $fechaPedido = $_GET['fechaPedido'];
+    $fechaLlegada = $_GET['fechaLlegada'];
+
+    $sentencia->execute();
+
+    include("disconnectDB.php");
+
+    header("Content-Type: application/json");
+    echo json_encode(array("mensaje" => "Atributos del lote modificados con éxito"));
+
 }
 
 // Agregar producto a Lote
 if ($query == 24) {
-    
-        $lote = $_GET['lote'];
-        $codProducto = $_GET['codProducto'];
-        $cantidad = $_GET['cantidad'];
 
-        include("connectDB.php");
+    $lote = $_GET['lote'];
+    $codProducto = $_GET['codProducto'];
+    $cantidad = $_GET['cantidad'];
 
-        $sql = "INSERT INTO contiene (unidades, codigo_lote, codigo_producto) VALUES (:cantidad, :lote, :codProducto)";
-        $sentencia = $conn->prepare($sql);
-        $sentencia->bindValue(':cantidad', $cantidad);
-        $sentencia->bindValue(':lote', $lote);
-        $sentencia->bindValue(':codProducto', $codProducto);
-        $sentencia->execute();
+    include("connectDB.php");
 
-        $rowCount = $sentencia->rowCount();
+    $sql = "INSERT INTO contiene (unidades, codigo_lote, codigo_producto) VALUES (:cantidad, :lote, :codProducto)";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindValue(':cantidad', $cantidad);
+    $sentencia->bindValue(':lote', $lote);
+    $sentencia->bindValue(':codProducto', $codProducto);
+    $sentencia->execute();
 
-        include("disconnectDB.php");
+    $rowCount = $sentencia->rowCount();
 
-        $response = ($rowCount > 0) ? true : false;
-        echo json_encode($response);
+    include("disconnectDB.php");
+
+    $response = ($rowCount > 0) ? true : false;
+    echo json_encode($response);
 }
 
 
@@ -658,7 +656,7 @@ if ($query == 26) {
 
     $sql = "DELETE FROM contiene
             WHERE codigo_lote = :codigo_lote";
-            
+
     $sentencia = $conn->prepare($sql);
     $sentencia->bindValue(':codigo_lote', $codigo_lote);
     $sentencia->execute();
