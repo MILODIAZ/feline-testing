@@ -26,7 +26,7 @@ function Producción() {
         <div>
             {openProveedor ? <ProveedorManager handleClose={handleOpenProveedor} /> : null}
             {openNewLote && (<NewLote 
-                handleClose={handleOpenNewLote}
+                handleClose={handleOpenNewLote} reloadLotes={setReloadLotes}
             />)}
             <div className='flex flex-row justify-end py-8 px-60'>
                 <div >

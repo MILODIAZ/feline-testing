@@ -592,7 +592,7 @@ if ($query == 23) {
     $sentencia->bindParam(':codigo', $codigo);
     $sentencia->bindParam(':fechaPedido', $fechaPedido);
     $sentencia->bindParam(':fechaLlegada', $fechaLlegada);
-
+    $sentencia->bindParam(':lote', $lote);
 
     // Asigna los valores adecuados a las variables correspondientes
 
@@ -712,6 +712,7 @@ if ($query == 28) {
 
     $sentencia = $conn->prepare($sql);
     $sentencia->bindValue(':codigo_lote', $codigo_lote);
+    $sentencia->bindValue(':beforeCodigo', $beforeCodigo);
     $sentencia->execute();
 
     $rowCount = $sentencia->rowCount();

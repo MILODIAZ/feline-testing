@@ -1,6 +1,6 @@
 import { FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
-
+import AlertConfirm from "../Extras/AlertConfirm";
 function NewLote(props){
 
     const [providers, setProviders] = useState([]);
@@ -8,7 +8,7 @@ function NewLote(props){
     const [nombreProveedor, setNombreProveedor] = useState([]);
     const [fechaPedido, setFechaPedido] = useState([]);
     const [fechaLlegada, setFechaLlegada] = useState([]);
-
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         dataProviders();
@@ -28,16 +28,24 @@ function NewLote(props){
         .catch(error => console.log(error));
     };
 
+    
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(nombreProveedor, codigo, fechaLlegada, fechaPedido)
+        e.preventDefault();
         fetch(`http://localhost/feline-testing/public/main.php?query=27&codigo=${codigo}&nombre_proveedor=${nombreProveedor}&fecha_pedido=${fechaPedido}&fecha_llegada=${fechaLlegada}`)
-        .then(response => response.json())
-        .then(data => {
-            props.reloadLotes(true);
-            console.log(data);
-        })
+            .then(response => response.json())
+            .then(data => {
+                if (data === true) {
+                    console.log(data)
+                }
+                setShowAlert(true);
+                props.reloadLotes(true);
+            });
+    };
+    const handleConfirm = () => {
+        setShowAlert(false);
+        props.handleClose();
     }
+
     return(
         <div className="fixed z-[60]  h-[100%] w-[100%] bg-[#ffe5f0] p-4"> 
                 <div className="flex justify-end">
@@ -76,6 +84,11 @@ function NewLote(props){
                     <button type="submit">Crear Lote</button>
                 </form>
             </div>
+            {showAlert && (
+                <AlertConfirm 
+                mensaje="Lote creado" 
+                onCancel={handleConfirm}/>
+            )}
         </div>
         
     )

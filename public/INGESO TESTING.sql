@@ -32,11 +32,11 @@ CREATE TABLE categoria(
 
 
 
-CREATE TABLE lote(
-	codigo TEXT PRIMARY KEY,
-	nombre_proveedor TEXT REFERENCES proveedor(nombre) ON DELETE SET NULL ON UPDATE CASCADE,
-	fecha_pedido DATE NOT NULL,
-	fecha_llegada DATE NOT NULL
+CREATE TABLE lote (
+    codigo TEXT PRIMARY KEY,
+    nombre_proveedor TEXT REFERENCES proveedor(nombre) ON DELETE SET NULL ON UPDATE CASCADE,
+    fecha_pedido DATE NOT NULL,
+    fecha_llegada DATE NOT NULL
 );
 
 
@@ -47,11 +47,11 @@ CREATE TABLE corresponde(
 );
 
 
-CREATE TABLE contiene(
-	unidades int NOT NULL,
-	codigo_lote TEXT NOT NULL REFERENCES lote(codigo),
-	codigo_producto TEXT NOT NULL REFERENCES producto(codigo),
-	PRIMARY KEY (codigo_lote, codigo_producto)
+CREATE TABLE contiene (
+    unidades INT NOT NULL,
+    codigo_lote TEXT NOT NULL REFERENCES lote(codigo) ON UPDATE CASCADE,
+    codigo_producto TEXT NOT NULL REFERENCES producto(codigo),
+    PRIMARY KEY (codigo_lote, codigo_producto)
 );
 
 /************************************POBLADO DE TABLAS****************************************************/
