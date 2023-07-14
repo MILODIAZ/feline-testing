@@ -2,8 +2,8 @@
 
 function AlertConfirm({mensaje, onCancel}){
     return(
-        <div className="fixed z-150 inset-0 flex items-center justify-center">
-        <div className="bg-[#f8efe6] p-8 rounded-[15px] border-solid border-[#000] border-[3px]">
+        <div className="fixed z-150 inset-0  flex items-center justify-center">
+        <div className="bg-[#f8efe6] py-5 px-12 rounded-[15px] border-solid border-[#000] border-[3px]">
           <h2 className="text-lg font-bold mb-4">{mensaje}</h2>
           <div className="mt-4 flex justify-center">
             <button

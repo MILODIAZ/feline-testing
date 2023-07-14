@@ -56,14 +56,14 @@ function ModHeader(props) {
     }
 
     return (
-        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#f8efe6] z-[60] border-solid border-[3px] border-[#000] rounded-[5px] flex justify-center items-center'>
-            <div className='flex justify-end '>
+        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#f8efe6] z-[60] border-solid border-[3px] border-[#000] rounded-[5px] p-4 justify-center items-center'>
+            <div className='flex justify-end'>
                 <button onClick={() => props.handleClose()}>
                     <FaTimes className='text-3xl hover:text-[#a5d5d5]' />
                 </button>
             </div>
-            <div className="p-8">  
-                <div>
+            <div className="px-8" >  
+                <div className="text-center">
                     <h3 className='text-[1.75rem] font-bold pb-6 '>Modificación del Lote</h3>
                 </div>
                 <div className='flex flex-row justify-between pb-2'>
@@ -80,7 +80,7 @@ function ModHeader(props) {
                 </div>
                 <button
                     onClick={ModHeaderData}
-                    className="bg-[#54e9d1] w-[150px] font-bold h-[50px] m-auto border-solid border-[2px] border-[#000] rounded-[10px] mb-[20px]">
+                    className="bg-[#54e9d1] w-[150px] font-bold h-[50px] mx-auto flex items-center justify-center border-solid border-[2px] border-[#000] rounded-[10px] mb-[20px]">
                     Actualizar Datos
                 </button>
             </div>

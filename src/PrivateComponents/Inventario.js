@@ -11,7 +11,7 @@ function Inventario() {
 
     useEffect(() => {
         dataProduct();
-    }, []);
+    },[]);
 
     const dataProduct = () => {
         fetch("http://localhost/feline-testing/public/main.php?query=4")
@@ -223,7 +223,6 @@ function Inventario() {
                                                 const isOverstock = product[5] >= product[6];
                                                 const isLowStock = product[5] < product[7];
                                                 const isNormalStock = (product[5] < product[6] && product[5]>=product[7]);
-                                                console.table(product)
                                                 if (
                                                     (selectedFilter === 'all') ||
                                                     (selectedFilter === 'overstock' && isOverstock) ||

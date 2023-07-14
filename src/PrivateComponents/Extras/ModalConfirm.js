@@ -1,7 +1,7 @@
 export default function ConfirmationModal({ message, onConfirm, onCancel }) {
     return (
       <div className="fixed z-50 inset-0 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-[15px] border-solid border-[#000] border-[3px]">
+        <div className="bg-[#f8efe6] p-8 rounded-[15px] border-solid border-[#000] border-[3px]">
           <h2 className="text-lg font-medium mb-4">Confirmar eliminación</h2>
           <p>{message}</p>
           <div className="mt-4 flex justify-end">

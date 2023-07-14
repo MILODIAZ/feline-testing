@@ -25,7 +25,8 @@ function HeaderLote(props) {
                 <div className="text-l grid grid-cols-3 h-[70%] mb-[20px]">
                     <div>Fecha del pedido: {props.fechaPedido}</div>
                     <div>Fecha de llegada: {props.fechaLlegada}</div>
-                    <p>Días de retrasos: {props.diasRestantes}</p>
+                    <p>Días de retrasos: {Math.abs(props.diasRestantes)}</p>
+                    
                 </div>
                 <button onClick={handlOpenModHeader}
                     className="bg-[#54e9d1] w-[150px] font-bold h-[50px] m-auto border-solid border-[2px] border-[#000] rounded-[10px] mb-[20px]">
