@@ -1,8 +1,13 @@
 import { FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import DeleteCategorie from './Delete-Categories';
+import AlertConfirm from "../Extras/AlertConfirm";
+
 
 function CategoriesManager(props) {
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [mensaje, setMensaje] = useState('');
 
   const [dataLoaded, setDataLoaded] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -17,8 +22,12 @@ function CategoriesManager(props) {
       .then(data => {
         setDataLoaded(true);
         setCategories(data);
+
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        setMensaje("UPS, ocurrio un error");
+        setShowAlert(true);
+      });
   };
 
   //ELMININAR CATEGORÍAS
@@ -30,11 +39,17 @@ function CategoriesManager(props) {
         console.log(data);
         if (data) {
           setDataLoaded(false);
+          setMensaje("Categoria eliminada");
+          setShowAlert(true);
           loadData();
           props.reloadCategories();
+
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        setMensaje("UPS, ocurrio un error");
+        setShowAlert(true);
+      });
   }
 
   const [deletingCategorie, setDeletingCategorie] = useState(false);
@@ -66,15 +81,14 @@ function CategoriesManager(props) {
           setDataLoaded(false);
           loadData();
           props.reloadCategories();
-          alert("Categoría agregada con éxito");
-        } else {
-          alert('Error al agregar la categoría');
+          setMensaje("Categoria agregada");
+          setShowAlert(true);
         }
 
       })
       .catch(error => {
-        alert(`La categoría ${categorieName} ya existe.`);
-        console.log(error)
+        setMensaje("La categoria ya existe.");
+        setShowAlert(true);
       });
   }
 
@@ -108,16 +122,22 @@ function CategoriesManager(props) {
           setDataLoaded(false);
           loadData();
           props.reloadCategories();
-          alert(`Categoría ${modCatSelected} ahora es ${categorieModName}`);
+          setMensaje("Categoria modificada");
+          setShowAlert(true);
         })
         .catch(error => {
-          console.log(error);
-          alert(`Ya existe una categoría ${categorieModName}`)
+          setMensaje("UPS, ocurrio un error");
+          setShowAlert(true);
         });
     } else {
-      alert('Ingrese un nombre válido.');
+      setMensaje("Ingrese un nombre Valido");
+      setShowAlert(true);
     }
 
+  }
+  const handleConfirm = () => {
+    setShowAlert(false);
+    props.handleClose()
   }
 
   return (
@@ -180,6 +200,11 @@ function CategoriesManager(props) {
 
         </div>
       </div>
+      {showAlert && (
+        <AlertConfirm
+          mensaje={mensaje}
+          onCancel={handleConfirm} />
+      )}
     </div>
   );
 }

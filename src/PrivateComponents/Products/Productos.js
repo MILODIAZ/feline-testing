@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import CategoriesManager from '../Categories/Manager-Categories';
+import AlertConfirm from "../Extras/AlertConfirm";
 
-
-function Productos(){
-
+function Productos(props) {
+  const [showAlert, setShowAlert] = useState(false);
+  const [mensaje, setMensaje] = useState('');
   //LÓGICA DE AGREGAR PRODUCTOS
 
   const [categories, setCategories] = useState([]);
   const [providers, setProviders] = useState([]);
   const [dataCategoryLoaded, setDataCategoryLoaded] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     codigo: '',
     nombre: '',
@@ -34,47 +35,51 @@ function Productos(){
       stockRecomendado: '',
       stockMinimo: '',
       descripcion: '',
-      imagen: null      
-    });    
+      imagen: null
+    });
   };
+  const handleConfirm = () => {
+    setShowAlert(false);
+    props.handleClose()
+  }
 
   const [selectedCategories, setSelectedCategories] = useState([]);
 
 
   const handleCodeChange = (event) => {
-    const updatedFormData = {...formData, codigo: event.target.value.toUpperCase()};
-    setFormData(updatedFormData);    
+    const updatedFormData = { ...formData, codigo: event.target.value.toUpperCase() };
+    setFormData(updatedFormData);
   };
   const handleNameChange = (event) => {
-    const updatedFormData = {...formData, nombre: event.target.value};
+    const updatedFormData = { ...formData, nombre: event.target.value };
     setFormData(updatedFormData);
   };
   const handlePriceChange = (event) => {
-    if(event.target.value >= 0){
-      const updatedFormData = {...formData, precio: event.target.value};
+    if (event.target.value >= 0) {
+      const updatedFormData = { ...formData, precio: event.target.value };
       setFormData(updatedFormData);
-    }    
+    }
   };
   const handleStockChange = (event) => {
-    if(event.target.value >= 0){
-      const updatedFormData = {...formData, stock: event.target.value};
+    if (event.target.value >= 0) {
+      const updatedFormData = { ...formData, stock: event.target.value };
       setFormData(updatedFormData);
-    } 
+    }
   };
   const handleRecommendedStockChange = (event) => {
-    if(event.target.value >= 0){
-      const updatedFormData = {...formData, stockRecomendado: event.target.value};
+    if (event.target.value >= 0) {
+      const updatedFormData = { ...formData, stockRecomendado: event.target.value };
       setFormData(updatedFormData);
-    } 
+    }
   };
   const handleMinimunStockChange = (event) => {
-    if(event.target.value >= 0){
-      const updatedFormData = {...formData, stockMinimo: event.target.value};
+    if (event.target.value >= 0) {
+      const updatedFormData = { ...formData, stockMinimo: event.target.value };
       setFormData(updatedFormData);
-    } 
+    }
   };
   const handleDescriptionChange = (event) => {
-    const updatedFormData = {...formData, descripcion: event.target.value};
+    const updatedFormData = { ...formData, descripcion: event.target.value };
     setFormData(updatedFormData);
   };
   const handleChangeCategories = (event) => {
@@ -91,20 +96,20 @@ function Productos(){
   };
   const handleProviderChange = (event) => {
     const selectedProvider = event.target.value;
-    const updatedFormData = { ...formData, proveedor:selectedProvider };
+    const updatedFormData = { ...formData, proveedor: selectedProvider };
     setFormData(updatedFormData);
   }
 
   const DatosObligatorios = () => {
-    if(formData.codigo==='' ||
-      formData.nombre==='' ||
-      formData.precio===0 ||
-      formData.stock===0  ||
-      formData.stockRecomendado===0 ||
-      formData.stockMinimo===0 ||
-      formData.descripcion==='' ||
-      document.getElementById('imagen').files.length===0
-    ){
+    if (formData.codigo === '' ||
+      formData.nombre === '' ||
+      formData.precio === 0 ||
+      formData.stock === 0 ||
+      formData.stockRecomendado === 0 ||
+      formData.stockMinimo === 0 ||
+      formData.descripcion === '' ||
+      document.getElementById('imagen').files.length === 0
+    ) {
       return false;
     } else {
       return true;
@@ -113,12 +118,12 @@ function Productos(){
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(DatosObligatorios()){
+    if (DatosObligatorios()) {
       const updatedFormData = {
         ...formData,
         categorias: selectedCategories
       };
-    
+
       const formDataToSend = new FormData();
       formDataToSend.append('query', '6');
       Object.keys(updatedFormData).forEach((key) => {
@@ -140,8 +145,8 @@ function Productos(){
         } else {
           formDataToSend.append(key, formData[key]);
         }
-      });    
-    
+      });
+
       fetch("http://localhost/feline-testing/public/postQueries.php", {
         method: 'POST',
         headers: {},
@@ -150,15 +155,18 @@ function Productos(){
         .then((response) => response.json())
         .then((data) => {
           resetFormData();
-          alert("Producto agregado con éxito");
+          setMensaje("Producto agregado con exito.");
+          setShowAlert(true);
         })
-        .catch((error) => {          
-          alert("Ya se ha registrado un producto con el mismo código.");       
+        .catch((error) => {
+          setMensaje("Ya existe este producto");
+          setShowAlert(true);;
         });
     } else {
-      alert("Complete los campos requeridos");
+      setMensaje("Complete los campos requeridos");
+      setShowAlert(true);
     }
-    
+
   };
 
   useEffect(() => {
@@ -168,22 +176,28 @@ function Productos(){
 
   const dataProviders = () => {
     fetch("http://localhost/feline-testing/public/main.php?query=5")
-        .then(response => response.json())
-        .then(data => {
-            setDataCategoryLoaded(true);
-            setProviders(data);
-        })
-        .catch(error => console.log(error));
+      .then(response => response.json())
+      .then(data => {
+        setDataCategoryLoaded(true);
+        setProviders(data);
+      })
+      .catch(error => {
+        setMensaje("UPS, ocurrio un error");
+        setShowAlert(true);
+      });
   };
 
   const dataCategory = () => {
-      fetch("http://localhost/feline-testing/public/main.php?query=1")
-          .then(response => response.json())
-          .then(data => {
-              setDataCategoryLoaded(true);
-              setCategories(data);
-          })
-          .catch(error => console.log(error));
+    fetch("http://localhost/feline-testing/public/main.php?query=1")
+      .then(response => response.json())
+      .then(data => {
+        setDataCategoryLoaded(true);
+        setCategories(data);
+      })
+      .catch(error => {
+        setMensaje("UPS, ocurrio un error");
+        setShowAlert(true);
+      });
   };
 
   const reloadCategories = () => {
@@ -196,24 +210,24 @@ function Productos(){
   const [openCategories, setOpenCategories] = useState(false);
 
   const handleOpenCategories = () => {
-    if(openCategories){
+    if (openCategories) {
       setOpenCategories(false);
     } else {
       setOpenCategories(true);
-    }    
+    }
   }
 
-  return(
+  return (
     <div>
 
-      {openCategories? <CategoriesManager reloadCategories={()=>reloadCategories()} handleClose={handleOpenCategories} /> : null}
+      {openCategories ? <CategoriesManager reloadCategories={() => reloadCategories()} handleClose={handleOpenCategories} /> : null}
 
       <div className='flex flex-row justify-between py-8'>
         <div className='w-6/12 text-center'>
           <p className='text-xl font-bold'>AGREGAR NUEVO PRODUCTO</p>
         </div>
-        <div className='w-6/12 text-center'>            
-          <button onClick={handleOpenCategories} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Categorías</button>          
+        <div className='w-6/12 text-center'>
+          <button onClick={handleOpenCategories} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Categorías</button>
         </div>
       </div>
 
@@ -224,7 +238,7 @@ function Productos(){
           <form onSubmit={handleSubmit}>
             <div className='pb-2'>
               <span className='text-xs'>(*) Campos requeridos</span>
-            </div>            
+            </div>
             <div className='flex flex-row justify-between pb-2'>
               <label htmlFor='codigo' className='pr-6'>CÓDIGO *</label>
               <input autoComplete='off' type='text' id='codigo' name='codigo' value={formData.codigo} onChange={handleCodeChange} />
@@ -235,7 +249,7 @@ function Productos(){
               <input autoComplete='off' type='text' id='nombre' name='nombre' value={formData.nombre} onChange={handleNameChange} />
             </div>
 
-            <div className='flex flex-row justify-between pb-2'>              
+            <div className='flex flex-row justify-between pb-2'>
               <label htmlFor='proveedor' className='pr-6'>PROVEEDOR</label>
               <select id='proveedor' name='proveedor' onChange={handleProviderChange} value={formData.proveedor}>
                 <option id='SIN PROVEEDOR' value={'SIN PROVEEDOR'}>SIN PROVEEDOR</option>
@@ -244,8 +258,8 @@ function Productos(){
                 ))}
               </select>
             </div>
-            
-            {dataCategoryLoaded? <div className='flex flex-row justify-between pb-2'>
+
+            {dataCategoryLoaded ? <div className='flex flex-row justify-between pb-2'>
               <div>
                 <label htmlFor='categorias' className='pr-6'>CATEGORÍAS</label>
               </div>
@@ -253,26 +267,26 @@ function Productos(){
                 {categories.map(categorie => (
                   <div key={categorie[0]} className='flex min-w-[150px]'>
                     <input
-                     type='checkbox'
-                     id={categorie[0]}
-                     value={categorie[0]}
-                     name='categorias'
-                     checked={selectedCategories.includes(categorie[0])}
-                     onChange={handleChangeCategories}
+                      type='checkbox'
+                      id={categorie[0]}
+                      value={categorie[0]}
+                      name='categorias'
+                      checked={selectedCategories.includes(categorie[0])}
+                      onChange={handleChangeCategories}
                     />
                     <label className='mx-2' htmlFor={categorie[0]}>{categorie[0]}</label>
-                  </div>                
+                  </div>
                 ))}
-              </div>                                       
-            </div> : null }
-            
+              </div>
+            </div> : null}
+
 
             <div className='flex flex-row justify-between pb-2'>
               <label htmlFor='precio' className='pr-6'>PRECIO *</label>
               <div className='flex'>
                 <p className='pr-2'>$</p>
                 <input autoComplete='off' type='number' placeholder='0' id='precio' name='precio' value={formData.precio} onChange={handlePriceChange} />
-              </div>              
+              </div>
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
@@ -305,23 +319,23 @@ function Productos(){
             </div>
 
           </form>
-        </div>  
+        </div>
         {/* Producto previsualizado */}
-        <div className="max-w-sm min-w-[300px] mx-auto border mt-[20px]  lg:mt-[10px] border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">          
-         
+        <div className="max-w-sm min-w-[300px] mx-auto border mt-[20px]  lg:mt-[10px] border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">
+
           <img
             alt='Imagen del producto'
             className='rounded-t-lg'
             src={formData.imagen ? URL.createObjectURL(formData.imagen) : require(`../../images/feline-logo.png`)}
           />
-          
+
           <div className='p-5'>
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
               {formData.nombre}
             </h5>
             <p
               className="mb-3 font-normal text-gray-700 bold dark:text-gray-700">
-              {formData.descripcion} 
+              {formData.descripcion}
             </p>
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-gray-900">
               Precio: ${formData.precio}
@@ -335,9 +349,13 @@ function Productos(){
               Codigo del producto: {formData.codigo}
             </p>
           </div>
-        </div>        
+        </div>
       </div>
-
+      {showAlert && (
+        <AlertConfirm
+          mensaje={mensaje}
+          onCancel={handleConfirm} />
+      )}
     </div>
   );
 }

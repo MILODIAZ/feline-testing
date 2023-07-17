@@ -10,6 +10,7 @@ function ModHeader(props) {
         beforeIdLote: props.id
     });
 
+    const [mensaje, setMensaje] = useState('');
     const [showAlert, setShowAlert] = useState(false);
 
     const handleIdChange = (event) => {
@@ -32,10 +33,12 @@ function ModHeader(props) {
         fetch(`http://localhost/feline-testing/public/main.php?query=23&codigo=${formHeader.idLote}&fechaPedido=${formHeader.ingresoFecha}&fechaLlegada=${formHeader.llegadaFecha}&lote=${formHeader.beforeIdLote}`)
             .then(response => response.json())
             .then(data => {
-                setShowAlert(true)
+                setMensaje("Datos modificados");
+                setShowAlert(true);
             })
             .catch(error => {
-                console.log(error);
+                setMensaje("UPS, ocurrio un error");
+                setShowAlert(true);
             });
     };
 
@@ -43,10 +46,10 @@ function ModHeader(props) {
         fetch(`http://localhost/feline-testing/public/main.php?query=28&codigo_lote=${formHeader.idLote}&beforeCodigo=${formHeader.beforeIdLote}`)
             .then(response => response.json())
             .then(data => {
-                // agregar un cuadro de texto que diga confirmar
             })
             .catch(error => {
-                console.log(error);
+                setMensaje("UPS, ocurrio un error");
+                setShowAlert(true);;
             });
     };
 
@@ -62,7 +65,7 @@ function ModHeader(props) {
                     <FaTimes className='text-3xl hover:text-[#a5d5d5]' />
                 </button>
             </div>
-            <div className="px-8" >  
+            <div className="px-8" >
                 <div className="text-center">
                     <h3 className='text-[1.75rem] font-bold pb-6 '>Modificación del Lote</h3>
                 </div>
@@ -85,9 +88,9 @@ function ModHeader(props) {
                 </button>
             </div>
             {showAlert && (
-                <AlertConfirm 
-                mensaje="Datos actualizados" 
-                onCancel={handleConfirm}/>
+                <AlertConfirm
+                    mensaje={mensaje}
+                    onCancel={handleConfirm} />
             )}
         </div>
     );
