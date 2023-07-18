@@ -1,4 +1,4 @@
-export default function ConfirmationModal({ message, onConfirm, onCancel }) {
+export default function ConfirmationModal({ message, onConfirm, onCancel, botonPrimario }) {
     return (
       <div className="fixed z-50 inset-0 flex items-center justify-center">
         <div className="bg-[#f8efe6] p-8 rounded-[15px] border-solid border-[#000] border-[3px]">
@@ -9,7 +9,7 @@ export default function ConfirmationModal({ message, onConfirm, onCancel }) {
               className="px-4 py-2 mr-2 bg-[#fc7494] font-bold rounded hover:bg-[#FA567C]"
               onClick={onConfirm}
             >
-              Eliminar
+              {botonPrimario}
             </button>
             <button
               className="px-4 py-2 bg-[#54e9d1] font-bold rounded hover:bg-teal-500"

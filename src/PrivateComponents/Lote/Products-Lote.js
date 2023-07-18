@@ -37,6 +37,7 @@ function ProductoLote(props) {
             {showConfirmation && (
                 <ConfirmationModal
                     message="¿Estás seguro de que deseas eliminar el producto?"
+                    botonPrimario={'Eliminar'}
                     onConfirm={eliminarProducto}
                     onCancel={() => setShowConfirmation(false)}
                 />

@@ -2,7 +2,7 @@ import LoteDetails from "./Details-Lote";
 import { useState } from "react";
 import ConfirmationModal from "../Extras/ModalConfirm";
 import AlertConfirm from "../Extras/AlertConfirm";
-
+import ConfirmLote from "./Confirm/Confirm-Lote"
 
 function LoteCard(props) {
 
@@ -14,7 +14,6 @@ function LoteCard(props) {
 
   const eliminarLote = () => {
     setShowConfirmation(false);
-    console.log(props.id);
     eliminarContenido();
 
     fetch(`http://localhost/feline-testing/public/main.php?query=18&codigo_lote=${props.id}`)
@@ -130,8 +129,9 @@ function LoteCard(props) {
         }
       </div>
       <div className='flex flex-col w-[20%] md:w-[10%] md:flex-wrap'>
+        {/* Confirmar */}
         <div>
-          <button className='text-sm my-[1px] text-black  transition duration-150 hover:bg-[#157c61] bg-[#93c47d]  font-bold w-[100%] py-2 md:px-4'>Confirmar</button>
+          <ConfirmLote id={props.id}/>
         </div>
         {/* Detalles */}
         <button
@@ -153,6 +153,7 @@ function LoteCard(props) {
         {showConfirmation && (
           <ConfirmationModal
             message={`¿Estás seguro de que deseas eliminar el Lote ${props.id}?`}
+            botonPrimario={'Eliminar'}
             onConfirm={eliminarLote}
             onCancel={() => setShowConfirmation(false)}
           />
