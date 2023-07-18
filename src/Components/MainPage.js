@@ -1,13 +1,14 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import NavBar from './NavBar';
-import CategoriesNav from './CategoriesNav';
+
 
 function MainPage(props) {
+
   return (
     <div>
       <NavBar />
-      <CategoriesNav />
+
       <main className='min-h-[600px]'>
         <div>
           <div>
@@ -15,15 +16,17 @@ function MainPage(props) {
           </div>
         </div>
       </main>
-      
-      <footer className='bg-[#56efd3] min-h-[185px]'>
-        <CategoriesNav />
-        <div className='fixed bottom-3 right-10'>
-          <Link className='inline-flex items-center rounded-md bg-[#b6efb0] px-6 py-3 
-        text-2xl font-medium text-white-700 bold shadow-lg
-         ring-1 ring-inset ring-pink-700/10' to={'/login'}>Login</Link>
+
+      <footer className='bg-[#56efd3] items-center'>
+        <ul className='text-center grid grid-cols-3 mb-3'>
+          <li><Link to={'/'} className={'text-[1.5rem] p-3.5 hover:text-white transition-all'}>INICIO</Link></li>
+          <li><Link to={'/Nosotros'} className={'text-[1.5rem] p-3.5 hover:text-white transition-all'}>NOSOTROS</Link></li>
+          <li><a target="_blank" rel="noopener noreferrer" href='https://www.instagram.com/tienda_feline/' className={'text-[1.5rem] p-3.5 hover:text-white transition-all'}>INSTAGRAM</a></li>
+        </ul>
+        <div className='text-center'>
+          <Link className='' to={'/login'}>Administración</Link>
         </div>
-        
+
       </footer>
     </div>
   );

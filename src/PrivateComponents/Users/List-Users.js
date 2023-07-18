@@ -118,7 +118,7 @@ function UsersList(props) {
     }
 
     // Verificar que el RUT tenga el formato correcto
-    const rutRegex = /^0*(\d{1,3}(\.?\d{3})*) \-?([\dkK])$/;
+    const rutRegex = /^0*(\d{1,3}(\.?\d{3})*)\-?([\dkK])$/;
     if (!rutRegex.test(rut)) {
       return false;
     }
