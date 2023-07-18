@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductCard from "./ProductCard";
 import ProductContainer from './ProductContainer';
 import HomeSlider from './HomeSlider';
+import CategoriesNav from './CategoriesNav';
 
 function HomeMain() {
 
@@ -34,7 +35,7 @@ function HomeMain() {
 
     productContainer.classList.remove('invisible');
     productContainer.classList.remove('opacity-0');
-    
+
     setProductCode(prodCod);
     setProductName(prodName);
     setProductPrice(prodPrice);
@@ -48,19 +49,19 @@ function HomeMain() {
   } else {
     return (
       <div>
-
+        <CategoriesNav />
         <HomeSlider dataLoaded={dataLoaded} />
 
         <ProductContainer code={productCode} name={productName} price={productPrice} stock={productStock} description={productDescription} />
 
         <div className="xl:px-32 2xl:px-60 py-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-y-8">
           {hotsales.map(hotsale => (
-            <ProductCard key={hotsale[0]} name={hotsale[2]} price={hotsale[4]} img={hotsale[0]} handleClick={showProductContainer} stock={hotsale[5]} description={hotsale[3]}/>
+            <ProductCard key={hotsale[0]} name={hotsale[2]} price={hotsale[4]} img={hotsale[0]} handleClick={showProductContainer} stock={hotsale[5]} description={hotsale[3]} />
           ))}
         </div>
-        
+
       </div>
-      
+
     );
   }
 }
