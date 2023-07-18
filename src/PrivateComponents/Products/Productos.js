@@ -38,9 +38,10 @@ function Productos(props) {
       imagen: null
     });
   };
+
+
   const handleConfirm = () => {
     setShowAlert(false);
-    props.handleClose()
   }
 
   const [selectedCategories, setSelectedCategories] = useState([]);
