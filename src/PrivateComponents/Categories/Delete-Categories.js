@@ -15,9 +15,9 @@ function DeleteCategorie(props) {
           <div>
             <p>¿Estás seguro de que deseas eliminar {props.name}?</p>
           </div>
-          <div className='flex justify-around pt-8'>
-            <button className='text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-6 rounded' onClick={() => { props.deleteCategorie() }}>Sí</button>
-            <button className='text-sm text-white transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-6 rounded' onClick={() => props.handleClick()}>No</button>
+          <div className='flex justify-end mt-4'>
+            <button className='px-4 py-2 mr-2 bg-[#fc7494] font-bold rounded hover:bg-[#FA567C]' onClick={() => { props.deleteCategorie() }}>Eliminar</button>
+            <button className='px-4 py-2 bg-[#54e9d1] font-bold rounded hover:bg-teal-500' onClick={() => props.handleClick()}>Cancelar</button>
           </div>
         </div>
       </div>

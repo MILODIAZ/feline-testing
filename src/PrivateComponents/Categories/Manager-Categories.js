@@ -151,7 +151,7 @@ function CategoriesManager(props) {
         </div>
         <div className='p-8'>
           <div>
-            <h3 className='text-[1.75rem] font-bold pb-6'>Administración de categorías</h3>
+            <h3 className='text-[1.75rem] font-bold pb-3'>Administración de categorías</h3>
           </div>
 
           <div className='relative overflow-y-scroll min-h-[169px]' onScroll={() => { setModCat(false); setCategorieModName(''); }}>
@@ -164,8 +164,8 @@ function CategoriesManager(props) {
                       <form onSubmit={ModCategorie} className='flex flex-row justify-between pb-2 mr-2'>
                         <input type='text' placeholder={categorie[0]} className='w-5/12' value={categorieModName} onChange={handleCategorieModNameChange} />
                         <div className='flex justify-end'>
-                          <button type='submit' className='text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-5 rounded'>Aceptar</button>
-                          <button onClick={openModCat} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-2 rounded ml-3'>Cancelar</button>
+                          <button type='submit' className='text-sm text-center transition duration-150 bg-[#54e9d1] font-bold py-1 px-2 border-[2px] border-[#000] rounded-[10px] ml-3'>Aceptar</button>
+                          <button onClick={openModCat} className='text-sm text-center transition duration-150 bg-[#fc7494] font-bold py-1 px-2 border-[2px] border-[#000] rounded-[10px] ml-3'>Cancelar</button>
                         </div>
                       </form>
                     </div>
@@ -173,8 +173,8 @@ function CategoriesManager(props) {
                     : <div key={categorie[0]} className='flex flex-row justify-between pb-2 mr-2'>
                       <p>{categorie[0]}</p>
                       <div className='flex justify-end'>
-                        <button onClick={() => openModCat(categorie[0])} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Modificar</button>
-                        <button onClick={() => { openDeleteCategorie(); setCategorieNameDeleting(categorie[0]); }} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
+                        <button onClick={() => openModCat(categorie[0])} className='text-sm text-black transition duration-150 bg-[#54e9d1] font-bold py-2 px-4 border-solid border-[2px] border-[#000] rounded-[10px]'>Modificar</button>
+                        <button onClick={() => { openDeleteCategorie(); setCategorieNameDeleting(categorie[0]); }} className='text-sm text-center transition duration-150 bg-[#fc7494] font-bold py-1 px-2 border-[2px] border-[#000] rounded-[10px] ml-3'>Eliminar</button>
                       </div>
                     </div>)
                 ))) : null}
@@ -184,14 +184,14 @@ function CategoriesManager(props) {
 
           <div>
 
-            <h3 className='pt-4 font-bold'>Nueva categoría</h3>
+            <h3 className='pt-4 font-bold text-center'>Nueva categoría</h3>
             <form onSubmit={insertCategorie}>
-              <div className='flex flex-col'>
-                <label htmlFor='nombre'>Nombre</label>
-                <input name='nombre' type='text' placeholder='categoría' value={categorieName} onChange={handleCategorieNameChange} autoComplete='off' />
+              <div className='flex flex-col text-center'>
+                <label htmlFor='nombre'></label>
+                <input className='text-center border-solid border-[2px] border-[#000] rounded-[10px]' name='nombre' type='text' placeholder='--Nombre de la Categoría --' value={categorieName} onChange={handleCategorieNameChange} autoComplete='off' />
               </div>
               <div className='flex justify-center'>
-                <button className='text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-4 rounded mt-4'>Agregar</button>
+                <button className='text-sm text-black transition duration-150 bg-[#54e9d1] font-bold py-2 px-4 border-solid border-[2px] border-[#000] rounded-[10px] mt-3'>Agregar</button>
               </div>
             </form>
 

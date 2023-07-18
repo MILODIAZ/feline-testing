@@ -234,7 +234,7 @@ function Productos(props) {
 
 
       {/* Div del producto */}
-      <div className='flex flex-col lg:flex-row xl:px-30 2xl:px-48 py-5 justify-around'>
+      <div className='flex flex-col lg:flex-row justify-around bg-[#f8efe6] border-solid border-[3px] border-[#000] rounded-[5px] mx-10'>
         <div className='pt-2 mx-auto'>
           <form onSubmit={handleSubmit}>
             <div className='pb-2'>
@@ -291,7 +291,7 @@ function Productos(props) {
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='stock' className='pr-6'>STOCK *</label>
+              <label htmlFor='stock' className='pr-6'> - STOCK *</label>
               <input autoComplete='off' type='number' placeholder='0' id='stock' name='stock' value={formData.stock} onChange={handleStockChange} />
             </div>
 
@@ -316,13 +316,13 @@ function Productos(props) {
             </div>
 
             <div className='mt-8 flex justify-center mb-[10px]'>
-              <button className="text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-4 rounded">AGREGAR</button>
+              <button className="text-sm text-black transition duration-150 bg-[#54e9d1] font-bold py-2 px-4 border-solid border-[2px] border-[#000] rounded-[10px] mt-3">AGREGAR</button>
             </div>
 
           </form>
         </div>
         {/* Producto previsualizado */}
-        <div className="max-w-sm min-w-[300px] mx-auto border mt-[20px]  lg:mt-[10px] border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">
+        <div className="max-w-sm min-w-[300px] mx-auto my-3 border mt-[20px]  lg:mt-[10px] border-gray-200 rounded-lg shadow bg-pink-300 dark:border-gray-700">
 
           <img
             alt='Imagen del producto'

@@ -38,30 +38,33 @@ function ProveedorManager(props) {
     const insertProveedor = (event) => {
         event.preventDefault();
         if (proveedorName === '') {
-            return alert('Debe ingresar un nombre!')
+            setMensaje("Debe ingresar un componente valido");
+            setShowAlert(true);
+        } else {
+            fetch(`http://localhost/feline-testing/public/main.php?query=21&proveedor=${proveedorName}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data === true) {
+                        setDataLoaded(false);
+                        loadData();
+                        setMensaje("Proveedor ingresado con exito");
+                        setShowAlert(true);
+                    } else {
+                        setMensaje("Error al agregar proveedor");
+                        setShowAlert(true);
+                    }
+                })
+                .catch(error => {
+                    setMensaje("El proveedor ya existe.");
+                    setShowAlert(true);
+                });
         }
-        fetch(`http://localhost/feline-testing/public/main.php?query=21&proveedor=${proveedorName}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data === true) {
-                    setDataLoaded(false);
-                    loadData();
-                    setMensaje("Proveedor ingresado con exito");
-                    setShowAlert(true);
-                } else {
-                    setMensaje("Error al agregar proveedor");
-                    setShowAlert(true);
-                }
-            })
-            .catch(error => {
-                setMensaje("El proveedor ya existe.");
-                setShowAlert(true);
-            });
+
         setProveedorName('');
     }
     const handleConfirm = () => {
@@ -150,7 +153,7 @@ function ProveedorManager(props) {
                 </div>
                 <div className='p-8'>
                     <div>
-                        <h3 className='text-[1.75rem] font-bold pb-6'>Administración de proveedores</h3>
+                        <h3 className='text-[1.75rem] font-bold pb-3 '>Administración de proveedores</h3>
                     </div>
                     <div className='relative overflow-y-scroll min-h-[169px]'>
                         <div className='absolute w-full'>
@@ -161,30 +164,30 @@ function ProveedorManager(props) {
                                             <form onSubmit={ModProveedor} className='flex flex-row justify-between pb-2 mr-2'>
                                                 <input type='text' placeholder={proveedor[0]} className='w-5/12' value={proveedorModName} onChange={handleProveedorModNameChange} />
                                                 <div className='flex justify-end'>
-                                                    <button type='submit' className='text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-5 rounded'>Aceptar</button>
-                                                    <button onClick={openModPro} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-2 rounded ml-3'>Cancelar</button>
+                                                    <button type='submit' className='text-sm text-center transition duration-150 bg-[#54e9d1] font-bold py-1 px-2 border-[2px] border-[#000] rounded-[10px] ml-3'>Aceptar</button>
+                                                    <button onClick={openModPro} className='text-sm text-center transition duration-150 bg-[#fc7494] font-bold py-1 px-2 border-[2px] border-[#000] rounded-[10px] ml-3'>Cancelar</button>
                                                 </div>
                                             </form>
                                         </div>
                                         : <div key={proveedor[0]} className='flex flex-row justify-between pb-2 mr-2'>
                                             <p>{proveedor[0]}</p>
                                             <div className='flex justify-end'>
-                                                <button onClick={() => openModPro(proveedor[0])} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Modificar</button>
-                                                <button onClick={() => { openDeleteProveedor(); setProveedorNameDeleting(proveedor[0]); }} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
+                                                <button onClick={() => openModPro(proveedor[0])} className='text-sm text-black transition duration-150 bg-[#54e9d1] font-bold py-2 px-4 border-solid border-[2px] border-[#000] rounded-[10px]'>Modificar</button>
+                                                <button onClick={() => { openDeleteProveedor(); setProveedorNameDeleting(proveedor[0]); }} className='text-sm text-center transition duration-150 bg-[#fc7494] font-bold py-1 px-2 border-[2px] border-[#000] rounded-[10px] ml-3'>Eliminar</button>
                                             </div>
                                         </div>)
                                 ))) : null}
                         </div>
                     </div>
                     <div>
-                        <h3 className='pt-4 font-bold'>Nuevo Proveedor</h3>
+                        <h3 className='pt-4 font-bold text-center'>Nuevo Proveedor</h3>
                         <form onSubmit={insertProveedor}>
-                            <div className='flex flex-col'>
-                                <label htmlFor='nombre'>Nombre del nuevo Proveedor</label>
-                                <input name='nombre' type='text' placeholder='-- Proveedor --' value={proveedorName} onChange={handleProveedorNameChange} autoComplete='off'></input>
+                            <div className='flex flex-col text-center'>
+                                <label htmlFor='nombre'></label>
+                                <input className='text-center border-solid border-[2px] border-[#000] rounded-[10px]' name='nombre' type='text' placeholder='-- Nombre del Proveedor --' value={proveedorName} onChange={handleProveedorNameChange} autoComplete='off'></input>
                             </div>
                             <div className='flex justify-center'>
-                                <button className='text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-4 rounded mt-4'>Agregar</button>
+                                <button className='text-sm text-black transition duration-150 bg-[#54e9d1] font-bold py-2 px-4 border-solid border-[2px] border-[#000] rounded-[10px] mt-3'>Agregar</button>
                             </div>
                         </form>
                     </div>
