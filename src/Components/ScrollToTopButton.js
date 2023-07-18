@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Children } from 'react';
+import { Outlet } from 'react-router-dom';
 
-const ScrollToTopButton = () => {
+const ScrollToTopButton = (props) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const handleScroll = () => {
@@ -24,12 +25,8 @@ const ScrollToTopButton = () => {
 
     return (
         <button
-            onClick={scrollToTop}
-            className={`fixed bottom-4 text-2xl right-4 bg-gray-800 text-white px-[22px] py-2 rounded-md shadow-xl 
-                transition duration-300 hover:bg-gray-600
-            ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-        >
-            Arriba
+            onClick={scrollToTop}>
+            {props.children}
         </button>
     );
 };

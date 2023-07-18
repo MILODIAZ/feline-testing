@@ -13,6 +13,13 @@ function Inventario() {
         dataProduct();
     },[]);
 
+    const [isVisible, setIsVisible] = useState(false);
+
+    const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        setIsVisible(scrollTop > 0);
+    };
+
     const dataProduct = () => {
         fetch("http://localhost/feline-testing/public/main.php?query=4")
             .then(response => response.json())
@@ -34,6 +41,10 @@ function Inventario() {
 
     useEffect(() => {
         dataCategory();
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     const dataCategory = () => {
@@ -210,7 +221,12 @@ function Inventario() {
                 </div>
             </div>
             <div className="lg:p-8 rounded-md w-[100%]">
-                <ScrollToTopButton />
+                <ScrollToTopButton>
+
+                <div             className={`fixed bottom-4 text-2xl right-4 bg-gray-800 text-white px-[22px] py-2 rounded-md shadow-xl 
+                transition duration-300 hover:bg-gray-600 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+            Arriba</div>
+                    </ScrollToTopButton>
                 <div className=" flex items-center  justify-between pb-6">
                     <div>
                         <div className="lg:-mx-4 w-[100%]  px-4 sm:px-8  overflow-x-auto">
