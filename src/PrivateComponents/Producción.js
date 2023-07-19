@@ -48,11 +48,6 @@ function Producción() {
                     <div>
                         <button onClick={handleOpenProveedor} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Proveedores</button>
                     </div>
-                    <div >
-                        <button className='hover:bg-red-700 bg-red-500 py-2 px-4 rounded mx-4'>
-                            < RiErrorWarningLine className="text-xl" />
-                        </button>
-                    </div>
                 </div>
             </div>
 
