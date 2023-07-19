@@ -745,21 +745,26 @@ if ($query == 29) {
 if ($query == 30) {
     include("connectDB.php");
 
-    $nuevotexto = $_GET['textonuevo'];
+    $nuevotexto = $_GET['nuevotexto'];
 
     $sql = "UPDATE nosotros 
-        SET texto = :textonuevo 
-        WHERE id = (SELECT MIN(id) FROM nosotros)";
+        SET texto = :nuevotexto 
+        WHERE codigo = (SELECT MIN(codigo) FROM nosotros)";
 
     $sentencia = $conn->prepare($sql);
-    $sentencia->bindParam(':textonuevo', $nuevotexto);
+    $sentencia->bindParam(':nuevotexto', $nuevotexto);
 
     $sentencia->execute();
+
+    $sqlConsulta = "SELECT texto FROM nosotros WHERE codigo = (SELECT MIN(codigo) FROM nosotros)";
+    $sentenciaConsulta = $conn->query($sqlConsulta);
+    $resultadoConsulta = $sentenciaConsulta->fetch(PDO::FETCH_ASSOC);
+    $textoActualizado = $resultadoConsulta['texto'];
 
     include("disconnectDB.php");
 
     header("Content-Type: application/json");
-    echo json_encode($response);
+    echo json_encode(['texto' => $textoActualizado]);
 
 }
 

@@ -23,8 +23,7 @@ function CambiarNosotros(props) {
       .then(data => {
         console.log('Texto actualizado en la base de datos:', data);
         setEditing(false);
-      })
-      
+      });
   };
 
   const handleOpenEditor = () => {
@@ -33,31 +32,37 @@ function CambiarNosotros(props) {
 
   return (
     <div className='fixed z-[99] inset-0 flex justify-center items-center'>
-      <div className='flex flex-col bg-[#f8efe6] p-2 border-2 border-black text-[1.5rem] rounded-lg'>
+      <div className='flex flex-col bg-white p-2 border-2 border-black text-lg rounded-lg'>
         <div className='flex justify-end'>
           <button onClick={() => props.handleClick()}>
             <FaTimes className='hover:text-[#a5d5d5]' />
           </button>
         </div>
         <div className="CambiarNosotros">
-          <h1>Texto Actual:</h1>
+          <h3 className='text-2xl font-bold mb-2 text-center'>Nosotros</h3>
           {editing ? (
             <div>
               <textarea
                 value={text}
                 onChange={handleTextChange}
-                style={{ width: '300px', height: '100px' }}
+                className='w-80 h-40 border-2 border-gray-300 rounded-md p-2 mb-2'
               />
-              <button onClick={handleConfirmChange}>Confirmar Cambio</button>
+              <div className='flex justify-center'>
+                <button
+                  onClick={handleConfirmChange}
+                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+                >
+                  Confirmar Cambio
+                </button>
+              </div>
             </div>
           ) : (
             <div onClick={handleOpenEditor}>
               <div
                 style={{
-                  overflowY: 'auto',
                   maxHeight: '300px',
-                  wordWrap: 'break-word',
                 }}
+                className='text-base bg-gray-100 border-2 border-gray-300 rounded-md p-2 cursor-pointer overflow-auto'
               >
                 {text}
               </div>
@@ -70,6 +75,7 @@ function CambiarNosotros(props) {
 }
 
 export default CambiarNosotros;
+
 
 
 
