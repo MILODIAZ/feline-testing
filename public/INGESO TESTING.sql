@@ -55,6 +55,7 @@ CREATE TABLE contiene (
 );
 
 CREATE TABLE nosotros (
+    codigo int not NULL,
 	texto TEXT NOT NULL	
 );
 
@@ -63,8 +64,8 @@ CREATE TABLE nosotros (
 INSERT INTO proveedor (nombre)
 VALUES ('Proveedor A'), ('Proveedor B'), ('Proveedor C'), ('Proveedor D'), ('Proveedor E');
 
-INSERT INTO nosotros (texto)
-VALUES ('Feline es una tienda en línea que ofrece una amplia variedad de accesorios y ropa con diseños de animales. Nos apasiona la moda y los animales, y queremos compartir esa pasión contigo. Nuestra misión es ofrecer productos de alta calidad a precios asequibles para que puedas lucir bien y sentirte bien al mismo tiempo.
+INSERT INTO nosotros (codigo,texto)
+VALUES (0,'Feline es una tienda en línea que ofrece una amplia variedad de accesorios y ropa con diseños de animales. Nos apasiona la moda y los animales, y queremos compartir esa pasión contigo. Nuestra misión es ofrecer productos de alta calidad a precios asequibles para que puedas lucir bien y sentirte bien al mismo tiempo.
 
 En Feline, creemos en la importancia de la sostenibilidad y la responsabilidad social. Por eso, trabajamos con proveedores que comparten nuestros valores y nos aseguramos de que todos nuestros productos sean éticos y respetuosos con el medio ambiente.
 
