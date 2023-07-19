@@ -5,18 +5,34 @@ import DeleteProduct from './Products/Delete-Product';
 import ModProducts from './Products/Mod-Products';
 import AlertLote from './Extras/AlertLote';
 
-function Inventario() {
-    const [dataProductLoaded, setDataProductLoaded] = useState(false);
-    const [products, setProducts] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
+function Inventario(props) {
 
     {/* Alerta de Lotes con retrasos*/ }
 
-    const [openAlert, setOpenAlert] = useState(false);
+    const [infoLotes, setInfoLotes] = useState([]);
 
-    const handleOpenAler = () => {
-        setOpenAlert(!openAlert)
+    useEffect(() => {
+        dataLotes();
+    }, []);
+
+    const dataLotes = () => {
+        fetch("http://localhost/feline-testing/public/main.php?query=14")
+            .then(response => response.json())
+            .then(data => {
+                setInfoLotes(data);
+            })
+            .catch(error => console.log(error));
+    }
+    const esNegativo = (dias_restantes) => {
+        return dias_restantes < 0;
     };
+    const openAlertButton = infoLotes.some(item => esNegativo(item.dias_restantes));
+
+    {/**/ }
+
+    const [dataProductLoaded, setDataProductLoaded] = useState(false);
+    const [products, setProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         dataProduct();
@@ -188,7 +204,7 @@ function Inventario() {
 
     return (
         <div>
-            <AlertLote />
+            {openAlertButton && <AlertLote handleClick={props.handleClose} />}
             {openModProd ? <ModProducts handleClick={handleOpenModProd} reloadProducts={reloadProducts} code={currentCode} name={currentName} provider={currentProvider} price={currentPrice} recStock={currentRecStock} minStock={currentMinStock} description={currentDescription} /> : null}
             {openDeleteProduct ? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
