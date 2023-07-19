@@ -759,7 +759,7 @@ if ($query == 30) {
     include("disconnectDB.php");
 
     header("Content-Type: application/json");
-    echo json_encode(array("mensaje" => "Atributos de nosotros modificado con éxito"));
+    echo json_encode($response);
 
 }
 
