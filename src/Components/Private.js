@@ -1,14 +1,17 @@
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../Contexts/AuthContext';
 import AdministracionUsuarios from '../PrivateComponents/Users/Manager-Users';
+import CambiarNosotros from '../PrivateComponents/Nosotros';
 import { useEffect, useState } from 'react';
+import CambiarSlider from '../PrivateComponents/Manager-Slider';
 
 const linksStyles='text-[1rem] w-2/6 py-2 text-center border-black border-e border-t-[1px] border-b-[2px] bg-white rounded-t-lg';
 
 function Private(){
 
   const [showUserAdmin, setShowUserAdmin] = useState(false);
-  const [showSliderMod, setShowSliderMod] = useState(true);
+  const [showSliderMod, setShowSliderMod] = useState(false);
+  const [showNosotros, setShowNosotros] = useState(false);
   const { userName, userRut, isAuthenticated } = useAuthContext();
 
   /*useEffect(() => {
@@ -65,6 +68,8 @@ function Private(){
     } else {
       setShowUserAdmin(true);
     }
+
+
   }
 
   //Diapositivas
@@ -79,25 +84,38 @@ function Private(){
     console.log(showSliderMod);
   }
 
+  const openNosotros = () => {
+    if(showNosotros){
+      setShowNosotros(false);
+    } else {
+      setShowNosotros(true);
+    }
+    console.log(openNosotros);
+  }
+
   return (
     <div className='bg-[#b0efef] flex flex-col justify-content-center h-screen'> 
       <div className='flex flex-row justify-between pb-16'>
 
-        <div className='pt-2 pl-4 text-[2.5rem]'>
-          <h2>Bienvenid@ {userName}</h2>
+        <div className='mx-auto text-[2.5rem]'>
+          <h2>Te damos la bienvenida {userName}</h2>
         </div>
 
         <div className='flex flex-row'>
           <div>
-            <button onClick={openSliderMod} className='text-sm text-white transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded m-3'>Diapositivas</button>
-          </div>
-          <div className='flex flex-col'>
-          <Link to={'/private/logout'} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-4 rounded m-3'>Cerrar Sesión</Link>
-          {(userName==='Mirle Jaque' && userRut==='15912517-3')?
+            {(userName==='Mirle Jaque' && userRut==='15912517-3')?
+            <button onClick={openSliderMod} className='text-sm text-white text-center transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded m-3'>Diapositivas</button>
+            : null} 
+            {(userName==='Mirle Jaque' && userRut==='15912517-3')?
             <button onClick={showUserAdminContainer} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Administrar Usuarios</button>
-            : null}          
+            : null} 
+            {(userName==='Mirle Jaque' && userRut==='15912517-3')?
+            <button onClick={openNosotros} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Nosotros</button>
+            : null} 
+            <Link to={'/private/logout'} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-4 rounded m-3'>Cerrar Sesión</Link>
+                     
           </div>
-
+        
         </div>
 
         
@@ -105,7 +123,12 @@ function Private(){
         {(userName==='Mirle Jaque' && userRut==='15912517-3' && showUserAdmin)?
           <AdministracionUsuarios handleClick={showUserAdminContainer} />
           : null}            
-
+        {(userName==='Mirle Jaque' && userRut==='15912517-3' && showSliderMod)?
+          <CambiarSlider handleClick={openSliderMod} />
+          : null} 
+        {(userName==='Mirle Jaque' && userRut==='15912517-3' && showNosotros)?
+          <CambiarNosotros handleClick={openNosotros} />
+          : null} 
       </div>
 
       <div id='adminMainTabs' className='flex justify-between'>

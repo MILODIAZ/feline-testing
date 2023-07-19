@@ -723,4 +723,46 @@ if ($query == 28) {
 
     echo json_encode($response);
 }
+
+//OBTENER TEXTO NOSOTROS
+if ($query == 29) {
+    include("connectDB.php");
+
+    $sql = "SELECT texto FROM nosotros";
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->execute();
+    $resultado = $sentencia->fetchAll();
+
+    include("disconnectDB.php");
+
+    header("Content-Type: application/json");
+    echo json_encode($resultado);
+}
+
+// MODIFICAR NOSOTROS
+
+if ($query == 30) {
+    include("connectDB.php");
+
+    $nuevotexto = $_GET['textonuevo'];
+
+    $sql = "UPDATE nosotros 
+        SET texto = :textonuevo 
+        WHERE id = (SELECT MIN(id) FROM nosotros)";
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindParam(':textonuevo', $nuevotexto);
+
+    $sentencia->execute();
+
+    include("disconnectDB.php");
+
+    header("Content-Type: application/json");
+    echo json_encode(array("mensaje" => "Atributos de nosotros modificado con éxito"));
+
+}
+
+
+
 ?>

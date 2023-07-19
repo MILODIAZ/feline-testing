@@ -54,10 +54,21 @@ CREATE TABLE contiene (
     PRIMARY KEY (codigo_lote, codigo_producto)
 );
 
+CREATE TABLE nosotros (
+	texto TEXT NOT NULL	
+);
+
 /************************************POBLADO DE TABLAS****************************************************/
 
 INSERT INTO proveedor (nombre)
 VALUES ('Proveedor A'), ('Proveedor B'), ('Proveedor C'), ('Proveedor D'), ('Proveedor E');
+
+INSERT INTO nosotros (texto)
+VALUES ('Feline es una tienda en línea que ofrece una amplia variedad de accesorios y ropa con diseños de animales. Nos apasiona la moda y los animales, y queremos compartir esa pasión contigo. Nuestra misión es ofrecer productos de alta calidad a precios asequibles para que puedas lucir bien y sentirte bien al mismo tiempo.
+
+En Feline, creemos en la importancia de la sostenibilidad y la responsabilidad social. Por eso, trabajamos con proveedores que comparten nuestros valores y nos aseguramos de que todos nuestros productos sean éticos y respetuosos con el medio ambiente.
+
+Nos encanta lo que hacemos y esperamos que tú también disfrutes de nuestros productos tanto como nosotros disfrutamos creándolos. ¡Gracias por visitar nuestra tienda en línea!"');
 
 INSERT INTO categoria (nombre)
 VALUES ('Accesorios'), ('Ropa'), ('Peluches'), ('Papelería'), ('Vasos'), ('Joyería'), ('Regalos'), ('Libros');
@@ -156,6 +167,8 @@ VALUES
    (5,'L4','P010'),
    (8,'L5','P011'),
    (1,'L6','P012');
+
+
 
 
 /************************************FUNCIONES Y TRIGGERS****************************************************/
