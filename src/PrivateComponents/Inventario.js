@@ -26,6 +26,9 @@ function Inventario(props) {
     const esNegativo = (dias_restantes) => {
         return dias_restantes < 0;
     };
+    const handleClose = () => {
+
+    };
     const openAlertButton = infoLotes.some(item => esNegativo(item.dias_restantes));
 
     {/**/ }
@@ -204,16 +207,16 @@ function Inventario(props) {
 
     return (
         <div>
-            {openAlertButton && <AlertLote handleClick={props.handleClose} />}
+            {openAlertButton && <AlertLote />}
             {openModProd ? <ModProducts handleClick={handleOpenModProd} reloadProducts={reloadProducts} code={currentCode} name={currentName} provider={currentProvider} price={currentPrice} recStock={currentRecStock} minStock={currentMinStock} description={currentDescription} /> : null}
             {openDeleteProduct ? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
-            <div>
-                <div className='px-8 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-2 mt-4'>
+            <div className='grid grid-cols-3 items-center text-center'>
+                <div className='px-8 grid xl:grid-cols-2 gap-2 mt-4'>
 
                     <label>Filtrar por categoría</label>
                     <select
-                        className=' px-4 py-2 text-black w-[80%] rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-md'
+                        className=' px-4 text-black w-[80%] rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-md'
                         value={selectedCategory} onChange={handleCategoryChange}>
                         <option id='todas' value={'todas'}>Todas</option>
                         {categories.map(categorie => (
@@ -227,7 +230,7 @@ function Inventario(props) {
 
                     <label>Filtro por stock</label>
                     <select
-                        className=' px-4 py-2 w-[80%] rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-md'
+                        className=' px-4 w-[80%] py-2 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-md'
                         value={selectedFilter} onChange={handleFilterChange}>
                         <option value="all">---</option>
                         <option value="overstock">Recomendado</option>
@@ -239,7 +242,7 @@ function Inventario(props) {
 
                     <label>Buscar:</label>
                     <input
-                        className="px-8 py-3 w-[80%] max-w-[600px] ml-3 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+                        className="px-8 py-3 w-[80%]  ml-3 rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                         type='text'
                         placeholder='Ingrese nombre o codigo del producto...'
                         value={searchTerm}
