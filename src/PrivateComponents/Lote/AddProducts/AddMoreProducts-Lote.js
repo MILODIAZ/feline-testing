@@ -39,7 +39,7 @@ function AddMoreProducts(props) {
           fetch(`http://localhost/feline-testing/public/main.php?query=24&lote=${props.id}&codProducto=${codigoProducto}&cantidad=${unidadesProducto}`)
           .then(data => {
             if (data) {
-              console.log(codigoProducto)
+              props.cargarProductos()
             }
         })
         });

@@ -34,25 +34,33 @@ function Producción() {
             {openNewLote && (<NewLote
                 handleClose={handleOpenNewLote} reloadLotes={setReloadLotes}
             />)}
-            <div className='flex flex-row justify-end py-8 px-60'>
 
-                {/* Nuevo Lote */}
-                <div>
-                    <button onClick={handleOpenNewLote} reloadLotes={setReloadLotes} className='text-sm text-white transition duration-150 hover:bg-[#157c61] bg-[#93c47d]  font-bold py-2 px-4 rounded mx-4'>+ Nuevo lote</button>
+            <div className='flex'>
+                <div className='flex items-center justify-center text-[30px] w-[50%]'>
+                    <h1 className='font-bold'>Segumiento de pedidos</h1>
                 </div>
-                <div>
-                    <button onClick={handleOpenProveedor} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Proveedores</button>
-                </div>
-                <div >
-                    <button className='hover:bg-red-700 bg-red-500 py-2 px-4 rounded mx-4'>
-                        < RiErrorWarningLine className="text-xl" />
-                    </button>
+                <div className='flex flex-row justify-end py-8 px-60'>
+
+                    {/* Nuevo Lote */}
+                    <div>
+                        <button onClick={handleOpenNewLote} reloadLotes={setReloadLotes} className='text-sm text-white transition duration-150 hover:bg-[#157c61] bg-[#93c47d]  font-bold py-2 px-4 rounded mx-4'>+ Nuevo lote</button>
+                    </div>
+                    <div>
+                        <button onClick={handleOpenProveedor} className='text-sm text-black transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded'>Administrar Proveedores</button>
+                    </div>
+                    <div >
+                        <button className='hover:bg-red-700 bg-red-500 py-2 px-4 rounded mx-4'>
+                            < RiErrorWarningLine className="text-xl" />
+                        </button>
+                    </div>
                 </div>
             </div>
+
             <div>
                 <SeguimientoPedidos />
             </div>
         </div>
+
     );
 }
 

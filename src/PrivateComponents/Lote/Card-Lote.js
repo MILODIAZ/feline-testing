@@ -131,7 +131,7 @@ function LoteCard(props) {
       <div className='flex flex-col w-[20%] md:w-[10%] md:flex-wrap'>
         {/* Confirmar */}
         <div>
-          <ConfirmLote id={props.id}/>
+          <ConfirmLote recargarLotes={props.cargarProductos} id={props.id}/>
         </div>
         {/* Detalles */}
         <button

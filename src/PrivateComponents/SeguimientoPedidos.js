@@ -42,12 +42,12 @@ function SeguimientoPedidos(reloadLotes) {
 
   const lotesFiltrados = filtroLotesPorRetraso(lotesData);
   return (
-    <div className='xl:px-40'>
-      <div className='py-4 pl-10'>
+    <div className='xl:px-40 '>
+      {/* <div className='py-4   pl-10'>
         <p className='text-xl font-bold text-center'>SEGUIMIENTO DE PEDIDOS</p>
-      </div>
+      </div> */}
 
-      <div className='px-8 grid grid-cols-2 md:grid-cols-8 xl:grid-cols-8 gap-2 mt-4'>
+      <div className='px-8  grid grid-cols-2 md:grid-cols-8 xl:grid-cols-8 gap-2 mt-4'>
         <label htmlFor="filtroRetraso" className="mr-2">
           <h5 className="text-xl">Filtrar por retraso:</h5>
         </label>

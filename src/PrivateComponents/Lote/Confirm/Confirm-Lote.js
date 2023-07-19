@@ -36,7 +36,9 @@ function ConfirmLote(props){
             .catch(error => console.log(error));
         })
         eliminarLote();
+        props.recargarLotes();
         setShowConfirmation(false)
+        
         setMensaje("Stock ingresado");
         setShowAlert(true);
     }
@@ -57,7 +59,7 @@ function ConfirmLote(props){
             return response.json();
           })
           .then((data) => {})
-          .catch((error) => {
+          .catch((error) => { console.log(error)
           });
       };
 
