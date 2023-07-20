@@ -14,7 +14,7 @@ function CambiarNosotros(props) {
 
   const handleTextChange = (event) => {
     setText(event.target.value);
-    setEditing(false);
+    setEditing(true);
   };
 
   const handleConfirmChange = () => {
@@ -57,7 +57,6 @@ function CambiarNosotros(props) {
         ) : (
           <div>
             <div
-
               className='text-base bg-gray-100 border-2 border-gray-300 rounded-md p-2 cursor-pointer overflow-auto w-96 h-64'
             >
               {text}
