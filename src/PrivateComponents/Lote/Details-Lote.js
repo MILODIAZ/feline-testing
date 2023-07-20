@@ -35,10 +35,6 @@ function LoteDetails(props) {
     cargarProductos();
   };
 
-  const reloadData = () =>{
-    dataLote();
-  }
-
   const agregarProducto = (producto) => {
     setProductos([...productos, producto]);
   };
