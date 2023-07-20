@@ -198,6 +198,17 @@ CREATE TRIGGER trigger_verificar_proveedores
 BEFORE INSERT ON contiene
 FOR EACH ROW
 EXECUTE FUNCTION VerificarProveedores();
+
+	
+	
+	
+	INSERT INTO proveedor (nombre)
+VALUES ('EFRATA'), ('INK STAMP'), ('DDDALGO'), ('SANPRO');
+
+
+INSERT INTO categoria (nombre)
+VALUES ('TAZONES'), ('CALCETIN'), ('PELUCHE');
+ 
  
 INSERT INTO producto (codigo, nombre_proveedor, nombre, descripción, precio, stock_actual, stock_recomendado, stock_bajo, favorito)
 VALUES
@@ -223,17 +234,6 @@ VALUES
     ('CAL407', 'DDDALGO', 'CALCETIN GATO-PEZ', 'TALLA ESTANDAR (35-41) 80% DE ALGODÓN', 100, 10, 20, 5, false),
     ('CAL408', 'SANPRO', 'CALCETIN AMIGOS', 'TALLA ESTANDAR (36-41) 70% DE ALGODÓN', 100, 10, 20, 5, false),
     ('CAL409', 'DDDALGO', 'CALCETIN PERRO SALCHICHA', 'TALLA ESTANDAR (35-41) 80% DE ALGODÓN', 100, 10, 20, 5, false);
-	
-	
-	
-	INSERT INTO proveedor (nombre)
-VALUES ('EFRATA'), ('INK STAMP'), ('DDDALGO'), ('SANPRO');
-
-
-INSERT INTO categoria (nombre)
-VALUES ('TAZONES'), ('CALCETIN')
- 
-
 INSERT INTO corresponde (codigo_producto, nombre_categoria)
 VALUES
   ('TZ201', 'TAZONES'),

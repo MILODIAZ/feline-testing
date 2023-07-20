@@ -5,9 +5,9 @@ import CambiarNosotros from '../PrivateComponents/Nosotros';
 import { useEffect, useState } from 'react';
 import CambiarSlider from '../PrivateComponents/Manager-Slider';
 
-const linksStyles='text-[1rem] w-2/6 py-2 text-center border-black border-e border-t-[1px] border-b-[2px] bg-white rounded-t-lg';
+const linksStyles = 'text-[1rem] w-2/6 py-2 text-center border-black border-e border-t-[1px] border-b-[2px] bg-white rounded-t-lg';
 
-function Private(){
+function Private() {
 
   const [showUserAdmin, setShowUserAdmin] = useState(false);
   const [showSliderMod, setShowSliderMod] = useState(false);
@@ -24,7 +24,7 @@ function Private(){
     links.forEach(element => {
       element.classList.remove('adminMainSelectedTab');
     });
-    switch(lastDir) {
+    switch (lastDir) {
       case "productos":
         document.querySelector('p[innerHTML="PRODUCTOS"]').classList.add("adminMainSelectedTab");
         break;
@@ -46,7 +46,7 @@ function Private(){
     const partes = url.split('/');
     const ultimoDirectorio = partes[partes.length - 1];
     return ultimoDirectorio;
-  }  
+  }
 
   const tabSelectorMarkup = (event) => {
     const links = document.querySelectorAll("#adminMainTabs a");
@@ -56,14 +56,14 @@ function Private(){
     event.target.classList.add('adminMainSelectedTab');
   }
 
-  
+
 
   const showUserAdminContainer = () => {
     /*const userAdminContainer = document.querySelector('#usersAdminContainer');
 
     userAdminContainer.classList.remove('invisible');
     userAdminContainer.classList.remove('opacity-0'); */
-    if (showUserAdmin){
+    if (showUserAdmin) {
       setShowUserAdmin(false);
     } else {
       setShowUserAdmin(true);
@@ -73,10 +73,10 @@ function Private(){
   }
 
   //Diapositivas
-  
+
 
   const openSliderMod = () => {
-    if(showSliderMod){
+    if (showSliderMod) {
       setShowSliderMod(false);
     } else {
       setShowSliderMod(true);
@@ -85,7 +85,7 @@ function Private(){
   }
 
   const openNosotros = () => {
-    if(showNosotros){
+    if (showNosotros) {
       setShowNosotros(false);
     } else {
       setShowNosotros(true);
@@ -94,41 +94,37 @@ function Private(){
   }
 
   return (
-    <div className='bg-[#b0efef] flex flex-col justify-content-center h-screen'> 
-      <div className='flex flex-row justify-between pb-16'>
+    <div className='bg-[#b0efef] flex flex-col justify-content-center h-screen'>
+      <div className='flex flex-row justify-between pb-5 my-4'>
 
-        <div className='mx-auto text-[2.5rem]'>
-          <h2>Te damos la bienvenida {userName}</h2>
+        <div className='mx-auto text-[2.5rem] font-bold'>
+          <p>Te damos la bienvenida {userName}</p>
         </div>
-
         <div className='flex flex-row'>
           <div>
-            {(userName==='Mirle Jaque' && userRut==='15912517-3')?
-            <button onClick={openSliderMod} className='text-sm text-white text-center transition duration-150 hover:bg-yellow-700 bg-yellow-500 font-bold py-2 px-4 rounded m-3'>Diapositivas</button>
-            : null} 
-            {(userName==='Mirle Jaque' && userRut==='15912517-3')?
-            <button onClick={showUserAdminContainer} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Administrar Usuarios</button>
-            : null} 
-            {(userName==='Mirle Jaque' && userRut==='15912517-3')?
-            <button onClick={openNosotros} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Nosotros</button>
-            : null} 
+            {(userName === 'Mirle Jaque' && userRut === '15912517-3') ?
+              <button onClick={openSliderMod} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Diapositivas</button>
+              : null}
+            {(userName === 'Mirle Jaque' && userRut === '15912517-3') ?
+              <button onClick={showUserAdminContainer} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Administrar Usuarios</button>
+              : null}
+            {(userName === 'Mirle Jaque' && userRut === '15912517-3') ?
+              <button onClick={openNosotros} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Nosotros</button>
+              : null}
             <Link to={'/private/logout'} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-2 px-4 rounded m-3'>Cerrar Sesión</Link>
-                     
+
           </div>
-        
+
         </div>
-
-        
-
-        {(userName==='Mirle Jaque' && userRut==='15912517-3' && showUserAdmin)?
+        {(userName === 'Mirle Jaque' && userRut === '15912517-3' && showUserAdmin) ?
           <AdministracionUsuarios handleClick={showUserAdminContainer} />
-          : null}            
-        {(userName==='Mirle Jaque' && userRut==='15912517-3' && showSliderMod)?
+          : null}
+        {(userName === 'Mirle Jaque' && userRut === '15912517-3' && showSliderMod) ?
           <CambiarSlider handleClick={openSliderMod} />
-          : null} 
-        {(userName==='Mirle Jaque' && userRut==='15912517-3' && showNosotros)?
+          : null}
+        {(userName === 'Mirle Jaque' && userRut === '15912517-3' && showNosotros) ?
           <CambiarNosotros handleClick={openNosotros} />
-          : null} 
+          : null}
       </div>
 
       <div id='adminMainTabs' className='flex justify-between'>
@@ -140,8 +136,8 @@ function Private(){
       <div className='bg-[#ffe5f0]'>
         <Outlet />
       </div>
-    </div>   
+    </div>
   );
 }
-  
+
 export default Private;
