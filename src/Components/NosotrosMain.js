@@ -12,13 +12,17 @@ function NosotrosMain(props) {
       .then(response => response.json())
       .then(data => setTexto(data[0].texto)) // Accedemos al primer elemento del array
       .catch(error => console.log(error));
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, []);
 
   return (
     <div>
-      <div className="mx-auto text-center bg-[#fff] px-[20px] h-[80vh] justify-center">
-        <p className="text-[3.5rem] pt-8">TIENDA FELINE</p>
-        <p className="text-xl py-[10px]">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#56efd3] z-[60] border-solid border-[2px] border-black rounded-[10px] p-4 justify-center items-center my-10">
+        <p className="text-4xl pt-2 text-center">TIENDA FELINE</p>
+        <p className="text-xl py-[10px] mx-10">
           {texto}
         </p>
       </div>
