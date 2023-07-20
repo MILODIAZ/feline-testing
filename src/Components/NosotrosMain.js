@@ -4,8 +4,6 @@ import { useEffect } from "react";
 
 
 function NosotrosMain(props) {
-  
-
   // CARGAR TEXTO
   const [texto, setTexto] = useState('Cargando...');
 
@@ -15,10 +13,11 @@ function NosotrosMain(props) {
       .then(data => setTexto(data[0].texto)) // Accedemos al primer elemento del array
       .catch(error => console.log(error));
   }, []);
+
   return (
     <div>
-      <div className="w-[60%] mx-auto text-center bg-[#fff] px-[20px] h-[80vh] justify-center">
-        <h2 className="text-[3.5rem] pt-8">TIENDA FELINE</h2>
+      <div className="mx-auto text-center bg-[#fff] px-[20px] h-[80vh] justify-center">
+        <p className="text-[3.5rem] pt-8">TIENDA FELINE</p>
         <p className="text-xl py-[10px]">
           {texto}
         </p>

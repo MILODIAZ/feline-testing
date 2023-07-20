@@ -148,8 +148,6 @@ function UsersList(props) {
 
   return (
     <div className='flex flex-col'>
-
-
       <div className='relative overflow-y-scroll min-h-[150px] min-w-[480px]'>
         <div className='absolute w-full'>
           {dataLoaded ? (
@@ -161,7 +159,7 @@ function UsersList(props) {
                     <p className='whitespace-nowrap pl-8 text-left'>{user[1]}</p>
                   </div>
                   <div className='flex justify-end pl-8'>
-                    <button onClick={() => deleteUser(user[0])} className='text-sm text-white text-center transition duration-150 hover:bg-red-900 bg-red-600 font-bold py-1 px-2 rounded ml-3'>Eliminar</button>
+                    <button onClick={() => deleteUser(user[0])} className='text-sm text-center transition duration-150 bg-[#fc7494] font-bold py-1 px-2 border-[2px] border-[#000] rounded-[10px] ml-3'>Eliminar</button>
                   </div>
 
                 </div>
@@ -178,15 +176,15 @@ function UsersList(props) {
         <form onSubmit={handleSubmit}>
 
           <div className='flex flex-col'>
-            <label htmlFor='userRut'>Rut</label>
-            <input id='userRut' type='text' value={userRut} placeholder='0000000-0' onChange={handleUserRutChange}></input>
+            <label htmlFor='userRut'></label>
+            <input className='text-center border-solid border-[2px] border-[#000] rounded-[10px] my-2' id='userRut' type='text' value={userRut} placeholder='-- Rut del usuario --' onChange={handleUserRutChange}></input>
           </div>
           <div className='flex flex-col'>
-            <label htmlFor='userName'>Nombre de usuario</label>
-            <input id='userName' type='text' value={userName} placeholder='Nombre' onChange={handleUserNameChange}></input>
+            <label htmlFor='userName'></label>
+            <input className='text-center border-solid border-[2px] border-[#000] rounded-[10px]' id='userName' type='text' value={userName} placeholder='-- Nombre del usuario --' onChange={handleUserNameChange}></input>
           </div>
           <div className='flex justify-center'>
-            <button className='text-sm text-white transition duration-150 hover:bg-[#b6efb0] bg-[#93c47d]  font-bold py-2 px-4 rounded mt-4'>Registrar</button>
+            <button className='text-sm text-black transition duration-150 bg-[#54e9d1] font-bold py-2 px-4 border-solid border-[2px] border-[#000] rounded-[10px] mt-3'>Registrar</button>
           </div>
 
         </form>

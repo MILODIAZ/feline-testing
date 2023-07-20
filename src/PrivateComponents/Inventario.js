@@ -8,7 +8,7 @@ import AlertLote from './Extras/AlertLote';
 function Inventario(props) {
 
     {/* Alerta de Lotes con retrasos*/ }
-
+    const [alertaAbierta, setAlertaAbierta] = useState(true);
     const [infoLotes, setInfoLotes] = useState([]);
 
     useEffect(() => {
@@ -26,8 +26,8 @@ function Inventario(props) {
     const esNegativo = (dias_restantes) => {
         return dias_restantes < 0;
     };
-    const handleClose = () => {
-
+    const handleCloseAlert = () => {
+        setAlertaAbierta(false); // Cierra la alerta
     };
     const openAlertButton = infoLotes.some(item => esNegativo(item.dias_restantes));
 
@@ -207,7 +207,9 @@ function Inventario(props) {
 
     return (
         <div>
-            {openAlertButton && <AlertLote />}
+            {openAlertButton && alertaAbierta && (
+                <AlertLote handleCloseAlert={handleCloseAlert} />
+            )}
             {openModProd ? <ModProducts handleClick={handleOpenModProd} reloadProducts={reloadProducts} code={currentCode} name={currentName} provider={currentProvider} price={currentPrice} recStock={currentRecStock} minStock={currentMinStock} description={currentDescription} /> : null}
             {openDeleteProduct ? <DeleteProduct code={productCode} name={productName} handleClick={handleOpenDelete} reloadProducts={reloadProducts} /> : null}
             {openStock ? <SetStock stock={productStock} codigo={productCode} name={productName} handleClick={handleOpenStock} reloadProducts={reloadProducts} /> : null}
@@ -249,7 +251,7 @@ function Inventario(props) {
                         onChange={event => setSearchTerm(event.target.value)} />
                 </div>
             </div>
-            <div className="lg:p-8 rounded-md w-[100%]">
+            <div className="px-10 rounded-md w-[100%]">
                 <ScrollToTopButton>
 
                     <div className={`fixed bottom-4 text-2xl right-4 bg-gray-800 text-white px-[22px] py-2 rounded-md shadow-xl 

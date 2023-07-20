@@ -291,7 +291,7 @@ function Productos(props) {
             </div>
 
             <div className='flex flex-row justify-between pb-2'>
-              <label htmlFor='stock' className='pr-6'> - STOCK *</label>
+              <label htmlFor='stock' className='pr-6'> STOCK *</label>
               <input autoComplete='off' type='number' placeholder='0' id='stock' name='stock' value={formData.stock} onChange={handleStockChange} />
             </div>
 
