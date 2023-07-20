@@ -71,7 +71,7 @@ function ConfirmLote(props){
             </button>
         {showConfirmation && (
             <ConfirmationModal
-            message={`¿Estás seguro de que deseas eliminar el Lote ${props.id}?`}
+            message={`¿Estás seguro de que deseas confirmar el Lote ${props.id}?`}
             botonPrimario={'Confirmar'}
             onConfirm={actualizarStock}
             onCancel={() => setShowConfirmation(false)}

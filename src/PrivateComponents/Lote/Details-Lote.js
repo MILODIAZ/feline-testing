@@ -30,15 +30,19 @@ function LoteDetails(props) {
   };
 
   
+  
   const reloadProducts = () => {
-    setDataProductLoaded(false);
     cargarProductos();
   };
+
+  const reloadData = () =>{
+    dataLote();
+  }
 
   const agregarProducto = (producto) => {
     setProductos([...productos, producto]);
   };
-
+        
   return (
     <div className="fixed inset-0 z-[50] flex justify-center items-center">
       {openAddMoreProducts && (
@@ -60,9 +64,6 @@ function LoteDetails(props) {
         {/* Componente que contiene los detalles del Lote */}
         <HeaderLote
           id={props.id}
-          nombreProveedor={props.proveedor}
-          fechaPedido={props.fechaPedido}
-          fechaLlegada={props.fechaLlegada}
           diasRestantes={props.diasRestantes}
         />
         {/* Seccion body con los productos que posee el lote */}

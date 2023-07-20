@@ -768,6 +768,25 @@ if ($query == 30) {
 
 }
 
+if ($query == 31) {
+    include("connectDB.php");
 
+    // Assuming $_GET['codigo'] contains the code you want to search for
+    $codigo = $_GET['codigo'];
+
+    $sql = "SELECT codigo, nombre_proveedor, fecha_pedido, fecha_llegada, fecha_llegada - CURRENT_DATE AS dias_restantes
+    FROM lote
+    WHERE codigo = :codigo"; // Use a named parameter to bind later
+
+    $sentencia = $conn->prepare($sql);
+    $sentencia->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+    $sentencia->execute();
+    $resultado = $sentencia->fetchAll();
+
+    include("disconnectDB.php");
+
+    header("Content-Type: application/json");
+    echo json_encode($resultado);
+}
 
 ?>

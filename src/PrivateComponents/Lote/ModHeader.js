@@ -35,12 +35,15 @@ function ModHeader(props) {
             .then(response => response.json())
             .then(data => {
                 setMensaje("Datos modificados");
+                props.recargarDatos(formHeader.idLote)
                 setShowAlert(true);
             })
             .catch(error => {
                 setMensaje("UPS, ocurrio un error");
                 setShowAlert(true);
             });
+        
+
     };
 
     const ModHeaderDataContiene = () => {
