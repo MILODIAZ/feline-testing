@@ -9,7 +9,7 @@ function SeguimientoPedidos(reloadLotes) {
 
   useEffect(() => {
     loadLotes();
-  }, [reloadLotes]);
+  }, );
 
   const loadLotes = () => {
     fetch(`http://localhost/feline-testing/public/main.php?query=14`)

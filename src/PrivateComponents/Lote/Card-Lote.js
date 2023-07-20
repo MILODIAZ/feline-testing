@@ -67,6 +67,7 @@ function LoteCard(props) {
     } else {
       setOpenDetailLote(true);
     }
+    props.recargarProductos
   }
 
   const [loteId, setLoteId] = useState('');
@@ -93,7 +94,7 @@ function LoteCard(props) {
           
           `}>
       {/* Abre y redirecciona a una carta con los detalles del lote */}
-      {(openDetailLote) ? <LoteDetails handleClick={handleOpenDetailLote} id={loteId} proveedor={loteProveedor} fechaPedido={loteFechaPedido} fechaLlegada={loteFechaLlegada} diasRestantes={loteDiasRestantes} handleClose={handleOpenDetailLote} /> : null}
+      {(openDetailLote) ? <LoteDetails handleClick={handleOpenDetailLote} id={loteId} proveedor={loteProveedor} fechaPedido={loteFechaPedido} fechaLlegada={loteFechaLlegada} diasRestantes={loteDiasRestantes} recargarData={props.cargarProductos} handleClose={handleOpenDetailLote} /> : null}
 
       <div className="md:w-[5%] text-center">
         <p className='text-[1.25rem] font-bold'>{props.id}</p>
