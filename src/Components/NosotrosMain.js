@@ -19,8 +19,8 @@ function NosotrosMain(props) {
   }, []);
 
   return (
-    <div>
-      <div className="fixed top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#56efd3] z-[60] border-solid border-[2px] border-black rounded-[10px] p-4 justify-center items-center my-10">
+    <div className="h-[80vh]">
+      <div className=" fixed top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#56efd3] z-[60] border-solid border-[2px] border-black rounded-[10px] p-4 justify-center items-center my-10">
         <p className="text-4xl pt-2 text-center">TIENDA FELINE</p>
         <p className="text-xl py-[10px] mx-10">
           {texto}

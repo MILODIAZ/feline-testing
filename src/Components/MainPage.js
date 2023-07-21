@@ -18,7 +18,7 @@ function MainPage(props) {
         </div>
       </main>
 
-      <footer className='bg-[#56efd3] items-center'>
+      <footer className=' bg-[#56efd3] items-center'>
         <ul className='text-center grid grid-cols-3 mb-3'>
           <li>
             <ScrollToTopButton>

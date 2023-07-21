@@ -51,14 +51,14 @@ function CategorieMain() {
     return <div>Cargando...</div>;
   } else {
     return (
-      <div>
+      <div className="h-[81.5vh]">
         <CategoriesNav />
         {categorieProducts.length > 0
           // Si hay productos
           ? (
             <div>
               <div className="flex justify-center">
-                <h2 className="text-[2.5rem] text-white mt-8 px-2 bg-[#ff7795] align-middle rounded-2xl">{params.categorieID}</h2>
+                <h2 className="text-[2.5rem] text-white mt-6 px-2 bg-[#ff7795] align-middle rounded-2xl">{params.categorieID}</h2>
               </div>
 
               <ProductContainer code={productCode} name={productName} price={productPrice} stock={productStock} description={productDescription} />

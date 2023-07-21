@@ -3,7 +3,6 @@ import { useAuthContext } from '../Contexts/AuthContext';
 import AdministracionUsuarios from '../PrivateComponents/Users/Manager-Users';
 import CambiarNosotros from '../PrivateComponents/Nosotros';
 import { useEffect, useState } from 'react';
-import CambiarSlider from '../PrivateComponents/Manager-Slider';
 
 const linksStyles = 'text-[1rem] w-2/6 py-2 text-center border-black border-e border-t-[1px] border-b-[2px] bg-white rounded-t-lg';
 
@@ -102,9 +101,7 @@ function Private() {
         </div>
         <div className='flex flex-row'>
           <div>
-            {(userName === 'Mirle Jaque' && userRut === '15912517-3') ?
-              <button onClick={openSliderMod} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Diapositivas</button>
-              : null}
+            
             {(userName === 'Mirle Jaque' && userRut === '15912517-3') ?
               <button onClick={showUserAdminContainer} className='text-sm text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold py-2 px-4 rounded m-3'>Administrar Usuarios</button>
               : null}
@@ -118,9 +115,6 @@ function Private() {
         </div>
         {(userName === 'Mirle Jaque' && userRut === '15912517-3' && showUserAdmin) ?
           <AdministracionUsuarios handleClick={showUserAdminContainer} />
-          : null}
-        {(userName === 'Mirle Jaque' && userRut === '15912517-3' && showSliderMod) ?
-          <CambiarSlider handleClick={openSliderMod} />
           : null}
         {(userName === 'Mirle Jaque' && userRut === '15912517-3' && showNosotros) ?
           <CambiarNosotros handleClick={openNosotros} />
