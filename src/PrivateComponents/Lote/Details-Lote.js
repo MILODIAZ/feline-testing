@@ -53,7 +53,10 @@ function LoteDetails(props) {
       )}
       <div className="flex flex-col bg-[#f8efe6] h-[90%] w-[80%] p-2 border-2 border-black rounded-l">
         <div className="flex justify-end">
-          <button onClick={() => props.handleClose()}>
+          <button onClick={() => {props.handleClick();
+            props.handleClose();
+            props.recargarData();
+          }}>
             <FaTimes className="text-3xl hover:text-[#a5d5d5]" />
           </button>
         </div>

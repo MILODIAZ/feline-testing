@@ -9,7 +9,7 @@ function SeguimientoPedidos(reloadLotes) {
 
   useEffect(() => {
     loadLotes();
-  }, );
+  }, []);
 
   const loadLotes = () => {
     fetch(`http://localhost/feline-testing/public/main.php?query=14`)
@@ -59,9 +59,10 @@ function SeguimientoPedidos(reloadLotes) {
         </select>
       </div>
 
+      {/* proveedor={lote[1] == null ? 'SIN PROVEEDOR' : lote[1]} fecha_pedido={lote[2]} fecha_llegada={lote[3]} dias_restantes={lote[4]} */}
       {dataLoaded ?
         lotesFiltrados.map(lote => (
-          <LoteCard key={lote[0]} cargarProductos={reloadProducts} id={lote[0]} proveedor={lote[1] == null ? 'SIN PROVEEDOR' : lote[1]} fecha_pedido={lote[2]} fecha_llegada={lote[3]} dias_restantes={lote[4]} />
+          <LoteCard key={lote[0]} cargarProductos={reloadProducts} id={lote[0]}  />
         )) : <h1>Cargando...</h1>}
     </div>
   );

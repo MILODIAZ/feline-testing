@@ -1,5 +1,5 @@
 import LoteDetails from "./Details-Lote";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ConfirmationModal from "../Extras/ModalConfirm";
 import AlertConfirm from "../Extras/AlertConfirm";
 import ConfirmLote from "./Confirm/Confirm-Lote"
@@ -8,14 +8,15 @@ function LoteCard(props) {
 
   const [showAlert, setShowAlert] = useState(false);
   const [mensaje, setMensaje] = useState('');
-
+  const [loteData, setLoteData] = useState([]); 
+  const [codigoLote , setCodigoLote] = useState(props.id)
   const [openDetailLote, setOpenDetailLote] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const eliminarLote = () => {
     setShowConfirmation(false);
     eliminarContenido();
-
+    
     fetch(`http://localhost/feline-testing/public/main.php?query=18&codigo_lote=${props.id}`)
       .then((response) => {
         if (!response.ok) {
@@ -36,6 +37,27 @@ function LoteCard(props) {
         setShowAlert(true);
       });
   };
+
+  useEffect(() => {
+    dataLote()
+  },[])
+
+  const reloadData = () => {
+    dataLote();
+  }
+
+
+  const dataLote = () => {
+    fetch(`http://localhost/feline-testing/public/main.php?query=31&codigo=${codigoLote}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setLoteData(data[0]);
+        } else if (!Array.isArray(data)) {
+          // Si data es un objeto, úsalo directamente
+          setLoteData(data);
+      }})
+  }
 
   const eliminarContenido = () => {
     setShowConfirmation(false);
@@ -67,7 +89,7 @@ function LoteCard(props) {
     } else {
       setOpenDetailLote(true);
     }
-    props.recargarProductos();
+    props.recargarProductos;
   }
 
   const [loteId, setLoteId] = useState('');
@@ -83,9 +105,9 @@ function LoteCard(props) {
     
     ${(() => {
         switch (true) {
-          case props.dias_restantes >= 3:
+          case loteData.dias_restantes >= 3:
             return 'bg-[#fff2cc]'
-          case props.dias_restantes < 0:
+          case loteData.dias_restantes < 0:
             return 'bg-[#eb8792]'
           default:
             return 'bg-[#b6efb0]'
@@ -94,35 +116,35 @@ function LoteCard(props) {
           
           `}>
       {/* Abre y redirecciona a una carta con los detalles del lote */}
-      {(openDetailLote) ? <LoteDetails handleClick={handleOpenDetailLote} id={loteId} proveedor={loteProveedor} fechaPedido={loteFechaPedido} fechaLlegada={loteFechaLlegada} diasRestantes={loteDiasRestantes} recargarData={props.cargarProductos} handleClose={handleOpenDetailLote} /> : null}
+      {(openDetailLote) ? <LoteDetails handleClick={handleOpenDetailLote} id={loteId} proveedor={loteProveedor} fechaPedido={loteFechaPedido} fechaLlegada={loteFechaLlegada} diasRestantes={loteDiasRestantes} recargarData={props.cargarProductos} recargarDatos={reloadData} handleClose={handleOpenDetailLote} /> : null}
 
       <div className="md:w-[5%] text-center">
-        <p className='text-[1.25rem] font-bold'>{props.id}</p>
+        <p className='text-[1.25rem] font-bold'>{loteData.codigo}</p>
       </div>
       <div className='w-[10%]'>
-        <p className='whitespace-nowrap md:text-xl'>{props.proveedor}</p>
+        <p className='whitespace-nowrap md:text-xl'>{loteData.nombre_proveedor == null ? 'SIN PROVEEDOR' : loteData.nombre_proveedor}</p>
       </div>
       <div className="w-[10%]">
         <p className="font-bold">Pedido:</p>
-        <p>{props.fecha_pedido}</p>
+        <p>{loteData.fecha_pedido}</p>
       </div>
       <div className="w-[10%]">
         <p className="font-bold">Llegada:</p>
-        <p>{props.fecha_llegada}</p>
+        <p>{loteData.fecha_llegada}</p>
       </div>
       <div className="w-[10%]">
         <p className="font-bold">Estado:</p>
         {
           (() => {
             switch (true) {
-              case (props.dias_restantes > 1):
-                return <p>{props.dias_restantes} días restantes</p>;
-              case (props.dias_restantes === 1):
+              case (loteData.dias_restantes > 1):
+                return <p>{loteData.dias_restantes} días restantes</p>;
+              case (loteData.dias_restantes === 1):
                 return <p>1 día restante</p>;
-              case (props.dias_restantes === -1):
+              case (loteData.dias_restantes === -1):
                 return <p>1 día atrasado</p>;
-              case (props.dias_restantes < -1):
-                return <p>{Math.abs(props.dias_restantes)} día(s) atrasado</p>;
+              case (loteData.dias_restantes < -1):
+                return <p>{Math.abs(loteData.dias_restantes)} día(s) atrasado</p>;
               default:
                 return <p>Llega hoy</p>;
             }
@@ -132,17 +154,17 @@ function LoteCard(props) {
       <div className='flex flex-col w-[20%] md:w-[10%] md:flex-wrap'>
         {/* Confirmar */}
         <div>
-          <ConfirmLote recargarLotes={props.cargarProductos} id={props.id}/>
+          <ConfirmLote recargarLotes={props.cargarProductos} id={loteData.codigo}/>
         </div>
         {/* Detalles */}
         <button
           onClick={() => {
             handleOpenDetailLote();
-            setLoteId(props.id);
-            setLoteProveedor(props.proveedor);
-            setLoteFechaPedido(props.fecha_pedido);
-            setLoteFechaLlegada(props.fecha_llegada);
-            setLoteDiasRestantes(props.dias_restantes);
+            setLoteId(loteData.codigo);
+            setLoteProveedor(loteData.nombre_proveedor == null ? 'SIN PROVEEDOR' : loteData.nombre_proveedor);
+            setLoteFechaPedido(loteData.fecha_pedido);
+            setLoteFechaLlegada(loteData.fecha_llegada);
+            setLoteDiasRestantes(loteData.dias_restantes);
           }}
           className="text-sm my-[1px] text-white text-center transition duration-150 hover:bg-indigo-900 bg-blue-600 font-bold w-[100%] py-2 md:px-4">
           Detalles
@@ -153,7 +175,7 @@ function LoteCard(props) {
         </div>
         {showConfirmation && (
           <ConfirmationModal
-            message={`¿Estás seguro de que deseas eliminar el Lote ${props.id}?`}
+            message={`¿Estás seguro de que deseas eliminar el Lote ${codigoLote}?`}
             botonPrimario={'Eliminar'}
             onConfirm={eliminarLote}
             onCancel={() => setShowConfirmation(false)}
