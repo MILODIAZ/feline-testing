@@ -67,7 +67,7 @@ function LoteCard(props) {
     } else {
       setOpenDetailLote(true);
     }
-    props.recargarProductos()
+    props.recargarProductos();
   }
 
   const [loteId, setLoteId] = useState('');
