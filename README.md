@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Feline Gift Shop Inventory and Catalog Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a web-based system designed for managing inventory and catalogs for the Feline gift shop. The project is developed in collaboration with a community partner (Learning + Service) and utilizes modern web technologies including React, PHP, PostgreSQL, Docker, and GitHub.
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+The Feline Gift Shop Inventory and Catalog Management System is aimed at streamlining the management of products, inventory levels, and catalog presentation for a retail gift shop. The system allows users to easily manage product listings, track inventory, and update the catalog in real-time.
 
-### `npm start`
+![MainPage](public/readme%20images/pagina%20principal.jpg)
+![Catalog](public/readme%20images/catalogo.jpg)
+![Management](public/readme%20images/inventario.jpg)
+![Modify product attributes](public/readme%20images/modificar%20producto.jpg)
+![Mobile View](public/readme%20images/mobile.jpg)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+React, PHP, PostgreSQL, Docker and GitHub.
 
-### `npm test`
+## Collaboration
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This project is developed in collaboration with the community partner through the "Learning + Service" initiative. The goal is to provide a practical solution while engaging in meaningful community service.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To learn more about the technologies used in this project, you can visit the following links:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+React Documentation
+PHP Documentation
+PostgreSQL Documentation
+Docker Documentation
+GitHub Documentation
 
-### Code Splitting
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To view the application with sample data, you can use the docker-compose file to set up a PostgreSQL database along with a pgAdmin instance. You can populate the database using the "INGESO TESTING.sql" file. For making requests, the repository also contains .php files for connecting to the database, and you can use them by setting up an Apache server, for example, with XAMPP.
 
-### Analyzing the Bundle Size
+You can log in to the admin interface using the default credentials:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+RUT: 15912517-3
+Password: "feline0"
 
-### Making a Progressive Web App
+## Future Enhancements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Implementing a real Backend App for requests.
+Adding real user authentication and role-based access control.
+Integrating with a payment gateway for online sales.

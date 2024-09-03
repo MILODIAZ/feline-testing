@@ -8,15 +8,15 @@ function LoteCard(props) {
 
   const [showAlert, setShowAlert] = useState(false);
   const [mensaje, setMensaje] = useState('');
-  const [loteData, setLoteData] = useState([]); 
-  const [codigoLote , setCodigoLote] = useState(props.id)
+  const [loteData, setLoteData] = useState([]);
+  const [codigoLote, setCodigoLote] = useState(props.id)
   const [openDetailLote, setOpenDetailLote] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const eliminarLote = () => {
     setShowConfirmation(false);
     eliminarContenido();
-    
+
     fetch(`http://localhost/feline-testing/public/main.php?query=18&codigo_lote=${props.id}`)
       .then((response) => {
         if (!response.ok) {
@@ -40,7 +40,7 @@ function LoteCard(props) {
 
   useEffect(() => {
     dataLote()
-  },[])
+  }, [])
 
   const reloadData = () => {
     dataLote();
@@ -56,7 +56,8 @@ function LoteCard(props) {
         } else if (!Array.isArray(data)) {
           // Si data es un objeto, úsalo directamente
           setLoteData(data);
-      }})
+        }
+      })
   }
 
   const eliminarContenido = () => {
@@ -89,7 +90,7 @@ function LoteCard(props) {
     } else {
       setOpenDetailLote(true);
     }
-    props.recargarProductos;
+    props.recargarProductos();
   }
 
   const [loteId, setLoteId] = useState('');
@@ -154,7 +155,7 @@ function LoteCard(props) {
       <div className='flex flex-col w-[20%] md:w-[10%] md:flex-wrap'>
         {/* Confirmar */}
         <div>
-          <ConfirmLote recargarLotes={props.cargarProductos} id={loteData.codigo}/>
+          <ConfirmLote recargarLotes={props.cargarProductos} id={loteData.codigo} />
         </div>
         {/* Detalles */}
         <button

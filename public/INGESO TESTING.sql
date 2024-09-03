@@ -76,10 +76,7 @@ VALUES ('Accesorios'), ('Ropa'), ('Peluches'), ('Papelería'), ('Vasos'), ('Joye
 
 INSERT INTO usuario (rut, nombre, contraseña)
 VALUES 
-	('15912517-3', 'Mirle Jaque', 'feline0'),
-   ('18924575-0', 'Emilio Díaz', 'feline1'),
-   ('20538523-1', 'Ignacio Herrera', 'feline2'),
-   ('20468276-3', 'Juan Nilo', 'feline3');
+	('15912517-3', 'Example User', 'feline0');
 
 INSERT INTO producto (codigo, nombre_proveedor, nombre, descripción, precio, stock_actual, stock_recomendado, stock_bajo, favorito)
 VALUES
@@ -144,32 +141,6 @@ VALUES
    ('P012', 'Ropa'),
    ('P013', 'Papelería'),
    ('P014', 'Peluches');
-
-INSERT INTO lote (codigo,nombre_proveedor,fecha_pedido,fecha_llegada)
-VALUES
-   ('L1', 'Proveedor A','31-05-2023', '05-06-2023'),
-   ('L2', null,'27-05-2023', '07-06-2023'),
-   ('L3', 'Proveedor C','28-05-2023', '10-06-2023'),
-   ('L4', 'Proveedor A','29-05-2023', '01-06-2023'),
-   ('L5', 'Proveedor B','31-05-2023', '07-06-2023'),
-   ('L6', 'Proveedor C','01-05-2023', '05-06-2023');
-
-INSERT INTO contiene (unidades,codigo_lote,codigo_producto)
-VALUES
-   (5,'L1','P001'),
-   (10,'L2','P002'),
-   (6,'L3','P003'),
-   (7,'L4','P004'),
-   (9,'L5','P005'),
-   (4,'L6','P006'),
-   (5,'L1','P007'),
-   (7,'L2','P008'),
-   (5,'L3','P009'),
-   (5,'L4','P010'),
-   (8,'L5','P011'),
-   (1,'L6','P012');
-
-
 
 
 /************************************FUNCIONES Y TRIGGERS****************************************************/
